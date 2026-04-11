@@ -1,262 +1,105 @@
 <!doctype html>
 <html lang="pt-pt">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Playlists | Santola Music</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
     <style>
-      :root {
-        --verde: #12ad2b;
-        --amarelo: #ffdb00;
-        --vermelho: #d21034;
-        --glass: rgba(255, 255, 255, 0.05);
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Inter", sans-serif;
-      }
-      body {
-        background: #080808;
-        color: white;
-        min-height: 100vh;
-      }
+        :root { --verde: #12ad2b; --amarelo: #ffdb00; --vermelho: #d21034; --glass: rgba(255, 255, 255, 0.05); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", sans-serif; }
+        body { background: #080808; color: white; min-height: 100vh; }
 
-      #loader-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #080808;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 99999;
-        transition: opacity 0.5s;
-      }
-      .loader-logo {
-        width: 120px;
-        animation: pulse 1.5s infinite;
-      }
-      @keyframes pulse {
-        from {
-          transform: scale(1);
+        header { padding: 2rem; text-align: center; border-bottom: 1px solid var(--glass); }
+        .main-content { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+
+        /* BOTÃO DE CIMA */
+        .trigger-playlist {
+            display: flex; align-items: center; justify-content: center;
+            background: #111; color: var(--amarelo); border: 2px solid var(--amarelo);
+            border-bottom: 5px solid #857200; padding: 20px; border-radius: 18px;
+            font-weight: 900; text-transform: uppercase; margin-bottom: 2rem; cursor: pointer;
         }
-        to {
-          transform: scale(1.1);
+
+        /* GRID DE PLAYLISTS */
+        .grid-albuns { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .album-card {
+            background: var(--glass); border-radius: 20px; padding: 15px; text-align: center;
+            border-bottom: 5px solid var(--vermelho); cursor: pointer; text-decoration: none; color: white;
         }
-      }
+        .album-capa { width: 100%; aspect-ratio: 1; border-radius: 15px; object-fit: cover; margin-bottom: 10px; }
 
-      header {
-        padding: 2rem;
-        text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .main-content {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 1.5rem;
-      }
-
-      /* SEÇÃO DO PLAYER DESTAQUE */
-      .playlist-destaque {
-        background: var(--glass);
-        border: 2px solid var(--verde);
-        border-radius: 24px;
-        padding: 15px;
-        margin-bottom: 2rem;
-      }
-      .video-responsive {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-        border-radius: 15px;
-        background: #000;
-      }
-      .video-responsive iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
-
-      /* GRID DE ÁLBUNS */
-      .grid-albuns {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
-
-      .album-card {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
-        padding: 15px;
-        text-align: center;
-        border-bottom: 5px solid var(--vermelho);
-        text-decoration: none;
-        color: white;
-        transition: 0.3s;
-      }
-      .album-card:hover {
-        transform: scale(1.02);
-        background: rgba(255, 255, 255, 0.1);
-      }
-      .album-capa {
-        width: 100%;
-        aspect-ratio: 1;
-        border-radius: 15px;
-        object-fit: cover;
-        margin-bottom: 10px;
-      }
-
-      .btn-voltar-fixo {
-        display: block;
-        background: white;
-        color: black;
-        padding: 15px;
-        border-radius: 15px;
-        text-align: center;
-        text-decoration: none;
-        font-weight: bold;
-        border-bottom: 5px solid #ccc;
-        margin-bottom: 20px;
-      }
-
-      @media (max-width: 500px) {
-        .grid-albuns {
-          grid-template-columns: 1fr;
+        /* LEITOR OVERLAY (MODO CINEMA) */
+        #playlist-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.98); z-index: 10000;
+            display: none; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
         }
-      }
+        .video-container { width: 100%; max-width: 800px; aspect-ratio: 16/9; border: 2px solid var(--amarelo); border-radius: 15px; overflow: hidden; }
+        .btn-fechar { margin-top: 20px; background: var(--vermelho); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: 800; cursor: pointer; }
+
+        @media (max-width: 500px) { .grid-albuns { grid-template-columns: 1fr; } }
     </style>
-  </head>
-  <body>
-    <div id="loader-overlay">
-      <img
-        src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
-        alt="Logo"
-        class="loader-logo"
-      />
-    </div>
+</head>
+<body>
 
     <header>
-      <h1 style="font-family: &quot;Syne&quot;; color: var(--amarelo)">
-        PLAYLISTS & ÁLBUNS
-      </h1>
+        <h1 style="font-family: 'Syne'; color: var(--amarelo)">PLAYLISTS</h1>
     </header>
 
     <main class="main-content">
-      <a href="index.html" class="btn-voltar-fixo">⬅ VOLTAR AO INÍCIO</a>
-
-      <section class="playlist-destaque">
-        <h2
-          style="
-            font-family: &quot;Syne&quot;;
-            color: var(--amarelo);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            text-align: center;
-          "
-        >
-          SANTOLA HITS 2026 🌍
-        </h2>
-        <div class="video-responsive">
-          <iframe
-            src="https://www.youtube.com/embed/videoseries?list=PLp0SUp_yOsq0_Y8DqXfT_K6oXv8_Z-k1P"
-            allowfullscreen
-          >
-          </iframe>
+        <div class="trigger-playlist" onclick="abrirPlayer('PLpVxR8mT2qwiSN8VX_LdVGyp5SVRh4Y92')">
+            OUVIR SANTOLA HITS 2026 🎵
         </div>
-      </section>
 
-      <div class="grid-albuns" id="lista-playlists"></div>
+        <div class="grid-albuns" id="lista-playlists">
+            </div>
     </main>
 
+    <div id="playlist-overlay">
+        <div class="video-container">
+            <iframe id="yt-player" width="100%" height="100%" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <button class="btn-fechar" onclick="fecharPlayer()">FECHAR X</button>
+    </div>
+
     <script>
-      // Função para abrir o leitor (Modo Cinema)
-      function abrirPlayerYoutube(idPlaylist) {
-        const overlay = document.getElementById("playlist-overlay");
-        const iframe = document.getElementById("yt-player");
-
-        iframe.src = `https://www.youtube.com/embed/videoseries?list=${idPlaylist}&autoplay=1`;
-
-        overlay.style.display = "flex";
-        document.body.style.overflow = "hidden";
-      }
-
-      function fecharPlaylist() {
-        const overlay = document.getElementById("playlist-overlay");
-        const iframe = document.getElementById("yt-player");
-        iframe.src = "";
-        overlay.style.display = "none";
-        document.body.style.overflow = "auto";
-      }
-
-      window.onload = async () => {
-        try {
-          const r = await fetch("musicas.json");
-          const dados = await r.json();
-
-          const cont = document.getElementById("lista-playlists");
-          cont.innerHTML = ""; // Limpa antes de carregar
-
-          dados.forEach((item) => {
-            // Verifica se é uma playlist ou álbum
-            if (
-              ["PLAYLISTS", "ALBUNS", "ALBUM"].includes(
-                item.categoria.toUpperCase(),
-              )
-            ) {
-              let acaoHtml = "";
-
-              // Se o link começar com "PL", é uma playlist do YouTube
-              if (item.link.startsWith("PL")) {
-                acaoHtml = `onclick="abrirPlayerYoutube('${item.link}'); return false;" href="#"`;
-              } else {
-                // Se não, é um link normal (álbum para download ou site externo)
-                acaoHtml = `href="${item.link}" target="_blank"`;
-              }
-
-              cont.innerHTML += `
-            <a ${acaoHtml} class="album-card">
-                <img src="${item.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="album-capa">
-                <strong>${item.artista}</strong><br>
-                <small>${item.titulo}</small>
-            </a>
-          `;
-            }
-          });
-        } catch (e) {
-          console.error("Erro ao carregar ficheiro:", e);
+        function abrirPlayer(id) {
+            const overlay = document.getElementById('playlist-overlay');
+            const iframe = document.getElementById('yt-player');
+            iframe.src = `https://www.youtube.com/embed/videoseries?list=${id}&autoplay=1`;
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
-        // Loader
-        const loader = document.getElementById("loader-overlay");
-        if (loader) {
-          loader.style.opacity = "0";
-          setTimeout(() => {
-            loader.style.display = "none";
-          }, 500);
+        function fecharPlayer() {
+            const overlay = document.getElementById('playlist-overlay');
+            document.getElementById('yt-player').src = "";
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
-      };
+
+        window.onload = async () => {
+            try {
+                const r = await fetch("musicas.json");
+                const dados = await r.json();
+                const container = document.getElementById("lista-playlists");
+
+                container.innerHTML = dados.filter(m => ["PLAYLISTS", "ALBUNS"].includes(m.categoria.toUpperCase())).map(p => {
+                    // Se o link for um ID do YouTube (começa com PL), usa o abrirPlayer
+                    const acao = p.link.startsWith('PL') ? `onclick="abrirPlayer('${p.link}')"` : `href="${p.link}"`;
+                    
+                    return `
+                        <div class="album-card" ${acao}>
+                            <img src="${p.capa}" class="album-capa">
+                            <strong>${p.artista}</strong><br>
+                            <small>${p.titulo}</small>
+                        </div>
+                    `;
+                }).join("");
+            } catch (e) { console.error(e); }
+        };
     </script>
-  </body>
+</body>
 </html>
