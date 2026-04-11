@@ -1,39 +1,24 @@
 [
   {
-    "artista": "Puto Português",
-    "titulo": "Fala Só",
-    "categoria": "Kizomba",
-    "link": "https://download1655.mediafire.com/4liie9gwvldgffTDq_MuvntRv-EUbpfU7gBegzMTmZwG9oaSI5mak7Unx6rEWs9vELoXY0gydDXQrqAkRXkxvSilf3RlgU6MJNWi4Xhay3tiLvs3aim9y832XA6Ozp5S6TS5KWs3hm7NCp54d20HvjDjvu2XexBxzZKAgKHV1cvGMas/87z1fgqh77v9mk3/Puto+Portugues+Ft.+Lil+Saint+-+Fala+So+%28Kizomba%29%E2%80%8F.mp3",
-    "audio": "https://soundcloud.com/search?q=PUTOB%20PORTUGUES%20FALA"
+    "id": 1,
+    "titulo": "ABANA",
+    "artista": "DJ VERIGAL X MOZANY & SARA CUCA",
+    "album": "",
+    "genero": "Top Angola",
+    "ano": 2025,
+    "capa": "",
+    "arquivo_audio": "",
+    "link_download": "https://www.mediafire.com/file/06st6wi6qzephgz/DJ+VERIGAL+X+MOZANY+&+SARA+CUCA+-+ABANA.mp3/file",
   },
   {
-  "artista": "",
-  "titulo": "" ,
-  "capa": "",
-  "categoria": "PLAYLISTS"
-},
-  {
-  "artista": "",
-  "titulo": "",
-  "link": "",
-  "capa": "",
-  "audio": "",
-  "categoria": ""
-},
-  {
-  "artista": "",
-  "titulo": "",
-  "link": "",
-  "capa": "",
-  "audio": "",
-  "categoria": ""
-},
-  {
-  "artista": "",
-  "titulo": "",
-  "link": "",
-  "capa": "",
-  "audio": "",
-  "categoria": ""
-},
+    "id": 2,
+    "titulo": "Não Deixei Assim",
+    "artista": "Tshunami x Levy x Maninho Pibom & Dj Kalisboy - Não Deixei Assim - Gallo Music Record - | Baixar MP3",
+    "album": "SantolaMusic",
+    "genero": "Top Angola",
+    "ano": 2026,
+    "capa": "",
+    "arquivo_audio": "https://www.mediafire.com/file/zr5b9fde8atk7bx/Tshunami+x+Levy+x+Maninho+Pibom+&+Dj+Kalisboy+-+N%C3%A3o+Deixei+Assim.mp3/file",
+    "link_download": "https://www.mediafire.com/file/zr5b9fde8atk7bx/Tshunami+x+Levy+x+Maninho+Pibom+&+Dj+Kalisboy+-+N%C3%A3o+Deixei+Assim.mp3/file",
+  }
 ]
