@@ -20,5 +20,16 @@
     "capa": "",
     "arquivo_audio": "https://www.mediafire.com/file/zr5b9fde8atk7bx/Tshunami+x+Levy+x+Maninho+Pibom+&+Dj+Kalisboy+-+N%C3%A3o+Deixei+Assim.mp3/file",
     "link_download": "https://www.mediafire.com/file/zr5b9fde8atk7bx/Tshunami+x+Levy+x+Maninho+Pibom+&+Dj+Kalisboy+-+N%C3%A3o+Deixei+Assim.mp3/file",
+  },
+  {
+    "id": 1,
+    "titulo": "NOME DA MÚSICA AQUI",
+    "artista": "NOME DO ARTISTA AQUI",
+    "album": "NOME DO ÁLBUM OU SINGLE",
+    "genero": "CATEGORIA AQUI (Ex: TOP ANGOLA, KIZOMBA, RAP)",
+    "ano": "2026",
+    "capa": "LINK_DA_IMAGEM_AQUI.jpg",
+    "arquivo_audio": "",
+    "link_download": "LINK_DO_MEDIAFIRE_AQUI"
   }
 ]
