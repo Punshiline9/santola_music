@@ -1,244 +1,229 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <title>Playlists | Santola Music</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Santola Music | O Som das Ilhas</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    
     <style>
-      :root {
-        --verde: #12ad2b;
-        --amarelo: #ffdb00;
-        --vermelho: #d21034;
-        --glass: rgba(255, 255, 255, 0.05);
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Inter", sans-serif;
-      }
-      body {
-        background: #080808;
-        color: white;
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
-
-      header {
-        padding: 2rem;
-        text-align: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      .main-content {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 1.5rem;
-      }
-
-      /* BOTÃO GATILHO DA PLAYLIST (IGUAL AOS OUTROS DO SITE) */
-      .trigger-playlist {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #111;
-        color: var(--amarelo);
-        border: 2px solid var(--amarelo);
-        border-bottom: 5px solid #857200;
-        padding: 22px;
-        border-radius: 18px;
-        text-decoration: none;
-        font-weight: 900;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        margin-bottom: 2rem;
-        cursor: pointer;
-        width: 100%;
-        transition: 0.2s;
-      }
-      .trigger-playlist:active {
-        transform: translateY(3px);
-        border-bottom-width: 2px;
-      }
-
-      /* OVERLAY DO LEITOR (ECRÃ CHEIO) */
-      #playlist-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        z-index: 10000;
-        display: none; /* Escondido por padrão */
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-      }
-
-      .video-container {
-        width: 100%;
-        max-width: 800px;
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        height: 0;
-        border-radius: 20px;
-        overflow: hidden;
-        border: 2px solid var(--amarelo);
-      }
-      .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
-
-      .btn-fechar {
-        margin-top: 20px;
-        background: var(--vermelho);
-        color: white;
-        border: none;
-        padding: 15px 40px;
-        border-radius: 50px;
-        font-weight: 800;
-        cursor: pointer;
-        text-transform: uppercase;
-      }
-
-      /* GRID DE ÁLBUNS ABAIXO */
-      .grid-albuns {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
-      .album-card {
-        background: var(--glass);
-        border-radius: 20px;
-        padding: 15px;
-        text-align: center;
-        border-bottom: 5px solid var(--vermelho);
-        text-decoration: none;
-        color: white;
-      }
-      .album-capa {
-        width: 100%;
-        aspect-ratio: 1;
-        border-radius: 15px;
-        object-fit: cover;
-        margin-bottom: 10px;
-      }
-
-      .btn-voltar-topo {
-        display: block;
-        background: white;
-        color: black;
-        padding: 15px;
-        border-radius: 15px;
-        text-align: center;
-        text-decoration: none;
-        font-weight: bold;
-        margin-bottom: 20px;
-      }
-
-      @media (max-width: 500px) {
-        .grid-albuns {
-          grid-template-columns: 1fr;
+        :root {
+            --verde: #12ad2b;
+            --amarelo: #ffdb00;
+            --vermelho: #d21034;
+            --preto: #080808;
+            --glass: rgba(255, 255, 255, 0.05);
         }
-      }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body { 
+            background-color: var(--preto); 
+            color: white; 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER & LOGO */
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(18, 173, 43, 0.1), transparent);
+        }
+
+        .logo-container img {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 219, 0, 0.3));
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            color: var(--amarelo);
+            margin-top: 15px;
+            letter-spacing: -1px;
+        }
+
+        /* MENU DE NAVEGAÇÃO PRINCIPAL */
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nav-btn {
+            background: #111;
+            color: white;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border: 2px solid var(--glass);
+            transition: 0.3s;
+            border-bottom: 5px solid var(--glass);
+        }
+
+        .nav-btn.active {
+            border-color: var(--amarelo);
+            border-bottom-color: #857200;
+            color: var(--amarelo);
+        }
+
+        /* SECÇÃO DE ÚLTIMOS LANÇAMENTOS (FEED DINÂMICO) */
+        .section-title {
+            padding: 20px;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            color: var(--verde);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #feed-musicas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+            padding: 0 20px 40px 20px;
+        }
+
+        .music-card {
+            background: var(--glass);
+            border-radius: 18px;
+            padding: 12px;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            border-bottom: 4px solid var(--vermelho);
+        }
+
+        .music-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .music-card strong {
+            display: block;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-card span {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        /* RODAPÉ */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            opacity: 0.5;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--glass);
+        }
+
+        /* LOADER (SPLASH SCREEN) */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--preto);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: 0.5s;
+        }
+
+        @media (max-width: 400px) {
+            #feed-musicas { grid-template-columns: 1fr 1fr; }
+        }
     </style>
-  </head>
-  <body>
-    <header>
-      <h1 style="font-family: &quot;Syne&quot;; color: var(--amarelo)">
-        PLAYLISTS & ÁLBUNS
-      </h1>
-    </header>
+</head>
+<body>
 
-    <main class="main-content">
-      <a href="index.html" class="btn-voltar-topo">⬅ VOLTAR AO INÍCIO</a>
-
-      <div class="trigger-playlist" onclick="abrirPlaylist()">
-        OUVIR SANTOLA HITS 2026 🎵
-      </div>
-
-      <div class="grid-albuns" id="lista-playlists"></div>
-    </main>
-
-    <div id="playlist-overlay">
-      <div class="video-container">
-        <iframe
-          id="yt-player"
-          src=""
-          title="YouTube video player"
-          allow="autoplay; encrypted-media"
-          allowfullscreen
-        >
-        </iframe>
-      </div>
-      <button class="btn-fechar" onclick="fecharPlaylist()">
-        FECHAR LEITOR X
-      </button>
+    <div id="loader">
+        <img src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" width="80" style="animation: pulse 1.5s infinite">
     </div>
 
+    <header>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" alt="Santola Music">
+        </div>
+        <h1>SANTOLA MUSIC</h1>
+        <p style="opacity: 0.7; font-size: 0.9rem;">O Portal da Música Santomense</p>
+    </header>
+
+    <nav class="nav-buttons">
+        <a href="index.html" class="nav-btn active">Início</a>
+        <a href="playlists.html" class="nav-btn">Playlists</a>
+        <a href="categorias.html" class="nav-btn">Gêneros</a>
+        <a href="politica.html" class="nav-btn">Sobre</a>
+    </nav>
+
+    <div class="section-title">
+        <span>Últimas Novidades</span>
+        <div style="height: 2px; flex-grow: 1; background: var(--glass); margin-left: 15px;"></div>
+    </div>
+
+    <main id="feed-musicas">
+        </main>
+
+    <footer>
+        &copy; 2026 Santola Music. Todos os direitos reservados.
+    </footer>
+
     <script>
-      const playlistID = "PLp0SUp_yOsq0_Y8DqXfT_K6oXv8_Z-k1P"; // <--- COLOQUE SEU ID AQUI
+        window.onload = async () => {
+            try {
+                // Busca os dados do seu arquivo JSON que está no GitHub
+                const response = await fetch('musicas.json');
+                const musicas = await response.json();
+                
+                const feed = document.getElementById('feed-musicas');
+                
+                // Mostra apenas as últimas 10 entradas do JSON no início
+                const ultimasMusicas = musicas.reverse().slice(0, 10);
 
-      function abrirPlaylist() {
-        const overlay = document.getElementById("playlist-overlay");
-        const iframe = document.getElementById("yt-player");
-        // Só carrega o vídeo quando clica para não pesar o site
-        iframe.src = `https://www.youtube.com/embed/videoseries?list=${playlistID}&autoplay=1`;
-        overlay.style.display = "flex";
-        document.body.style.overflow = "hidden"; // Impede scroll ao fundo
-      }
+                feed.innerHTML = ultimasMusicas.map(m => `
+                    <a href="${m.link}" class="music-card">
+                        <img src="${m.capa || 'https://i.postimg.cc/RhnRhFNj/Logo-STP.png'}" alt="${m.titulo}">
+                        <strong>${m.artista}</strong>
+                        <span>${m.titulo}</span>
+                    </a>
+                `).join('');
 
-      function fecharPlaylist() {
-        const overlay = document.getElementById("playlist-overlay");
-        const iframe = document.getElementById("yt-player");
-        iframe.src = ""; // Para a música ao fechar
-        overlay.style.display = "none";
-        document.body.style.overflow = "auto";
-      }
+            } catch (error) {
+                console.error("Erro ao carregar músicas:", error);
+                document.getElementById('feed-musicas').innerHTML = "<p style='padding:20px; opacity:0.5;'>Ligue a internet para ver as novidades.</p>";
+            }
 
-      // Carregar álbuns do JSON
-      window.onload = async () => {
-        try {
-          const r = await fetch("musicas.json");
-          const dados = await r.json();
-          const playlists = dados.filter((m) =>
-            ["PLAYLISTS", "ALBUNS", "ALBUM"].includes(
-              m.categoria.toUpperCase(),
-            ),
-          );
-
-          document.getElementById("lista-playlists").innerHTML = playlists
-            .map(
-              (p) => `
-            <a href="${p.link}" class="album-card">
-                <img src="${p.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="album-capa">
-                <strong>${p.artista}</strong><br><small>${p.titulo}</small>
-            </a>
-          `,
-            )
-            .join("");
-        } catch (e) {
-          console.error(e);
-        }
-      };
+            // Esconde o loader após carregar tudo
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        };
     </script>
-  </body>
+
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+    </style>
+</body>
 </html>
