@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Categorias | Santola Music</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --glass: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        background-color: #080808;
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Splash Screen */
+      #loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #080808;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+      .loader-logo {
+        width: 120px;
+        animation: pulse 1.5s infinite;
+        filter: drop-shadow(0 0 15px var(--amarelo));
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(0.95);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      /* Header */
+      header {
+        padding: 2.5rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        background: rgba(8, 8, 8, 0.95);
+        position: relative;
+      }
+      .btn-voltar {
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        background: var(--glass);
+        border: 1px solid var(--amarelo);
+        color: var(--amarelo);
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.7rem;
+        transition: 0.3s;
+        z-index: 10;
+      }
+      .btn-voltar:hover {
+        background: var(--amarelo);
+        color: black;
+        box-shadow: 0 0 15px var(--amarelo);
+      }
+      .logo-texto {
+        font-family: "Syne";
+        font-size: 2.8rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+      }
+      .container-logo-dir {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 70px;
+        height: 70px;
+        opacity: 0.8;
+      }
+
+      /* Main Content */
+      .main-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+      }
+      .titulo-pag {
+        font-family: "Syne";
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--amarelo);
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      /* Grid Categorias */
+      .grid-categorias {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .cat-card {
+        background: var(--glass);
+        border: 2px solid var(--border);
+        padding: 30px 15px;
+        border-radius: 20px;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        border-bottom-width: 6px;
+      }
+      .c-verde {
+        border-color: var(--verde);
+        border-bottom-color: #0a6b1a;
+      }
+      .c-amarelo {
+        border-color: var(--amarelo);
+        border-bottom-color: #bfa300;
+      }
+      .c-vermelho {
+        border-color: var(--vermelho);
+        border-bottom-color: #8b0a22;
+      }
+      .cat-card:hover {
+        transform: translateY(-5px);
+        filter: brightness(1.2);
+      }
+      .cat-card strong {
+        font-family: "Syne";
+        font-size: 1.1rem;
+        text-transform: uppercase;
+      }
+
+      /* Listagem */
+      .music-row {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        margin-bottom: 12px;
+        padding: 14px;
+        border-radius: 20px;
+        gap: 15px;
+        border: 1px solid var(--border);
+      }
+      .artist-thumb {
+        width: 55px;
+        height: 55px;
+        border-radius: 12px;
+        object-fit: cover;
+      }
+      .btn-baixar-cat {
+        background: var(--amarelo);
+        color: black;
+        padding: 8px 15px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.8rem;
+        border-bottom: 3px solid #bfa300;
+      }
+
+      /* FOOTER MINIMALISTA COM NOME EM DESTAQUE 3D */
+      footer {
+        background: #050505;
+        padding: 3rem 1rem 1.5rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+        margin-top: 3rem;
+      }
+      .social-row {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+      .social-mini {
+        padding: 8px 12px;
+        min-width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        text-decoration: none;
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 800;
+        transition: 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .s-wa {
+        border-color: #25d366;
+        color: #25d366;
+      }
+      .s-fb {
+        border-color: #1877f2;
+        color: #1877f2;
+      }
+      .s-tk {
+        border-color: #ffffff;
+        color: #ffffff;
+      }
+      .s-yt {
+        border-color: #ff0000;
+        color: #ff0000;
+      }
+      .s-wa:hover {
+        background: #25d366;
+        color: #000;
+      }
+      .s-fb:hover {
+        background: #1877f2;
+        color: #fff;
+      }
+      .s-tk:hover {
+        background: #fff;
+        color: #000;
+      }
+      .s-yt:hover {
+        background: #ff0000;
+        color: #fff;
+      }
+      .footer-info {
+        margin-bottom: 20px;
+      }
+      .footer-info a {
+        color: #888;
+        text-decoration: none;
+        font-size: 0.8rem;
+      }
+      .policy-link {
+        color: var(--amarelo);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: block;
+        margin-top: 10px;
+      }
+
+      /* ESTILO ESPECÍFICO PARA O TEU NOME PACHECO GONÇALVES */
+      .dev-name-highlight {
+        font-size: 1.1rem;
+        color: var(--amarelo);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 25px;
+        font-weight: 800;
+        display: block;
+        text-shadow: 0 0 12px rgba(255, 219, 0, 0.7);
+      }
+      .credits-prefix {
+        font-size: 0.7rem;
+        color: #444;
+        text-transform: uppercase;
+        display: block;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 480px) {
+        .logo-texto {
+          font-size: 2rem;
+        }
+        .grid-categorias {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loader-overlay">
+      <img
+        src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+        class="loader-logo"
+      />
+    </div>
+
+    <header>
+      <a href="index.html" class="btn-voltar">⬅ VOLTAR</a>
+      <div class="logo-texto">Santola Music</div>
+      <div class="container-logo-dir">
+        <img
+          src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+          style="width: 100%"
+        />
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div id="menu-view">
+        <h2 class="titulo-pag">Escolha o seu Estilo 📂</h2>
+        <div class="grid-categorias">
+          <div class="cat-card c-verde" onclick="filtrar('Kizomba & Zouk')">
+            <strong>Kizomba & Zouk</strong>
+          </div>
+          <div class="cat-card c-amarelo" onclick="filtrar('Puxita & Bulaúe')">
+            <strong>Puxita & Bulaúe</strong>
+          </div>
+          <div class="cat-card c-vermelho" onclick="filtrar('Top Angola')">
+            <strong>Top Angola</strong>
+          </div>
+          <div class="cat-card c-vermelho" onclick="filtrar('Rap STP')">
+            <strong>Rap STP</strong>
+          </div>
+          <div class="cat-card c-amarelo" onclick="filtrar('Trap STP')">
+            <strong>Trap STP</strong>
+          </div>
+          <div class="cat-card c-verde" onclick="filtrar('Internacional')">
+            <strong>Internacionais</strong>
+          </div>
+        </div>
+      </div>
+
+      <div id="result-view" style="display: none">
+        <h2
+          id="cat-titulo"
+          class="titulo-pag"
+          style="
+            border-left: 5px solid var(--vermelho);
+            padding-left: 15px;
+            text-align: left;
+          "
+        ></h2>
+        <div id="lista-musicas"></div>
+        <button
+          class="cat-card"
+          style="width: 100%; margin-top: 20px; background: #222"
+          onclick="voltarMenu()"
+        >
+          🔄 VER OUTROS ESTILOS
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-row">
+        <a href="https://wa.me/2399944660" class="social-mini s-wa">WhatsApp</a>
+        <a
+          href="https://facebook.com/santolamusic"
+          class="social-mini s-fb"
+          target="_blank"
+          >Facebook</a
+        >
+        <a
+          href="https://tiktok.com/@santolamusic"
+          class="social-mini s-tk"
+          target="_blank"
+          >TikTok</a
+        >
+        <a
+          href="https://youtube.com/@SantolaMusic"
+          class="social-mini s-yt"
+          target="_blank"
+          >YouTube</a
+        >
+      </div>
+
+      <div class="footer-info">
+        <a href="mailto:punchiline9@gmail.com">punchiline9@gmail.com</a>
+        <a href="politica.html" class="policy-link">Termos & Copyright</a>
+      </div>
+
+      <div class="dev-info-block">
+        <span class="credits-prefix">Desenvolvido por</span>
+        <span class="dev-name-highlight">Pacheco Gonçalves</span>
+      </div>
+
+      <p style="opacity: 0.3; font-size: 0.6rem; margin-top: 20px">
+        © 2026 SANTOLA MUSIC
+      </p>
+    </footer>
+
+    <script>
+      let musicasGerais = [];
+      window.onload = async () => {
+        try {
+          const r = await fetch("musicas.json");
+          musicasGerais = await r.json();
+        } catch (e) {
+          console.error("Erro JSON");
+        }
+        setTimeout(() => {
+          document.getElementById("loader-overlay").style.opacity = "0";
+          setTimeout(
+            () =>
+              (document.getElementById("loader-overlay").style.display =
+                "none"),
+            500,
+          );
+        }, 800);
+      };
+
+      function filtrar(estilo) {
+        const menu = document.getElementById("menu-view"),
+          result = document.getElementById("result-view"),
+          lista = document.getElementById("lista-musicas"),
+          titulo = document.getElementById("cat-titulo");
+        const filtradas = musicasGerais.filter(
+          (m) => m.categoria.toLowerCase() === estilo.toLowerCase(),
+        );
+        titulo.innerText = estilo;
+        menu.style.display = "none";
+        result.style.display = "block";
+        if (filtradas.length === 0) {
+          lista.innerHTML = `<p style="text-align:center; padding:40px; color:#666;">Nenhuma música encontrada.</p>`;
+        } else {
+          lista.innerHTML = filtradas
+            .map(
+              (m) => `
+            <div class="music-row">
+                <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="artist-thumb">
+                <div style="flex:1">
+                    <strong style="font-size:1.1rem">${m.artista}</strong><br>
+                    <small style="color:var(--amarelo)">${m.titulo}</small>
+                </div>
+                <a href="${m.link}" class="btn-baixar-cat">BAIXAR</a>
+            </div>
+          `,
+            )
+            .join("");
+        }
+        window.scrollTo(0, 0);
+      }
+
+      function voltarMenu() {
+        document.getElementById("menu-view").style.display = "block";
+        document.getElementById("result-view").style.display = "none";
+        window.scrollTo(0, 0);
+      }
+    </script>
+  </body>
+</html>
