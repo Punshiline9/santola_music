@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "artista": "Puto Português",
     "titulo": "Fala Só",
     "categoria": "Kizomba",
@@ -8,10 +7,33 @@
     "audio": "https://soundcloud.com/search?q=PUTOB%20PORTUGUES%20FALA"
   },
   {
-  "artista": "SANTOLA MUSIC",
-  "titulo": "Playlist Oficial Calema",
-  "capa": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png",
-  "link": "PLpVxR8mT2qwiSN8VX_LdVGyp5SVRh4Y92",
+  "artista": "",
+  "titulo": "" ,
+  "capa": "",
   "categoria": "PLAYLISTS"
-}
+},
+  {
+  "artista": "",
+  "titulo": "",
+  "link": "";
+  "capa": "",
+  "audio": "",
+  "categoria": ""
+},
+  {
+  "artista": "",
+  "titulo": "",
+  "link": "";
+  "capa": "",
+  "audio": "",
+  "categoria": ""
+},
+  {
+  "artista": "",
+  "titulo": "",
+  "link": "";
+  "capa": "",
+  "audio": "",
+  "categoria": ""
+},
 ]
