@@ -467,87 +467,110 @@
         © 2026 SANTOLA MUSIC
       </p>
     </footer>
+<script>
+    let musicasGerais = [];
+    const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
+    const NOME_BLOG = "Santola Music";
+    const SLOGAN_BLOG = "O Blog das Ilhas";
 
-    <script>
-      let musicasGerais = [];
-      window.addEventListener("load", async () => {
+    // Função para remover acentos e facilitar a busca
+    function normalizar(texto) {
+        if (!texto) return "";
+        return texto.toString().toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    window.addEventListener("load", async () => {
         try {
-          const r = await fetch("musicas.json");
-          musicasGerais = await r.json();
-          renderizarHome();
+            const r = await fetch("musicas.json");
+            const dadosRaw = await r.json();
+
+            // TRATAMENTO ULTRA-INTELIGENTE (Preenchimento de lacunas)
+            musicasGerais = dadosRaw.map(m => {
+                return {
+                    id: m.id || m["eu ia"] || Date.now() + Math.random(),
+                    // Se não houver artista ou título, usa as informações do Blog
+                    artista: m.artista && m.artista.trim() !== "" ? m.artista : NOME_BLOG,
+                    titulo: (m.titulo || m.título) && (m.titulo || m.título).trim() !== "" ? (m.titulo || m.título) : SLOGAN_BLOG,
+                    // Se não houver categoria, define como INTERNACIONAIS
+                    categoria: m.categoria || m.gênero || "INTERNACIONAIS",
+                    // Link de download (se não houver, mantém # para não quebrar o botão)
+                    link: m.link || m.link_download || "#",
+                    // Se não houver link de capa, usa o Logo Oficial
+                    capa: m.capa && m.capa.trim() !== "" ? m.capa : LOGO_PADRAO
+                };
+            });
+
+            renderizarHome();
         } catch (e) {
-          console.error("Erro ao carregar JSON");
+            console.error("Erro ao carregar ou processar o JSON:", e);
         }
+        
         setTimeout(() => {
-          const splash = document.getElementById("splash");
-          splash.style.opacity = "0";
-          setTimeout(() => (splash.style.display = "none"), 500);
+            const splash = document.getElementById("splash");
+            splash.style.opacity = "0";
+            setTimeout(() => (splash.style.display = "none"), 500);
         }, 800);
-      });
+    });
 
-      function renderizarHome() {
+    function renderizarHome() {
         const novidades = [...musicasGerais].reverse().slice(0, 10);
-        const top20 = musicasGerais
-          .filter((m) => m.categoria.toLowerCase() === "top 20")
-          .slice(0, 20);
-        document.getElementById("list-novidades").innerHTML =
-          gerarHtml(novidades);
-        document.getElementById("list-top20").innerHTML = gerarHtml(
-          top20.length ? top20 : musicasGerais.slice(0, 20),
-        );
-      }
+        
+        // Filtro para Top 20 (procura por nomes similares à categoria)
+        const top20 = musicasGerais.filter(m => 
+            normalizar(m.categoria).includes("top 20") || 
+            normalizar(m.categoria).includes("angola")
+        ).slice(0, 20);
 
-      function realizarPesquisa() {
-        const termo = document
-          .getElementById("searchInput")
-          .value.toLowerCase()
-          .trim();
+        document.getElementById("list-novidades").innerHTML = gerarHtml(novidades);
+        document.getElementById("list-top20").innerHTML = gerarHtml(
+            top20.length ? top20 : musicasGerais.slice(0, 20)
+        );
+    }
+
+    function realizarPesquisa() {
+        const termo = normalizar(document.getElementById("searchInput").value).trim();
         const home = document.getElementById("home-content");
         const searchView = document.getElementById("search-results-view");
 
         if (termo.length > 0) {
-          home.style.display = "none";
-          searchView.style.display = "block";
+            home.style.display = "none";
+            searchView.style.display = "block";
 
-          const resultados = musicasGerais.filter(
-            (m) =>
-              m.artista.toLowerCase().includes(termo) ||
-              m.titulo.toLowerCase().includes(termo) ||
-              m.categoria.toLowerCase().includes(termo),
-          );
+            const resultados = musicasGerais.filter(m => {
+                const alvo = normalizar(`${m.artista} ${m.titulo} ${m.categoria}`);
+                return alvo.includes(termo);
+            });
 
-          document.getElementById("list-search").innerHTML =
-            gerarHtml(resultados);
+            document.getElementById("list-search").innerHTML = gerarHtml(resultados);
         } else {
-          cancelarPesquisa();
+            cancelarPesquisa();
         }
-      }
+    }
 
-      function cancelarPesquisa() {
+    function cancelarPesquisa() {
         document.getElementById("searchInput").value = "";
         document.getElementById("home-content").style.display = "block";
         document.getElementById("search-results-view").style.display = "none";
-      }
+    }
 
-      function gerarHtml(lista) {
+    function gerarHtml(lista) {
         if (lista.length === 0)
-          return "<p style='text-align:center; padding:20px; opacity:0.5; font-size:0.8rem;'>Nada encontrado.</p>";
-        return lista
-          .map(
-            (m) => `
-          <div class="music-row">
-            <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="artist-thumb">
-            <div class="info-musica">
-              <strong>${m.artista}</strong>
-              <small style="color:var(--amarelo); display:block; font-size:0.7rem;">${m.titulo}</small>
-              <span class="tag-cat">${m.categoria}</span>
+            return "<p style='text-align:center; padding:20px; opacity:0.5; font-size:0.8rem;'>Nada encontrado.</p>";
+        
+        return lista.map(m => `
+            <div class="music-row">
+                <img src="${m.capa}" class="artist-thumb" onerror="this.src='${LOGO_PADRAO}'">
+                <div class="info-musica">
+                    <strong>${m.artista}</strong>
+                    <small style="color:var(--amarelo); display:block; font-size:0.7rem;">${m.titulo}</small>
+                    <span class="tag-cat">${m.categoria.toUpperCase()}</span>
+                </div>
+                <a href="${m.link}" class="btn-download" target="_blank">BAIXAR</a>
             </div>
-            <a href="${m.link}" class="btn-download">BAIXAR</a>
-          </div>
-        `,
-          )
-          .join("");
-      }
-    </script>
+        `).join("");
+    }
+</script>
   </body>
 </html>
