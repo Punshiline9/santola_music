@@ -1,0 +1,20 @@
+[
+  {
+    "titulo": "NOME DO EVENTO 1",
+    "imagem": "https://link-da-foto-do-evento.com/banner1.jpg",
+    "link": "eventos.html",
+    "dataExpira": "2026-05-20"
+  },
+  {
+    "titulo": "FESTIVAL SANTOLA 2026",
+    "imagem": "https://link-da-foto-do-evento.com/banner2.jpg",
+    "link": "https://wa.me/2399944660",
+    "dataExpira": "2026-08-15"
+  },
+  {
+    "titulo": "PROMOÇÃO DE ARTISTA",
+    "imagem": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png",
+    "link": "contato.html",
+    "dataExpira": "2027-01-01"
+  }
+]
