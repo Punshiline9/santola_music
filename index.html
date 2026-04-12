@@ -150,6 +150,7 @@
         padding: 1.2rem;
         border: 2px solid var(--verde);
         margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
       }
       .titulo-secao {
         font-family: "Syne";
@@ -253,6 +254,21 @@
         font-weight: 900;
         font-size: 0.65rem;
         border-bottom: 3px solid #bfa300;
+      }
+
+      /* MODAL STYLES */
+      #downloadModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 10000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
       }
 
       /* FOOTER */
@@ -433,6 +449,106 @@
       </div>
     </main>
 
+    <div id="downloadModal">
+      <div
+        class="card-glass"
+        style="
+          max-width: 400px;
+          width: 100%;
+          text-align: center;
+          position: relative;
+          border-color: var(--amarelo);
+        "
+      >
+        <button
+          onclick="fecharModal()"
+          style="
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+          "
+        >
+          &times;
+        </button>
+
+        <img
+          id="modalCapa"
+          src=""
+          class="artist-thumb"
+          style="
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            display: block;
+            border-radius: 12px;
+          "
+        />
+        <h2
+          id="modalArtista"
+          style="
+            font-family: &quot;Syne&quot;;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+          "
+        ></h2>
+        <p
+          id="modalTitulo"
+          style="color: var(--amarelo); font-size: 0.9rem; margin-bottom: 15px"
+        ></p>
+
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 0.8rem;
+            text-align: left;
+            border: 1px solid var(--border);
+          "
+        >
+          <p style="margin-bottom: 5px">
+            <strong>Gênero:</strong> <span id="modalGenero"></span>
+          </p>
+          <p><strong>Tamanho:</strong> <span id="modalPeso"></span></p>
+        </div>
+
+        <a
+          id="modalLinkDownload"
+          href=""
+          class="cat-full-btn"
+          style="margin-bottom: 10px"
+          >BAIXAR AGORA</a
+        >
+
+        <p
+          style="
+            font-size: 0.65rem;
+            color: #888;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          "
+        >
+          Partilhar música no WhatsApp
+        </p>
+        <a
+          id="modalShareWA"
+          href=""
+          target="_blank"
+          class="social-mini s-wa"
+          style="width: 100%; min-height: 40px"
+          >ENVIAR PARA AMIGOS</a
+        >
+      </div>
+    </div>
+
     <footer>
       <div class="social-row">
         <a href="https://wa.me/2399944660" class="social-mini s-wa">WhatsApp</a>
@@ -467,13 +583,13 @@
         © 2026 SANTOLA MUSIC
       </p>
     </footer>
+
     <script>
       let musicasGerais = [];
       const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
       const NOME_BLOG = "Santola Music";
       const SLOGAN_BLOG = "O Blog das Ilhas";
 
-      // Função para remover acentos e facilitar a busca
       function normalizar(texto) {
         if (!texto) return "";
         return texto
@@ -488,23 +604,19 @@
           const r = await fetch("musicas.json");
           const dadosRaw = await r.json();
 
-          // TRATAMENTO ULTRA-INTELIGENTE (Preenchimento de lacunas)
           musicasGerais = dadosRaw.map((m) => {
             return {
               id: m.id || m["eu ia"] || Date.now() + Math.random(),
-              // Se não houver artista ou título, usa as informações do Blog
               artista:
                 m.artista && m.artista.trim() !== "" ? m.artista : NOME_BLOG,
               titulo:
                 (m.titulo || m.título) && (m.titulo || m.título).trim() !== ""
                   ? m.titulo || m.título
                   : SLOGAN_BLOG,
-              // Se não houver categoria, define como INTERNACIONAIS
               categoria: m.categoria || m.gênero || "INTERNACIONAIS",
-              // Link de download (se não houver, mantém # para não quebrar o botão)
               link: m.link || m.link_download || "#",
-              // Se não houver link de capa, usa o Logo Oficial
               capa: m.capa && m.capa.trim() !== "" ? m.capa : LOGO_PADRAO,
+              tamanho: m.tamanho || "4.8 MB", // Valor padrão caso não exista no JSON
             };
           });
 
@@ -522,8 +634,6 @@
 
       function renderizarHome() {
         const novidades = [...musicasGerais].reverse().slice(0, 10);
-
-        // Filtro para Top 20 (procura por nomes similares à categoria)
         const top20 = musicasGerais
           .filter(
             (m) =>
@@ -549,12 +659,10 @@
         if (termo.length > 0) {
           home.style.display = "none";
           searchView.style.display = "block";
-
           const resultados = musicasGerais.filter((m) => {
             const alvo = normalizar(`${m.artista} ${m.titulo} ${m.categoria}`);
             return alvo.includes(termo);
           });
-
           document.getElementById("list-search").innerHTML =
             gerarHtml(resultados);
         } else {
@@ -568,13 +676,16 @@
         document.getElementById("search-results-view").style.display = "none";
       }
 
+      // FUNÇÃO ALTERADA PARA ABRIR MODAL
       function gerarHtml(lista) {
         if (lista.length === 0)
           return "<p style='text-align:center; padding:20px; opacity:0.5; font-size:0.8rem;'>Nada encontrado.</p>";
 
         return lista
-          .map(
-            (m) => `
+          .map((m) => {
+            // Transformar objeto em string segura para o atributo onclick
+            const musicaString = encodeURIComponent(JSON.stringify(m));
+            return `
             <div class="music-row">
                 <img src="${m.capa}" class="artist-thumb" onerror="this.src='${LOGO_PADRAO}'">
                 <div class="info-musica">
@@ -582,12 +693,43 @@
                     <small style="color:var(--amarelo); display:block; font-size:0.7rem;">${m.titulo}</small>
                     <span class="tag-cat">${m.categoria.toUpperCase()}</span>
                 </div>
-                <a href="${m.link}" class="btn-download" target="_blank">BAIXAR</a>
+                <a href="javascript:void(0)" onclick="abrirModal('${musicaString}')" class="btn-download">BAIXAR</a>
             </div>
-        `,
-          )
+            `;
+          })
           .join("");
       }
+
+      // NOVAS FUNÇÕES DO MODAL
+      function abrirModal(dadosMusica) {
+        const m = JSON.parse(decodeURIComponent(dadosMusica));
+        const modal = document.getElementById("downloadModal");
+
+        document.getElementById("modalCapa").src = m.capa;
+        document.getElementById("modalArtista").innerText = m.artista;
+        document.getElementById("modalTitulo").innerText = m.titulo;
+        document.getElementById("modalGenero").innerText = m.categoria;
+        document.getElementById("modalPeso").innerText = m.tamanho;
+        document.getElementById("modalLinkDownload").href = m.link;
+
+        // Link de Partilha
+        const shareLink = window.location.href;
+        const shareText = `Baixa agora "${m.titulo}" de ${m.artista} no Santola Music: ${shareLink}`;
+        document.getElementById("modalShareWA").href =
+          `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+
+        modal.style.display = "flex";
+      }
+
+      function fecharModal() {
+        document.getElementById("downloadModal").style.display = "none";
+      }
+
+      // Fechar ao clicar fora do card
+      window.onclick = function (event) {
+        const modal = document.getElementById("downloadModal");
+        if (event.target == modal) fecharModal();
+      };
     </script>
   </body>
 </html>
