@@ -23,6 +23,7 @@
         --vermelho: #d21034;
         --glass: rgba(255, 255, 255, 0.05);
         --border: rgba(255, 255, 255, 0.1);
+        --glow: 0 0 15px rgba(255, 219, 0, 0.3);
       }
       * {
         margin: 0;
@@ -53,16 +54,18 @@
         transition: opacity 0.5s ease;
       }
       #splash img {
-        width: 150px;
+        width: 120px;
         animation: pulse 1s infinite alternate;
         filter: drop-shadow(0 0 15px var(--amarelo));
       }
       @keyframes pulse {
         from {
           transform: scale(1);
+          opacity: 0.8;
         }
         to {
           transform: scale(1.1);
+          opacity: 1;
         }
       }
 
@@ -71,8 +74,11 @@
         padding: 2.5rem 1rem 1.5rem;
         text-align: center;
         border-bottom: 1px solid var(--border);
-        background: rgba(8, 8, 8, 0.95);
-        position: relative;
+        background: rgba(8, 8, 8, 0.98);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(10px);
       }
       .logo-texto {
         font-family: "Syne";
@@ -88,28 +94,56 @@
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
         line-height: 1.1;
+        cursor: pointer;
       }
+
+      .btn-publicitar-top {
+        background: var(--amarelo);
+        color: #000;
+        padding: 6px 16px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.65rem;
+        margin-top: 10px;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+        transition: 0.3s;
+        border-bottom: 3px solid #bfa300;
+      }
+      .btn-publicitar-top:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--glow);
+        background: white;
+      }
+
       .btn-enviar {
         position: absolute;
         left: 15px;
         top: 15px;
         background: var(--verde);
         color: white;
-        padding: 6px 10px;
-        border-radius: 4px;
+        padding: 7px 12px;
+        border-radius: 6px;
         text-decoration: none;
         font-weight: 800;
-        font-size: 0.55rem;
+        font-size: 0.6rem;
         z-index: 10;
         border-bottom: 2px solid #0a6b1a;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        transition: 0.2s;
       }
+      .btn-enviar:active {
+        transform: scale(0.95);
+      }
+
       .container-logo-dir {
         position: absolute;
         right: 15px;
         top: 15px;
-        width: 45px;
+        width: 42px;
         opacity: 0.9;
       }
       .logo-img-dir {
@@ -119,14 +153,19 @@
 
       .search-box {
         background: var(--glass);
-        border-radius: 24px;
+        border-radius: 14px;
         margin: 1.2rem auto 0;
-        border: 2px solid var(--amarelo);
+        border: 1.5px solid var(--border);
         width: 100%;
         max-width: 500px;
         display: flex;
         align-items: center;
         padding-left: 15px;
+        transition: 0.3s;
+      }
+      .search-box:focus-within {
+        border-color: var(--amarelo);
+        box-shadow: var(--glow);
       }
       .search-box input {
         flex: 1;
@@ -138,9 +177,39 @@
         padding: 0.8rem;
       }
 
+      /* ANÚNCIOS */
+      .ads-container {
+        width: 100%;
+        height: 120px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        margin: 20px 0;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        background: #111;
+      }
+      .ads-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        transition: opacity 0.5s ease;
+      }
+      .ads-slide.active {
+        display: flex;
+      }
+
       /* MAIN CONTENT */
       .main-content {
-        max-width: 1000px;
+        max-width: 800px;
         margin: 0 auto;
         padding: 1rem;
       }
@@ -148,254 +217,249 @@
         background: var(--glass);
         border-radius: 24px;
         padding: 1.2rem;
-        border: 2px solid var(--verde);
+        border: 1px solid var(--border);
         margin-bottom: 2rem;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(5px);
       }
       .titulo-secao {
         font-family: "Syne";
-        color: var(--amarelo);
-        font-size: 1.3rem;
+        color: #fff;
+        font-size: 1.1rem;
         margin-bottom: 15px;
         display: flex;
         align-items: center;
         gap: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .titulo-secao span {
+        color: var(--amarelo);
       }
 
-      /* BOTÕES */
-      .row-botoes {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 12px;
-      }
-      .btn-half {
-        flex: 1;
-        text-align: center;
-        padding: 22px 10px;
-        border-radius: 18px;
-        text-decoration: none;
-        font-weight: 900;
-        font-size: 0.85rem;
-        transition: 0.3s;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .btn-letras {
-        background: var(--vermelho);
-        color: white;
-        border-bottom: 5px solid #8b0a22;
-      }
-      .btn-playlist {
-        background: #111;
-        color: var(--amarelo);
-        border: 2px solid var(--amarelo);
-        border-bottom: 5px solid #857200;
-      }
+      /* BOTÕES DE NAVEGAÇÃO */
       .cat-full-btn {
         display: block;
         text-align: center;
-        padding: 18px;
-        border-radius: 18px;
+        padding: 16px;
+        border-radius: 16px;
         text-decoration: none;
         font-weight: 800;
         margin-bottom: 20px;
         background: var(--verde);
         color: white;
-        border-bottom: 5px solid #0a6b1a;
+        border-bottom: 4px solid #0a6b1a;
         text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.2s;
+      }
+      .cat-full-btn:active {
+        transform: translateY(2px);
+        border-bottom-width: 1px;
       }
 
-      /* LISTAGEM */
+      .row-botoes-footer {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .btn-footer-action {
+        flex: 1;
+        height: 45px;
+        text-align: center;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s;
+      }
+      .btn-letras {
+        background: var(--vermelho);
+        color: white;
+        border-bottom: 3px solid #8b0a22;
+      }
+      .btn-playlist {
+        background: #1a1a1a;
+        color: var(--amarelo);
+        border: 1px solid var(--amarelo);
+        border-bottom: 3px solid #857200;
+      }
+
+      /* LISTAGEM DE MÚSICAS */
       .music-row {
         display: flex;
         align-items: center;
         background: rgba(255, 255, 255, 0.03);
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 18px;
+        margin-bottom: 12px;
+        padding: 12px;
+        border-radius: 16px;
         gap: 12px;
         border: 1px solid var(--border);
+        transition: 0.2s;
+      }
+      .music-row:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: var(--border);
       }
       .artist-thumb {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        border: 2px solid var(--amarelo);
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
         object-fit: cover;
+        background: #222;
+        border: 1px solid var(--border);
       }
       .info-musica {
         flex: 1;
         min-width: 0;
       }
       .info-musica strong {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         color: #fff;
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
+      .info-musica small {
+        color: #aaa;
+        font-size: 0.75rem;
+      }
       .tag-cat {
         font-size: 0.55rem;
         background: var(--verde);
         color: white;
-        padding: 1px 5px;
+        padding: 2px 6px;
         border-radius: 4px;
         font-weight: 800;
+        display: inline-block;
+        margin-top: 4px;
       }
       .btn-download {
-        background: linear-gradient(90deg, #ffdb00, #ff4e00);
+        background: var(--amarelo);
         color: black;
-        padding: 8px 18px;
-        border-radius: 20px;
+        padding: 8px 14px;
+        border-radius: 10px;
         text-decoration: none;
-        font-weight: 900;
+        font-weight: 800;
         font-size: 0.65rem;
-        border-bottom: 3px solid #bfa300;
+        transition: 0.2s;
       }
 
-      /* MODAL STYLES */
+      /* MODAL */
       #downloadModal {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(0, 0, 0, 0.95);
         z-index: 10000;
         display: none;
         justify-content: center;
         align-items: center;
         padding: 20px;
+        backdrop-filter: blur(10px);
+      }
+      .modal-card {
+        background: #111;
+        border-radius: 28px;
+        padding: 2rem;
+        border: 1px solid var(--amarelo);
+        width: 100%;
+        max-width: 380px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
       }
 
       /* FOOTER */
       footer {
         background: #050505;
-        padding: 3rem 1rem 1.5rem;
+        padding: 3rem 1rem 2rem;
         text-align: center;
         border-top: 1px solid var(--border);
-        margin-top: 3rem;
       }
       .social-row {
         display: flex;
         justify-content: center;
-        gap: 8px;
-        margin-bottom: 30px;
+        gap: 10px;
+        margin-bottom: 25px;
         flex-wrap: wrap;
       }
       .social-mini {
-        padding: 8px 12px;
-        min-width: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 6px;
+        padding: 10px 15px;
+        border-radius: 10px;
         text-decoration: none;
         color: white;
-        font-size: 0.65rem;
+        font-size: 0.7rem;
         font-weight: 800;
-        transition: 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        border: 1px solid var(--border);
+        transition: 0.3s;
       }
       .s-wa {
         border-color: #25d366;
         color: #25d366;
       }
-      .s-fb {
-        border-color: #1877f2;
-        color: #1877f2;
-      }
-      .s-tk {
-        border-color: #ffffff;
-        color: #ffffff;
-      }
       .s-yt {
         border-color: #ff0000;
         color: #ff0000;
       }
-      .s-wa:hover {
-        background: #25d366;
-        color: #000;
-      }
-      .s-fb:hover {
-        background: #1877f2;
-        color: #fff;
-      }
-      .s-tk:hover {
-        background: #fff;
-        color: #000;
-      }
-      .s-yt:hover {
-        background: #ff0000;
-        color: #fff;
-      }
-
-      .footer-info {
-        margin-bottom: 20px;
-      }
-      .footer-info a {
-        color: #888;
-        text-decoration: none;
-        font-size: 0.8rem;
-        display: block;
-        margin-bottom: 5px;
-      }
-      .policy-link {
-        color: var(--amarelo) !important;
-        font-weight: 700;
-        margin-top: 10px;
-      }
 
       .dev-name-highlight {
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: var(--amarelo);
         text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-top: 5px;
         font-weight: 800;
         display: block;
-        text-shadow: 0 0 12px rgba(255, 219, 0, 0.7);
+        margin-top: 5px;
+        letter-spacing: 1px;
       }
       .credits-prefix {
-        font-size: 0.7rem;
-        color: #444;
+        font-size: 0.65rem;
+        color: #666;
         text-transform: uppercase;
         display: block;
-        margin-top: 20px;
+        margin-top: 25px;
       }
     </style>
   </head>
   <body>
     <div id="splash">
-      <img
-        src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
-        alt="SANTOLA LOGO"
-      />
+      <img src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" alt="SANTOLA" />
     </div>
 
     <header>
-      <a href="https://wa.me/2399944660" class="btn-enviar">O TEU TRABALHO</a>
-      <div class="logo-texto">Santola Music</div>
+      <a href="https://wa.me/2399944660" class="btn-enviar">ENVIAR MÚSICA</a>
+      <div class="logo-texto" onclick="window.location.href = 'index.html'">
+        Santola Music
+      </div>
       <p
         style="
           color: var(--amarelo);
           font-weight: 600;
-          font-size: 0.75rem;
-          letter-spacing: 2px;
+          font-size: 0.65rem;
+          letter-spacing: 3px;
+          margin-top: 5px;
         "
       >
         O BLOG DAS ILHAS
       </p>
+
+      <a
+        href="https://wa.me/2399944660?text=Quero+anunciar"
+        class="btn-publicitar-top"
+        >Publicitar Aqui</a
+      >
+
       <div class="search-box">
         <input
           type="text"
           id="searchInput"
-          placeholder="Pesquisar música, artista ou estilo..."
+          placeholder="Procurar artista ou música..."
           oninput="realizarPesquisa()"
         />
       </div>
@@ -403,117 +467,139 @@
         <img
           src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
           class="logo-img-dir"
-          alt="Logo"
         />
       </div>
     </header>
 
     <main class="main-content">
-      <div id="home-content">
-        <div class="row-botoes">
-          <a
-            href="https://www.youtube.com/@SantolaMusic?sub_confirmation=1"
-            target="_blank"
-            class="btn-half btn-letras"
-            >MELHORES LETRAS</a
-          >
-          <a href="playlists.html" class="btn-half btn-playlist"
-            >ALBUM & PLAYLISTS</a
-          >
+      <div id="home-content" class="page-section">
+        <div
+          class="ads-container"
+          onclick="window.location.href = 'eventos.html'"
+        >
+          <div class="ads-slide active">
+            <span
+              style="
+                color: var(--vermelho);
+                font-weight: 800;
+                font-size: 0.6rem;
+              "
+              >PUBLICIDADE</span
+            >
+            <h3 style="font-family: &quot;Syne&quot;; color: var(--amarelo)">
+              EVENTOS DAS ILHAS
+            </h3>
+            <p style="font-size: 0.7rem; opacity: 0.8">
+              Clique para ver a agenda completa
+            </p>
+          </div>
+          <div class="ads-slide" style="background: #0d2b14">
+            <span
+              style="color: var(--amarelo); font-weight: 800; font-size: 0.6rem"
+              >PROMOÇÃO</span
+            >
+            <h3 style="font-family: &quot;Syne&quot;; color: white">
+              ANUNCIE CONNOSCO
+            </h3>
+            <p style="font-size: 0.7rem">Dê visibilidade ao seu negócio</p>
+          </div>
         </div>
+
         <a href="categorias.html" class="cat-full-btn"
-          >EXPLORAR CATEGORIAS 📂</a
+          >📂 EXPLORAR POR CATEGORIAS</a
         >
 
         <section class="card-glass">
-          <h2 class="titulo-secao">Novidades 🔥</h2>
+          <h2 class="titulo-secao"><span>🔥</span> Novidades</h2>
           <div id="list-novidades"></div>
         </section>
 
-        <section class="card-glass" style="border-color: var(--amarelo)">
-          <h2 class="titulo-secao" style="color: var(--amarelo)">Top 20 🏆</h2>
+        <section class="card-glass">
+          <h2 class="titulo-secao"><span>🏆</span> Top 20 Semanal</h2>
           <div id="list-top20"></div>
+
+          <div class="row-botoes-footer">
+            <a
+              href="https://youtube.com/@SantolaMusic"
+              target="_blank"
+              class="btn-footer-action btn-letras"
+              >VER LETRAS</a
+            >
+            <a href="playlists.html" class="btn-footer-action btn-playlist"
+              >ALBUMS & PLAYLISTS</a
+            >
+          </div>
         </section>
       </div>
 
-      <div id="search-results-view" style="display: none">
-        <h2 class="titulo-secao">Resultados</h2>
+      <div id="search-results-view" class="page-section" style="display: none">
+        <h2 class="titulo-secao"><span>🔍</span> Resultados</h2>
         <div id="list-search"></div>
         <button
           class="cat-full-btn"
-          style="background: #222; margin-top: 20px"
+          style="
+            background: #222;
+            margin-top: 20px;
+            border-bottom: 4px solid #000;
+          "
           onclick="cancelarPesquisa()"
         >
-          VOLTAR
+          VOLTAR AO INÍCIO
         </button>
       </div>
     </main>
 
     <div id="downloadModal">
-      <div
-        class="card-glass"
-        style="
-          max-width: 400px;
-          width: 100%;
-          text-align: center;
-          position: relative;
-          border-color: var(--amarelo);
-        "
-      >
+      <div class="modal-card">
         <button
           onclick="fecharModal()"
           style="
             position: absolute;
-            right: 15px;
+            right: 20px;
             top: 15px;
             background: none;
             border: none;
             color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
+            font-size: 1.8rem;
           "
         >
           &times;
         </button>
-
         <img
           id="modalCapa"
           src=""
           class="artist-thumb"
           style="
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto 15px;
             display: block;
-            border-radius: 12px;
+            border-radius: 15px;
+            border: 2px solid var(--amarelo);
           "
         />
         <h2
           id="modalArtista"
-          style="
-            font-family: &quot;Syne&quot;;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-          "
+          style="font-family: &quot;Syne&quot;; font-size: 1.3rem"
         ></h2>
         <p
           id="modalTitulo"
-          style="color: var(--amarelo); font-size: 0.9rem; margin-bottom: 15px"
+          style="color: var(--amarelo); font-size: 1rem; margin-bottom: 20px"
         ></p>
 
         <div
           style="
             background: rgba(255, 255, 255, 0.05);
-            padding: 12px;
+            padding: 15px;
             border-radius: 12px;
             margin-bottom: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-align: left;
-            border: 1px solid var(--border);
           "
         >
           <p style="margin-bottom: 5px">
-            <strong>Gênero:</strong> <span id="modalGenero"></span>
+            <strong>Gênero:</strong>
+            <span id="modalGenero" style="color: var(--verde)"></span>
           </p>
           <p><strong>Tamanho:</strong> <span id="modalPeso"></span></p>
         </div>
@@ -523,28 +609,15 @@
           href=""
           class="cat-full-btn"
           style="margin-bottom: 10px"
-          >BAIXAR AGORA</a
+          >FAZER DOWNLOAD</a
         >
-
-        <p
-          style="
-            font-size: 0.65rem;
-            color: #888;
-            margin-top: 15px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-          "
-        >
-          Partilhar música no WhatsApp
-        </p>
         <a
           id="modalShareWA"
           href=""
           target="_blank"
           class="social-mini s-wa"
-          style="width: 100%; min-height: 40px"
-          >ENVIAR PARA AMIGOS</a
+          style="display: block; text-align: center"
+          >PARTILHAR NO WHATSAPP</a
         >
       </div>
     </div>
@@ -553,118 +626,123 @@
       <div class="social-row">
         <a href="https://wa.me/2399944660" class="social-mini s-wa">WhatsApp</a>
         <a
-          href="https://facebook.com/santolamusic"
-          class="social-mini s-fb"
-          target="_blank"
-          >Facebook</a
-        >
-        <a
           href="https://tiktok.com/@santolamusic"
           class="social-mini s-tk"
           target="_blank"
           >TikTok</a
         >
         <a
-          href="https://www.youtube.com/@Santola_Music_Blog"
+          href="https://youtube.com/@SantolaMusic"
           class="social-mini s-yt"
           target="_blank"
           >YouTube</a
         >
       </div>
       <div class="footer-info">
-        <a href="mailto:punchiline9@gmail.com">punchiline9@gmail.com</a>
-        <a href="politica.html" class="policy-link">Termos & Copyright</a>
+        <a
+          href="politica.html"
+          style="color: var(--amarelo); font-size: 0.7rem; font-weight: 700"
+          >TERMOS DE USO & COPYRIGHT</a
+        >
       </div>
-      <div class="dev-info-block">
-        <span class="credits-prefix">Desenvolvido por</span>
-        <span class="dev-name-highlight">Pacheco Gonçalves</span>
-      </div>
-      <p style="opacity: 0.3; font-size: 0.6rem; margin-top: 20px">
-        © 2026 SANTOLA MUSIC
+      <span class="credits-prefix">Site desenhado por</span>
+      <span class="dev-name-highlight">Pacheco Gonçalves</span>
+      <p style="opacity: 0.3; font-size: 0.6rem; margin-top: 25px">
+        © 2026 SANTOLA MUSIC - SÃO TOMÉ E PRÍNCIPE
       </p>
     </footer>
 
     <script>
       let musicasGerais = [];
       const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
-      const NOME_BLOG = "Santola Music";
-      const SLOGAN_BLOG = "O Blog das Ilhas";
 
       function normalizar(texto) {
-        if (!texto) return "";
         return texto
-          .toString()
-          .toLowerCase()
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "");
+          ? texto
+              .toString()
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+          : "";
+      }
+
+      // NOVO SISTEMA DE NAVEGAÇÃO: Diferencia o que é interno e o que é arquivo .html
+      function irParaPagina(idPagina) {
+        const sections = document.querySelectorAll(".page-section");
+        const targetSection =
+          document.getElementById(idPagina + "-view") ||
+          document.getElementById(idPagina + "-content");
+
+        if (targetSection) {
+          // É uma seção interna (como a busca)
+          sections.forEach((s) => (s.style.display = "none"));
+          targetSection.style.display = "block";
+        } else {
+          // Se não existe a seção, tenta abrir o arquivo .html
+          window.location.href = idPagina + ".html";
+        }
       }
 
       window.addEventListener("load", async () => {
         try {
           const r = await fetch("musicas.json");
           const dadosRaw = await r.json();
-
-          musicasGerais = dadosRaw.map((m) => {
-            return {
-              id: m.id || m["eu ia"] || Date.now() + Math.random(),
-              artista:
-                m.artista && m.artista.trim() !== "" ? m.artista : NOME_BLOG,
-              titulo:
-                (m.titulo || m.título) && (m.titulo || m.título).trim() !== ""
-                  ? m.titulo || m.título
-                  : SLOGAN_BLOG,
-              categoria: m.categoria || m.gênero || "INTERNACIONAIS",
-              link: m.link || m.link_download || "#",
-              capa: m.capa && m.capa.trim() !== "" ? m.capa : LOGO_PADRAO,
-              tamanho: m.tamanho || "4.8 MB", // Valor padrão caso não exista no JSON
-            };
-          });
-
+          musicasGerais = dadosRaw.map((m) => ({
+            id: m.id || Math.random(),
+            artista: m.artista || "Santola Music",
+            titulo: m.titulo || "Música STP",
+            categoria: m.categoria || "Geral",
+            link: m.link || "#",
+            capa: m.capa || LOGO_PADRAO,
+            tamanho: m.tamanho || "4.5 MB",
+          }));
           renderizarHome();
         } catch (e) {
-          console.error("Erro ao carregar ou processar o JSON:", e);
+          console.error("Erro ao carregar músicas:", e);
         }
 
+        iniciarAnuncios();
         setTimeout(() => {
-          const splash = document.getElementById("splash");
-          splash.style.opacity = "0";
-          setTimeout(() => (splash.style.display = "none"), 500);
-        }, 800);
+          document.getElementById("splash").style.opacity = "0";
+          setTimeout(
+            () => (document.getElementById("splash").style.display = "none"),
+            500,
+          );
+        }, 1000);
       });
+
+      function iniciarAnuncios() {
+        const slides = document.querySelectorAll(".ads-slide");
+        let index = 0;
+        if (slides.length < 2) return;
+        setInterval(() => {
+          slides[index].classList.remove("active");
+          index = (index + 1) % slides.length;
+          slides[index].classList.add("active");
+        }, 4000);
+      }
 
       function renderizarHome() {
         const novidades = [...musicasGerais].reverse().slice(0, 10);
-        const top20 = musicasGerais
-          .filter(
-            (m) =>
-              normalizar(m.categoria).includes("top 20") ||
-              normalizar(m.categoria).includes("angola"),
-          )
-          .slice(0, 20);
-
+        const top20 = musicasGerais.slice(0, 20);
         document.getElementById("list-novidades").innerHTML =
           gerarHtml(novidades);
-        document.getElementById("list-top20").innerHTML = gerarHtml(
-          top20.length ? top20 : musicasGerais.slice(0, 20),
-        );
+        document.getElementById("list-top20").innerHTML = gerarHtml(top20);
       }
 
       function realizarPesquisa() {
-        const termo = normalizar(
-          document.getElementById("searchInput").value,
-        ).trim();
-        const home = document.getElementById("home-content");
-        const searchView = document.getElementById("search-results-view");
-
+        const termo = normalizar(document.getElementById("searchInput").value);
         if (termo.length > 0) {
-          home.style.display = "none";
-          searchView.style.display = "block";
-          const resultados = musicasGerais.filter((m) => {
-            const alvo = normalizar(`${m.artista} ${m.titulo} ${m.categoria}`);
-            return alvo.includes(termo);
-          });
-          document.getElementById("list-search").innerHTML =
-            gerarHtml(resultados);
+          irParaPagina("search-results");
+          const filtradas = musicasGerais.filter(
+            (m) =>
+              normalizar(m.artista).includes(termo) ||
+              normalizar(m.titulo).includes(termo) ||
+              normalizar(m.categoria).includes(termo),
+          );
+          document.getElementById("list-search").innerHTML = filtradas.length
+            ? gerarHtml(filtradas)
+            : "<p style='text-align:center; padding:20px; opacity:0.5;'>Nenhuma música encontrada...</p>";
         } else {
           cancelarPesquisa();
         }
@@ -672,63 +750,45 @@
 
       function cancelarPesquisa() {
         document.getElementById("searchInput").value = "";
-        document.getElementById("home-content").style.display = "block";
-        document.getElementById("search-results-view").style.display = "none";
+        irParaPagina("home");
       }
 
-      // FUNÇÃO ALTERADA PARA ABRIR MODAL
       function gerarHtml(lista) {
-        if (lista.length === 0)
-          return "<p style='text-align:center; padding:20px; opacity:0.5; font-size:0.8rem;'>Nada encontrado.</p>";
-
         return lista
-          .map((m) => {
-            // Transformar objeto em string segura para o atributo onclick
-            const musicaString = encodeURIComponent(JSON.stringify(m));
-            return `
-            <div class="music-row">
-                <img src="${m.capa}" class="artist-thumb" onerror="this.src='${LOGO_PADRAO}'">
-                <div class="info-musica">
-                    <strong>${m.artista}</strong>
-                    <small style="color:var(--amarelo); display:block; font-size:0.7rem;">${m.titulo}</small>
-                    <span class="tag-cat">${m.categoria.toUpperCase()}</span>
-                </div>
-                <a href="javascript:void(0)" onclick="abrirModal('${musicaString}')" class="btn-download">BAIXAR</a>
+          .map(
+            (m) => `
+          <div class="music-row">
+            <img src="${m.capa}" class="artist-thumb" onerror="this.src='${LOGO_PADRAO}'">
+            <div class="info-musica">
+              <strong>${m.artista}</strong>
+              <small>${m.titulo}</small><br>
+              <span class="tag-cat">${m.categoria}</span>
             </div>
-            `;
-          })
+            <button onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')" class="btn-download">BAIXAR</button>
+          </div>
+        `,
+          )
           .join("");
       }
 
-      // NOVAS FUNÇÕES DO MODAL
-      function abrirModal(dadosMusica) {
-        const m = JSON.parse(decodeURIComponent(dadosMusica));
-        const modal = document.getElementById("downloadModal");
-
+      function abrirModal(dados) {
+        const m = JSON.parse(decodeURIComponent(dados));
         document.getElementById("modalCapa").src = m.capa;
         document.getElementById("modalArtista").innerText = m.artista;
         document.getElementById("modalTitulo").innerText = m.titulo;
         document.getElementById("modalGenero").innerText = m.categoria;
         document.getElementById("modalPeso").innerText = m.tamanho;
         document.getElementById("modalLinkDownload").href = m.link;
-
-        // Link de Partilha
-        const shareLink = window.location.href;
-        const shareText = `Baixa agora "${m.titulo}" de ${m.artista} no Santola Music: ${shareLink}`;
         document.getElementById("modalShareWA").href =
-          `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-
-        modal.style.display = "flex";
+          `https://wa.me/?text=Ouve isto no Santola: ${m.artista} - ${m.titulo}`;
+        document.getElementById("downloadModal").style.display = "flex";
       }
 
       function fecharModal() {
         document.getElementById("downloadModal").style.display = "none";
       }
-
-      // Fechar ao clicar fora do card
-      window.onclick = function (event) {
-        const modal = document.getElementById("downloadModal");
-        if (event.target == modal) fecharModal();
+      window.onclick = (e) => {
+        if (e.target == document.getElementById("downloadModal")) fecharModal();
       };
     </script>
   </body>
