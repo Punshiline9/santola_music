@@ -1,20 +1,26 @@
 [
   {
-    "titulo": "NOME DO EVENTO 1",
-    "imagem": "https://link-da-foto-do-evento.com/banner1.jpg",
-    "link": "eventos.html",
-    "dataExpira": "2026-05-20"
+    "titulo": "Festival de Verão STP",
+    "dataExpira": "2026-05-30",
+    "imagem": "link-da-imagem.jpg",
+    "link": "pagina-do-evento.html",
+    "localizacao": "Praia de Lagarto, São Tomé",
+    "maps": "https://goo.gl/maps/exemplo"
   },
   {
-    "titulo": "FESTIVAL SANTOLA 2026",
-    "imagem": "https://link-da-foto-do-evento.com/banner2.jpg",
-    "link": "https://wa.me/2399944660",
-    "dataExpira": "2026-08-15"
+    "titulo": "Festival de Verão STP",
+    "dataExpira": "2026-05-30",
+    "imagem": "link-da-imagem.jpg",
+    "link": "pagina-do-evento.html",
+    "localizacao": "Praia de Lagarto, São Tomé",
+    "maps": "https://goo.gl/maps/exemplo"
   },
   {
-    "titulo": "PROMOÇÃO DE ARTISTA",
-    "imagem": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png",
-    "link": "contato.html",
-    "dataExpira": "2027-01-01"
+    "titulo": "Festival de Verão STP",
+    "dataExpira": "2026-05-30",
+    "imagem": "link-da-imagem.jpg",
+    "link": "pagina-do-evento.html",
+    "localizacao": "Praia de Lagarto, São Tomé",
+    "maps": "https://goo.gl/maps/exemplo"
   }
 ]
