@@ -2,476 +2,227 @@
 <html lang="pt-pt">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <title>Categorias | Santola Music</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Estilos Musicais | Santola Music</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
     <style>
       :root {
         --verde: #12ad2b;
         --amarelo: #ffdb00;
         --vermelho: #d21034;
-        --glass: rgba(255, 255, 255, 0.07);
+        --glass: rgba(255, 255, 255, 0.05);
         --border: rgba(255, 255, 255, 0.1);
+        --grad-kizomba: linear-gradient(135deg, #12ad2b, #0a6b1a);
+        --grad-puxita: linear-gradient(135deg, #ffdb00, #bfa300);
+        --grad-angola: linear-gradient(135deg, #d21034, #7a091d);
+        --grad-rap: linear-gradient(135deg, #333, #000);
       }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Inter", sans-serif;
-        -webkit-tap-highlight-color: transparent;
-      }
-      body {
-        background-color: #080808;
-        color: white;
-        min-height: 100vh;
-        line-height: 1.4;
-      }
+      * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", sans-serif; -webkit-tap-highlight-color: transparent; }
+      body { background-color: #080808; color: white; min-height: 100vh; overflow-x: hidden; }
 
-      /* Loader */
-      #loader-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #080808;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        transition: opacity 0.4s ease;
-      }
-      .loader-logo {
-        width: 100px;
-        animation: pulse 1.5s infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(0.9);
-        }
-        50% {
-          transform: scale(1.1);
-        }
-      }
+      /* HEADER */
+      header { padding: 1.5rem 1rem; text-align: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(8, 8, 8, 0.9); z-index: 100; backdrop-filter: blur(15px); }
+      .btn-voltar { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: var(--verde); color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-weight: 800; font-size: 0.6rem; text-transform: uppercase; }
+      .logo-texto { font-family: "Syne"; font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, var(--verde), var(--amarelo), var(--vermelho)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
 
-      header {
-        padding: 2rem 1rem;
-        text-align: center;
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 0;
-        background: rgba(8, 8, 8, 0.95);
-        z-index: 100;
-        backdrop-filter: blur(10px);
-      }
-      .btn-voltar {
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: var(--glass);
-        border: 1px solid var(--amarelo);
-        color: var(--amarelo);
-        padding: 6px 12px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 0.65rem;
-      }
-      .logo-texto {
-        font-family: "Syne";
-        font-size: 1.8rem;
-        font-weight: 800;
-        background: linear-gradient(
-          to right,
-          var(--verde),
-          var(--amarelo),
-          var(--vermelho)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
+      .main-content { max-width: 700px; margin: 0 auto; padding: 1rem; }
+      .titulo-secao { font-family: "Syne"; text-align: left; margin: 1rem 0; color: #fff; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
 
-      .main-content {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 1rem;
-      }
-      .titulo-pag {
-        font-family: "Syne";
-        text-align: center;
-        margin: 1.5rem 0;
-        color: var(--amarelo);
-        font-size: 1.2rem;
-        text-transform: uppercase;
-      }
+      /* BUSCA RÁPIDA */
+      .search-box { background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 12px; width: 100%; color: white; margin-bottom: 20px; outline: none; }
+      .search-box:focus { border-color: var(--amarelo); }
 
-      /* Categorias Grid */
-      .grid-categorias {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      .cat-card {
-        background: var(--glass);
-        border: 1px solid var(--border);
-        padding: 20px 10px;
-        border-radius: 15px;
-        color: white;
-        text-align: center;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        border-bottom: 4px solid var(--border);
-        transition: 0.2s;
-      }
-      .cat-card:active {
-        transform: scale(0.95);
-      }
-      .c-verde {
-        border-color: var(--verde);
-      }
-      .c-amarelo {
-        border-color: var(--amarelo);
-      }
-      .c-vermelho {
-        border-color: var(--vermelho);
-      }
-      .cat-card strong {
-        font-family: "Syne";
-        font-size: 0.85rem;
-        text-transform: uppercase;
-      }
+      /* GRID CATEGORIAS */
+      .grid-categorias { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+      .cat-card { position: relative; height: 120px; border-radius: 18px; display: flex; flex-direction: column; justify-content: flex-end; padding: 15px; text-decoration: none; overflow: hidden; transition: 0.3s; border: 1px solid var(--border); }
+      .cat-card:active { transform: scale(0.96); }
+      .cat-card strong { font-family: "Syne"; font-size: 1rem; text-transform: uppercase; z-index: 2; }
+      .cat-card span { font-size: 0.65rem; opacity: 0.8; z-index: 2; text-transform: uppercase; font-weight: 600; }
+      
+      /* SOBREPOSIÇÃO PARA LEITURA */
+      .cat-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 1; }
 
-      /* Music Row */
-      .music-row {
-        display: flex;
-        align-items: center;
-        background: var(--glass);
-        margin-bottom: 10px;
-        padding: 12px;
-        border-radius: 12px;
-        gap: 12px;
-        border: 1px solid var(--border);
-      }
-      .artist-thumb {
-        width: 50px;
-        height: 50px;
-        border-radius: 8px;
-        object-fit: cover;
-        border: 1px solid var(--border);
-      }
-      .info-musica {
-        flex: 1;
-        min-width: 0;
-      }
-      .info-musica strong {
-        font-size: 0.95rem;
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .info-musica small {
-        color: var(--amarelo);
-        font-size: 0.75rem;
-        display: block;
-      }
-      .btn-baixar-cat {
-        background: linear-gradient(90deg, #ffdb00, #ff4e00);
-        color: black;
-        padding: 8px 12px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 900;
-        font-size: 0.7rem;
-        flex-shrink: 0;
-        border-bottom: 2px solid #bfa300;
-      }
+      /* CORES ESPECÍFICAS */
+      .kizomba { background: var(--grad-kizomba); }
+      .puxita { background: var(--grad-puxita); color: black; }
+      .puxita::after { background: linear-gradient(to top, rgba(0,0,0,0.4), transparent); }
+      .angola { background: var(--grad-angola); }
+      .rap { background: var(--grad-rap); }
 
-      /* MODAL STYLE */
-      #downloadModal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 10000;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        backdrop-filter: blur(5px);
-      }
-      .modal-card {
-        background: #111;
-        border: 2px solid var(--amarelo);
-        padding: 20px;
-        border-radius: 20px;
-        width: 100%;
-        max-width: 350px;
-        text-align: center;
-        position: relative;
-      }
-      .s-wa {
-        border: 1px solid #25d366;
-        color: #25d366;
-        padding: 10px;
-        border-radius: 8px;
-        text-decoration: none;
-        display: block;
-        font-size: 0.7rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        margin-top: 10px;
-      }
+      /* LISTA DE MÚSICAS FILTRADAS */
+      .music-item { display: flex; align-items: center; background: var(--glass); padding: 12px; border-radius: 15px; margin-bottom: 10px; border: 1px solid var(--border); animation: slideUp 0.4s ease forwards; }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      
+      .m-capa { width: 55px; height: 55px; border-radius: 10px; object-fit: cover; margin-right: 15px; }
+      .m-info { flex: 1; }
+      .m-info h4 { font-size: 0.9rem; margin-bottom: 2px; color: #fff; }
+      .m-info p { font-size: 0.75rem; color: var(--amarelo); }
+      .btn-download-icon { background: var(--verde); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.8rem; }
 
-      footer {
-        padding: 2rem 1rem;
-        text-align: center;
-        border-top: 1px solid var(--border);
-        margin-top: 2rem;
-        background: #050505;
-      }
-      .dev-name-highlight {
-        color: var(--amarelo);
-        font-weight: 800;
-        font-size: 1rem;
-        margin-top: 5px;
-        display: block;
-      }
+      /* MODAL */
+      #downloadModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
+      .modal-card { background: #111; border: 1px solid var(--border); padding: 25px; border-radius: 25px; width: 100%; max-width: 350px; text-align: center; border-bottom: 4px solid var(--amarelo); }
+      
+      footer { padding: 3rem 1rem; text-align: center; opacity: 0.6; font-size: 0.7rem; }
     </style>
   </head>
   <body>
-    <div id="loader-overlay">
-      <img
-        src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
-        class="loader-logo"
-      />
-    </div>
 
     <header>
-      <a href="index.html" class="btn-voltar">VOLTAR</a>
+      <a href="index.html" class="btn-voltar">Voltar</a>
       <div class="logo-texto">Santola Music</div>
     </header>
 
     <main class="main-content">
+      
       <div id="menu-view">
-        <h2 class="titulo-pag">Estilos 📂</h2>
-        <div class="grid-categorias">
-          <div class="cat-card c-verde" onclick="filtrar('Kizomba')">
-            <strong>Kizomba</strong>
+        <h2 class="titulo-secao">Explorar Estilos 📂</h2>
+        <input type="text" class="search-box" placeholder="Procurar artista ou música..." id="mainSearch" oninput="buscaGeral()">
+        
+        <div class="grid-categorias" id="grid-home">
           </div>
-          <div class="cat-card c-amarelo" onclick="filtrar('Puxita')">
-            <strong>Puxita</strong>
-          </div>
-          <div class="cat-card c-vermelho" onclick="filtrar('Top Angola')">
-            <strong>Top Angola</strong>
-          </div>
-          <div class="cat-card c-vermelho" onclick="filtrar('Rap STP')">
-            <strong>Rap STP</strong>
-          </div>
-          <div class="cat-card c-amarelo" onclick="filtrar('Trap STP')">
-            <strong>Trap STP</strong>
-          </div>
-          <div class="cat-card c-verde" onclick="filtrar('Internacional')">
-            <strong>Mundo</strong>
-          </div>
-        </div>
       </div>
 
-      <div id="result-view" style="display: none">
-        <h2
-          id="cat-titulo"
-          class="titulo-pag"
-          style="
-            text-align: left;
-            border-left: 4px solid var(--vermelho);
-            padding-left: 10px;
-          "
-        ></h2>
+      <div id="result-view" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2 id="cat-titulo" class="titulo-secao" style="margin:0;"></h2>
+          <button onclick="voltarMenu()" style="background: none; border: none; color: var(--amarelo); font-weight: 800; font-size: 0.7rem;">FECHAR ✕</button>
+        </div>
         <div id="lista-musicas"></div>
-        <button
-          class="cat-card"
-          style="width: 100%; margin-top: 20px; background: #111"
-          onclick="voltarMenu()"
-        >
-          🔄 OUTROS ESTILOS
-        </button>
       </div>
+
     </main>
 
-    <div id="downloadModal">
-      <div class="modal-card">
-        <button
-          onclick="fecharModal()"
-          style="
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-          "
-        >
-          &times;
-        </button>
-        <img
-          id="mCapa"
-          src=""
-          style="
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            border: 2px solid var(--amarelo);
-          "
-        />
-        <h3 id="mArtista" style="font-size: 1.1rem; margin-bottom: 2px"></h3>
-        <p
-          id="mTitulo"
-          style="color: var(--amarelo); font-size: 0.8rem; margin-bottom: 15px"
-        ></p>
-        <div
-          style="
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
-            border-radius: 10px;
-            text-align: left;
-            font-size: 0.75rem;
-            margin-bottom: 15px;
-          "
-        >
-          <p><strong>Gênero:</strong> <span id="mCat"></span></p>
-          <p><strong>Tamanho:</strong> <span id="mPeso"></span></p>
-        </div>
-        <a
-          id="mLink"
-          href=""
-          class="btn-baixar-cat"
-          style="display: block; font-size: 0.9rem; padding: 12px"
-          >BAIXAR MP3</a
-        >
-        <a id="mShare" href="" target="_blank" class="s-wa"
-          >Partilhar no WhatsApp</a
-        >
+    <div id="downloadModal" onclick="fecharModal(event)">
+      <div class="modal-card" onclick="event.stopPropagation()">
+        <img id="mCapa" src="" style="width: 100px; height: 100px; border-radius: 15px; margin-bottom: 15px; border: 2px solid var(--amarelo);">
+        <h3 id="mArtista" style="margin-bottom: 5px;"></h3>
+        <p id="mTitulo" style="color: var(--amarelo); margin-bottom: 20px; font-size: 0.9rem;"></p>
+        <a id="mLink" href="#" class="btn-download-icon" style="width: 100%; border-radius: 12px; height: 50px; font-weight: 800; text-transform: uppercase;">Baixar MP3</a>
+        <p style="margin-top: 15px; font-size: 0.6rem; opacity: 0.5;">SANTOLA MUSIC - O BLOG DAS ILHAS</p>
       </div>
     </div>
 
     <footer>
-      <span style="font-size: 0.6rem; color: #666; text-transform: uppercase"
-        >Criado por</span
-      >
-      <span class="dev-name-highlight">Pacheco Gonçalves</span>
+      <p>© 2026 DESENVOLVIDO POR</p>
+      <strong style="color: var(--amarelo); font-size: 1rem;">PACHECO GONÇALVES</strong>
     </footer>
 
     <script>
       let musicasGerais = [];
-      const LOGO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
+      const ESTILOS = [
+        { nome: 'Kizomba', classe: 'kizomba' },
+        { nome: 'Puxita', classe: 'puxita' },
+        { nome: 'Top Angola', classe: 'angola' },
+        { nome: 'Rap STP', classe: 'rap' },
+        { nome: 'Trap STP', classe: 'rap' },
+        { nome: 'Internacional', classe: 'kizomba' }
+      ];
 
-      function normalizar(t) {
-        return t
-          ? t
-              .toString()
-              .toLowerCase()
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "")
-          : "";
+      async function iniciar() {
+        try {
+          const r = await fetch('musicas.json');
+          musicasGerais = await r.json();
+          renderizarGrid();
+        } catch (e) {
+          console.error("Erro ao carregar músicas");
+        }
       }
 
-      async function carregarDados() {
-        try {
-          const r = await fetch("musicas.json");
-          const dados = await r.json();
-          musicasGerais = dados.map((m) => ({
-            artista: m.artista || "Santola Music",
-            titulo: m.titulo || m.título || "O Blog das Ilhas",
-            categoria: m.categoria || m.gênero || "Internacional",
-            link: m.link || m.link_download || "#",
-            capa: m.capa && m.capa.trim() !== "" ? m.capa : LOGO,
-            tamanho: m.tamanho || "4.5 MB",
-          }));
-        } catch (e) {
-          console.error("Erro JSON");
-        }
-        const loader = document.getElementById("loader-overlay");
-        loader.style.opacity = "0";
-        setTimeout(() => (loader.style.display = "none"), 400);
+      function renderizarGrid() {
+        const grid = document.getElementById('grid-home');
+        grid.innerHTML = ESTILOS.map(estilo => {
+          const total = musicasGerais.filter(m => 
+            (m.categoria || m.gênero || "").toLowerCase().includes(estilo.nome.toLowerCase())
+          ).length;
+          
+          return `
+            <div class="cat-card ${estilo.classe}" onclick="filtrar('${estilo.nome}')">
+              <span>${total} Músicas</span>
+              <strong>${estilo.nome}</strong>
+            </div>
+          `;
+        }).join('');
       }
 
       function filtrar(estilo) {
-        const termo = normalizar(estilo);
-        const filtradas = musicasGerais.filter((m) =>
-          normalizar(m.categoria).includes(termo),
+        const filtradas = musicasGerais.filter(m => 
+          (m.categoria || m.gênero || "").toLowerCase().includes(estilo.toLowerCase())
         );
-        document.getElementById("cat-titulo").innerText = estilo;
-        document.getElementById("menu-view").style.display = "none";
-        document.getElementById("result-view").style.display = "block";
-        const lista = document.getElementById("lista-musicas");
-
-        if (filtradas.length === 0) {
-          lista.innerHTML = `<p style="text-align:center; padding:30px; opacity:0.5;">Em breve...</p>`;
+        
+        document.getElementById('cat-titulo').innerText = estilo;
+        document.getElementById('menu-view').style.display = 'none';
+        document.getElementById('result-view').style.display = 'block';
+        
+        const lista = document.getElementById('lista-musicas');
+        if(filtradas.length === 0) {
+          lista.innerHTML = '<p style="text-align:center; opacity:0.5; padding:40px;">Nenhuma música encontrada neste estilo.</p>';
         } else {
-          lista.innerHTML = filtradas
-            .map((m) => {
-              const mData = encodeURIComponent(JSON.stringify(m));
-              return `
-            <div class="music-row">
-              <img src="${m.capa}" class="artist-thumb" onerror="this.src='${LOGO}'">
-              <div class="info-musica">
-                <strong>${m.artista}</strong>
-                <small>${m.titulo}</small>
+          lista.innerHTML = filtradas.map(m => `
+            <div class="music-item">
+              <img src="${m.capa || 'https://i.postimg.cc/RhnRhFNj/Logo-STP.png'}" class="m-capa">
+              <div class="m-info">
+                <h4>${m.artista}</h4>
+                <p>${m.titulo}</p>
               </div>
-              <a href="javascript:void(0)" onclick="abrirModal('${mData}')" class="btn-baixar-cat">BAIXAR</a>
-            </div>`;
-            })
-            .join("");
+              <a href="javascript:void(0)" onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')" class="btn-download-icon">↓</a>
+            </div>
+          `).join('');
         }
-        window.scrollTo(0, 0);
+        window.scrollTo(0,0);
       }
 
-      function abrirModal(json) {
-        const m = JSON.parse(decodeURIComponent(json));
-        document.getElementById("mCapa").src = m.capa;
-        document.getElementById("mArtista").innerText = m.artista;
-        document.getElementById("mTitulo").innerText = m.titulo;
-        document.getElementById("mCat").innerText = m.categoria;
-        document.getElementById("mPeso").innerText = m.tamanho;
-        document.getElementById("mLink").href = m.link;
+      function buscaGeral() {
+        const termo = document.getElementById('mainSearch').value.toLowerCase();
+        if(termo.length < 2) {
+            document.getElementById('result-view').style.display = 'none';
+            document.getElementById('menu-view').style.display = 'block';
+            return;
+        }
+        
+        const filtradas = musicasGerais.filter(m => 
+          m.artista.toLowerCase().includes(termo) || 
+          m.titulo.toLowerCase().includes(termo)
+        );
 
-        const texto = `Baixa agora "${m.titulo}" de ${m.artista} no Santola Music: ${window.location.href}`;
-        document.getElementById("mShare").href =
-          `https://wa.me/?text=${encodeURIComponent(texto)}`;
-        document.getElementById("downloadModal").style.display = "flex";
+        document.getElementById('cat-titulo').innerText = "Resultados";
+        document.getElementById('menu-view').style.display = 'none';
+        document.getElementById('result-view').style.display = 'block';
+        
+        const lista = document.getElementById('lista-musicas');
+        lista.innerHTML = filtradas.map(m => `
+            <div class="music-item">
+              <img src="${m.capa || 'https://i.postimg.cc/RhnRhFNj/Logo-STP.png'}" class="m-capa">
+              <div class="m-info">
+                <h4>${m.artista}</h4>
+                <p>${m.titulo}</p>
+              </div>
+              <a href="javascript:void(0)" onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')" class="btn-download-icon">↓</a>
+            </div>
+          `).join('');
       }
 
-      function fecharModal() {
-        document.getElementById("downloadModal").style.display = "none";
+      function abrirModal(data) {
+        const m = JSON.parse(decodeURIComponent(data));
+        document.getElementById('mCapa').src = m.capa || 'https://i.postimg.cc/RhnRhFNj/Logo-STP.png';
+        document.getElementById('mArtista').innerText = m.artista;
+        document.getElementById('mTitulo').innerText = m.titulo;
+        document.getElementById('mLink').href = m.link;
+        document.getElementById('downloadModal').style.display = 'flex';
       }
-      window.onclick = (e) => {
-        if (e.target == document.getElementById("downloadModal")) fecharModal();
-      };
+
+      function fecharModal(e) {
+        document.getElementById('downloadModal').style.display = 'none';
+      }
+
       function voltarMenu() {
-        document.getElementById("menu-view").style.display = "block";
-        document.getElementById("result-view").style.display = "none";
+        document.getElementById('menu-view').style.display = 'block';
+        document.getElementById('result-view').style.display = 'none';
+        document.getElementById('mainSearch').value = "";
       }
-      window.addEventListener("load", carregarDados);
+
+      window.onload = iniciar;
     </script>
   </body>
 </html>
