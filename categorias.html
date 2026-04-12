@@ -2,62 +2,226 @@
 <html lang="pt-pt">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Categorias | Santola Music</title>
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --verde: #12ad2b; --amarelo: #ffdb00; --vermelho: #d21034;
-        --glass: rgba(255, 255, 255, 0.07); --border: rgba(255, 255, 255, 0.1);
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --glass: rgba(255, 255, 255, 0.07);
+        --border: rgba(255, 255, 255, 0.1);
       }
-      * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", sans-serif; -webkit-tap-highlight-color: transparent; }
-      body { background-color: #080808; color: white; min-height: 100vh; line-height: 1.4; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        background-color: #080808;
+        color: white;
+        min-height: 100vh;
+        line-height: 1.4;
+      }
 
       /* Splash Screen Corrigido para Mobile */
       #loader-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: #080808; display: flex; justify-content: center; align-items: center;
-        z-index: 10000; transition: opacity 0.4s ease;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #080808;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        transition: opacity 0.4s ease;
       }
-      .loader-logo { width: 100px; animation: pulse 1.5s infinite; }
-      @keyframes pulse { 0%, 100% { transform: scale(0.9); } 50% { transform: scale(1.1); } }
+      .loader-logo {
+        width: 100px;
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(0.9);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
 
-      header { padding: 2rem 1rem; text-align: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(8,8,8,0.95); z-index: 100; backdrop-filter: blur(10px); }
-      .btn-voltar { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: var(--glass); border: 1px solid var(--amarelo); color: var(--amarelo); padding: 6px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.65rem; }
-      .logo-texto { font-family: "Syne"; font-size: 1.8rem; font-weight: 800; background: linear-gradient(to right, var(--verde), var(--amarelo), var(--vermelho)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      header {
+        padding: 2rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: rgba(8, 8, 8, 0.95);
+        z-index: 100;
+        backdrop-filter: blur(10px);
+      }
+      .btn-voltar {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--glass);
+        border: 1px solid var(--amarelo);
+        color: var(--amarelo);
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.65rem;
+      }
+      .logo-texto {
+        font-family: "Syne";
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
-      .main-content { max-width: 600px; margin: 0 auto; padding: 1rem; }
-      .titulo-pag { font-family: "Syne"; text-align: center; margin: 1.5rem 0; color: var(--amarelo); font-size: 1.2rem; text-transform: uppercase; }
+      .main-content {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+      .titulo-pag {
+        font-family: "Syne";
+        text-align: center;
+        margin: 1.5rem 0;
+        color: var(--amarelo);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+      }
 
       /* Grid Mobile First */
-      .grid-categorias { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-      .cat-card {
-        background: var(--glass); border: 1px solid var(--border); padding: 20px 10px;
-        border-radius: 15px; color: white; text-align: center; cursor: pointer;
-        display: flex; flex-direction: column; gap: 8px; border-bottom: 4px solid var(--border);
+      .grid-categorias {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
       }
-      .cat-card:active { transform: scale(0.95); }
-      .c-verde { border-color: var(--verde); } .c-amarelo { border-color: var(--amarelo); } .c-vermelho { border-color: var(--vermelho); }
-      .cat-card strong { font-family: "Syne"; font-size: 0.85rem; text-transform: uppercase; }
+      .cat-card {
+        background: var(--glass);
+        border: 1px solid var(--border);
+        padding: 20px 10px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-bottom: 4px solid var(--border);
+      }
+      .cat-card:active {
+        transform: scale(0.95);
+      }
+      .c-verde {
+        border-color: var(--verde);
+      }
+      .c-amarelo {
+        border-color: var(--amarelo);
+      }
+      .c-vermelho {
+        border-color: var(--vermelho);
+      }
+      .cat-card strong {
+        font-family: "Syne";
+        font-size: 0.85rem;
+        text-transform: uppercase;
+      }
 
       /* Lista de Musicas Mobile */
       .music-row {
-        display: flex; align-items: center; background: var(--glass);
-        margin-bottom: 10px; padding: 12px; border-radius: 12px; gap: 12px; border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        background: var(--glass);
+        margin-bottom: 10px;
+        padding: 12px;
+        border-radius: 12px;
+        gap: 12px;
+        border: 1px solid var(--border);
       }
-      .artist-thumb { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; }
-      .info-musica { flex: 1; min-width: 0; }
-      .info-musica strong { font-size: 0.95rem; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .info-musica small { color: var(--amarelo); font-size: 0.75rem; display: block; }
-      .btn-baixar-cat { background: var(--amarelo); color: black; padding: 8px 12px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.7rem; flex-shrink: 0; }
+      .artist-thumb {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+      .info-musica {
+        flex: 1;
+        min-width: 0;
+      }
+      .info-musica strong {
+        font-size: 0.95rem;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .info-musica small {
+        color: var(--amarelo);
+        font-size: 0.75rem;
+        display: block;
+      }
+      .btn-baixar-cat {
+        background: var(--amarelo);
+        color: black;
+        padding: 8px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.7rem;
+        flex-shrink: 0;
+      }
 
-      footer { padding: 2rem 1rem; text-align: center; border-top: 1px solid var(--border); margin-top: 2rem; background: #050505; }
-      .dev-name-highlight { color: var(--amarelo); font-weight: 800; font-size: 1rem; margin-top: 5px; display: block; }
+      footer {
+        padding: 2rem 1rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+        margin-top: 2rem;
+        background: #050505;
+      }
+      .dev-name-highlight {
+        color: var(--amarelo);
+        font-weight: 800;
+        font-size: 1rem;
+        margin-top: 5px;
+        display: block;
+      }
     </style>
   </head>
   <body>
-    <div id="loader-overlay"><img src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" class="loader-logo" /></div>
+    <div id="loader-overlay">
+      <img
+        src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+        class="loader-logo"
+      />
+    </div>
 
     <header>
       <a href="index.html" class="btn-voltar">VOLTAR</a>
@@ -68,24 +232,52 @@
       <div id="menu-view">
         <h2 class="titulo-pag">Estilos 📂</h2>
         <div class="grid-categorias">
-          <div class="cat-card c-verde" onclick="filtrar('Kizomba & Zouk')"><strong>Kizomba</strong></div>
-          <div class="cat-card c-amarelo" onclick="filtrar('Puxita & Bulaúe')"><strong>Puxita</strong></div>
-          <div class="cat-card c-vermelho" onclick="filtrar('Top Angola')"><strong>Top Angola</strong></div>
-          <div class="cat-card c-vermelho" onclick="filtrar('Rap STP')"><strong>Rap STP</strong></div>
-          <div class="cat-card c-amarelo" onclick="filtrar('Trap STP')"><strong>Trap STP</strong></div>
-          <div class="cat-card c-verde" onclick="filtrar('Internacional')"><strong>Mundo</strong></div>
+          <div class="cat-card c-verde" onclick="filtrar('Kizomba & Zouk')">
+            <strong>Kizomba</strong>
+          </div>
+          <div class="cat-card c-amarelo" onclick="filtrar('Puxita & Bulaúe')">
+            <strong>Puxita</strong>
+          </div>
+          <div class="cat-card c-vermelho" onclick="filtrar('Top Angola')">
+            <strong>Top Angola</strong>
+          </div>
+          <div class="cat-card c-vermelho" onclick="filtrar('Rap STP')">
+            <strong>Rap STP</strong>
+          </div>
+          <div class="cat-card c-amarelo" onclick="filtrar('Trap STP')">
+            <strong>Trap STP</strong>
+          </div>
+          <div class="cat-card c-verde" onclick="filtrar('Internacional')">
+            <strong>Mundo</strong>
+          </div>
         </div>
       </div>
 
       <div id="result-view" style="display: none">
-        <h2 id="cat-titulo" class="titulo-pag" style="text-align: left; border-left: 4px solid var(--vermelho); padding-left: 10px;"></h2>
+        <h2
+          id="cat-titulo"
+          class="titulo-pag"
+          style="
+            text-align: left;
+            border-left: 4px solid var(--vermelho);
+            padding-left: 10px;
+          "
+        ></h2>
         <div id="lista-musicas"></div>
-        <button class="cat-card" style="width: 100%; margin-top: 20px; background: #111" onclick="voltarMenu()">🔄 OUTROS ESTILOS</button>
+        <button
+          class="cat-card"
+          style="width: 100%; margin-top: 20px; background: #111"
+          onclick="voltarMenu()"
+        >
+          🔄 OUTROS ESTILOS
+        </button>
       </div>
     </main>
 
     <footer>
-      <span style="font-size: 0.6rem; color: #666; text-transform: uppercase;">Criado por</span>
+      <span style="font-size: 0.6rem; color: #666; text-transform: uppercase"
+        >Criado por</span
+      >
       <span class="dev-name-highlight">Pacheco Gonçalves</span>
     </footer>
 
@@ -93,39 +285,53 @@
       let musicasGerais = [];
       const LOGO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
 
-      function normalizar(t) { return t ? t.toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : ""; }
+      function normalizar(t) {
+        return t
+          ? t
+              .toString()
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+          : "";
+      }
 
       async function carregarDados() {
         try {
           const r = await fetch("musicas.json");
           const dados = await r.json();
-          musicasGerais = dados.map(m => ({
+          musicasGerais = dados.map((m) => ({
             artista: m.artista || "Santola Music",
             titulo: m.titulo || m.título || "O Blog das Ilhas",
             categoria: m.categoria || m.gênero || "Internacional",
             link: m.link || m.link_download || "#",
-            capa: m.capa && m.capa.trim() !== "" ? m.capa : LOGO
+            capa: m.capa && m.capa.trim() !== "" ? m.capa : LOGO,
           }));
-        } catch (e) { console.error("Erro JSON"); }
+        } catch (e) {
+          console.error("Erro JSON");
+        }
         // Forçar saída do loader mesmo com erro
         const loader = document.getElementById("loader-overlay");
         loader.style.opacity = "0";
-        setTimeout(() => loader.style.display = "none", 400);
+        setTimeout(() => (loader.style.display = "none"), 400);
       }
 
       function filtrar(estilo) {
         const termo = normalizar(estilo);
-        const filtradas = musicasGerais.filter(m => normalizar(m.categoria).includes(termo));
-        
+        const filtradas = musicasGerais.filter((m) =>
+          normalizar(m.categoria).includes(termo),
+        );
+
         document.getElementById("cat-titulo").innerText = estilo;
         document.getElementById("menu-view").style.display = "none";
         document.getElementById("result-view").style.display = "block";
-        
+
         const lista = document.getElementById("lista-musicas");
         if (filtradas.length === 0) {
           lista.innerHTML = `<p style="text-align:center; padding:30px; opacity:0.5;">Em breve...</p>`;
         } else {
-          lista.innerHTML = filtradas.map(m => `
+          lista.innerHTML = filtradas
+            .map(
+              (m) => `
             <div class="music-row">
               <img src="${m.capa}" class="artist-thumb" onerror="this.src='${LOGO}'">
               <div class="info-musica">
@@ -134,18 +340,20 @@
               </div>
               <a href="${m.link}" class="btn-baixar-cat" target="_blank">BAIXAR</a>
             </div>
-          `).join("");
+          `,
+            )
+            .join("");
         }
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
       }
 
       function voltarMenu() {
         document.getElementById("menu-view").style.display = "block";
         document.getElementById("result-view").style.display = "none";
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
       }
 
-      window.addEventListener('load', carregarDados);
+      window.addEventListener("load", carregarDados);
     </script>
   </body>
 </html>
