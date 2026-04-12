@@ -1,16 +1,5 @@
 [
   {
-    "id": 1,
-    "titulo": "ABANA",
-    "artista": "DJ VERIGAL X MOZANY & SARA CUCA",
-    "album": "",
-    "genero": "TOP ANGOLA",
-    "ano": 2025,
-    "capa": "",
-    "arquivo_audio": "",
-    "link_download": "https://www.mediafire.com/file/06st6wi6qzephgz/DJ+VERIGAL+X+MOZANY+&+SARA+CUCA+-+ABANA.mp3/file",
-  },
-  {
     "id": 2,
     "titulo": "Não Deixei Assim",
     "artista": "Tshunami x Levy x Maninho Pibom & Dj Kalisboy - Não Deixei Assim - Gallo Music Record - | Baixar MP3",
@@ -23,13 +12,13 @@
   },
   {
     "id": 1,
-    "titulo": "NOME DA MÚSICA AQUI",
-    "artista": "NOME DO ARTISTA AQUI",
+    "titulo": "ABANA",
+    "artista": "DJ VERIGAL X MOZANY & SARA CUCA",
     "album": "NOME DO ÁLBUM OU SINGLE",
-    "genero": "CATEGORIA AQUI (Ex: TOP ANGOLA, KIZOMBA, RAP)",
-    "ano": "2026",
-    "capa": "LINK_DA_IMAGEM_AQUI.jpg",
+    "genero": "TOP ANGOLA",
+    "ano": "2025",
+    "capa": "",
     "arquivo_audio": "",
-    "link_download": "LINK_DO_MEDIAFIRE_AQUI"
+    "link_download":  "https://www.mediafire.com/file/06st6wi6qzephgz/DJ+VERIGAL+X+MOZANY+&+SARA+CUCA+-+ABANA.mp3/file"
   }
 ]
