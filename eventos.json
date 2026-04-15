@@ -1,26 +1,59 @@
 [
   {
-    "titulo": "Festival de Verão STP",
-    "dataExpira": "2026-05-30",
-    "imagem": "link-da-imagem.jpg",
-    "link": "pagina-do-evento.html",
-    "localizacao": "Praia de Lagarto, São Tomé",
-    "maps": "https://goo.gl/maps/exemplo"
+    "titulo": "Pool Party",
+    "dataExpira": "2026-08-23",
+    "imagem": "https://kezir.st/public/uploads/events/img_69b7ee66d0b545.51230502.png",
+    "link": "https://kezir.st/events/688715617150173184",
+    "localizacao": "A Definir, São Tomé",
+    "maps": "A Definir, São Tomé"
   },
   {
-    "titulo": "Festival de Verão STP",
-    "dataExpira": "2026-05-30",
-    "imagem": "link-da-imagem.jpg",
-    "link": "pagina-do-evento.html",
+    "titulo": "Festa no Mato 2026",
+    "dataExpira": "2026-06-09",
+    "imagem": "https://kezir.st/public/uploads/events/img_695d4c3778a033.00220560.jpg",
+    "link": "https://kezir.st/events/663802460699099136",
     "localizacao": "Praia de Lagarto, São Tomé",
-    "maps": "https://goo.gl/maps/exemplo"
+    "maps": "Cidade Trindade, São tomé"
   },
   {
-    "titulo": "Festival de Verão STP",
-    "dataExpira": "2026-05-30",
-    "imagem": "link-da-imagem.jpg",
-    "link": "pagina-do-evento.html",
-    "localizacao": "Praia de Lagarto, São Tomé",
-    "maps": "https://goo.gl/maps/exemplo"
+    "titulo": "Euphoria - Las Kozitas Buenas",
+    "dataExpira": "2026-08-21",
+    "imagem": "https://kezir.st/public/uploads/events/img_698bc29b1266e2.38693681.jpg",
+    "link": "https://kezir.st/events/676573963593187328",
+    "localizacao": "A Definir, São Tomé",
+    "maps": "A Definir, São Tomé"
+  },
+  {
+    "titulo": "Sunset Pool Party - Deejay Ronaldo",
+    "dataExpira": "2026-16-08",
+    "imagem": "https://kezir.st/public/uploads/events/img_69ba9f6d477571.44284474.jpg",
+    "link": "https://kezir.st/events/689455451930099712",
+    "localizacao": "A Definir, São Tomé",
+    "maps": "A Definir, São Tomé"
+  },
+  {
+    "titulo": "Palco Aberto",
+    "dataExpira": "2026-04-24",
+    "imagem": "https://kezir.st/public/uploads/events/img_69c3f4970a15b2.52700267.jpg",
+    "link": "https://kezir.st/events/692020796595372032",
+    "localizacao": "Aliança Francesa, Rua Ex Gago Coutinho, São Tomé",
+    "maps": "Aliança Francesa, Rua Ex Gago Coutinho, São Tomé"
+  },
+  {
+    "titulo": "Mussulo Em Ribeira Afonso",
+    "dataExpira": "2026-04-20",
+    "imagem": "https://kezir.st/public/uploads/events/img_69dfb20709cea6.64894888.jfif",
+    "link": "https://kezir.st/events/699645906571493376",
+    "localizacao": "A frente da Igreja de Ribeira Afonso, São Tomé",
+    "maps": "A frente da Igreja de Ribeira Afonso, São Tomé"
+  },
+  {
+    "titulo": "São Tomé Maratona 2026 - Corra no Centro do Mundo",
+    "dataExpira": "2026-06-28",
+    "imagem": "https://kezir.st/public/uploads/events/img_6942c4ef33a713.14669892.jpg",
+    "link": "https://kezir.st/events/656510376791244800",
+    "localizacao": "info@saotomemaratona.com, São Tomé",
+    "maps": "info@saotomemaratona.com"
   }
+
 ]
