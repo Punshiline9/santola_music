@@ -27,6 +27,8 @@
         --grad-puxita: linear-gradient(135deg, #ffdb00, #bfa300);
         --grad-angola: linear-gradient(135deg, #d21034, #7a091d);
         --grad-rap: linear-gradient(135deg, #333, #000);
+        --grad-brazil: linear-gradient(135deg, #009739, #fedd00);
+        --grad-inter: linear-gradient(135deg, #1a2a6c, #b21f1f);
       }
       * {
         margin: 0;
@@ -148,7 +150,6 @@
         font-weight: 600;
       }
 
-      /* SOBREPOSIÇÃO PARA LEITURA */
       .cat-card::after {
         content: "";
         position: absolute;
@@ -160,24 +161,36 @@
         z-index: 1;
       }
 
-      /* CORES ESPECÍFICAS */
+      /* CORES ESPECÍFICAS CORRIGIDAS */
       .kizomba {
-        background: var(--grad-kizomba);
+        background: var(--grad-inter);
       }
-      .puxita {
+      .brazil {
         background: var(--grad-puxita);
-        color: black;
-      }
-      .puxita::after {
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
       }
       .angola {
         background: var(--grad-angola);
       }
       .rap {
-        background: var(--grad-rap);
+        background: var(--grad-angola);
+      }
+      .internacional {
+        background: var(--grad-inter);
+      }
+      .mixs::after {
+        background: var(--grad-brazil);
+        color: black;
+      }
+      .semba::after {
+        background: var(--grad-angola);
+      }
+      .BEATS::after {
+        background: var(--grad-puxita);
       }
 
+      .puxita::after {
+        background: var(--grad-brazil);
+      }
       /* LISTA DE MÚSICAS FILTRADAS */
       .music-item {
         display: flex;
@@ -279,7 +292,6 @@
           id="mainSearch"
           oninput="buscaGeral()"
         />
-
         <div class="grid-categorias" id="grid-home"></div>
       </div>
 
@@ -357,13 +369,15 @@
     <script>
       let musicasGerais = [];
       const ESTILOS = [
-        { nome: "Kizomba & Zouk", classe: "Kizomba & Zouk" },
-        { nome: "Top Brazil", classe: "Top Brazil" },
-        { nome: "Puxita & Bulaúe", classe: "Puxita & Bulaúe" },
-        { nome: "Top Angola", classe: "Top angola" },
-        { nome: "Rap STP", classe: "rap" },
-        { nome: "Trap STP", classe: "rap" },
-        { nome: "Internacional", classe: "Internacional" },
+        { nome: "Kizomba & Zouk", classe: "kizomba" },
+        { nome: "Top Brazil", classe: "brazil" },
+        { nome: "Top STP", classe: "puxita" },
+        { nome: "Top Angola", classe: "angola" },
+        { nome: "RAP", classe: "rap" },
+        { nome: "BEATS", classe: "BEATS" },
+        { nome: "Melhores MIXS", classe: "mixs" },
+        { nome: "SEMBA", classe: "semba" },
+        { nome: "Internacional", classe: "internacional" },
       ];
 
       async function iniciar() {
@@ -408,7 +422,7 @@
         const lista = document.getElementById("lista-musicas");
         if (filtradas.length === 0) {
           lista.innerHTML =
-            '<p style="text-align:center; opacity:0.5; padding:40px;">Nenhuma música encontrada neste estilo.</p>';
+            '<p style="text-align:center; opacity:0.5; padding:40px;">Nenhuma música encontrada.</p>';
         } else {
           lista.innerHTML = filtradas
             .map(
