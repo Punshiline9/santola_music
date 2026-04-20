@@ -2,20 +2,10 @@
 <html lang="pt-pt">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Estilos Musicais | Santola Music</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
     <style>
       :root {
         --verde: #12ad2b;
@@ -31,249 +21,99 @@
         --grad-inter: linear-gradient(135deg, #1a2a6c, #b21f1f);
       }
       * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+        margin: 0; padding: 0; box-sizing: border-box;
         font-family: "Inter", sans-serif;
         -webkit-tap-highlight-color: transparent;
       }
-      body {
-        background-color: #080808;
-        color: white;
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
+      body { background-color: #080808; color: white; min-height: 100vh; overflow-x: hidden; }
 
       /* HEADER */
       header {
-        padding: 1.5rem 1rem;
-        text-align: center;
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 0;
-        background: rgba(8, 8, 8, 0.9);
-        z-index: 100;
-        backdrop-filter: blur(15px);
+        padding: 1.5rem 1rem; text-align: center; border-bottom: 1px solid var(--border);
+        position: sticky; top: 0; background: rgba(8, 8, 8, 0.9);
+        z-index: 100; backdrop-filter: blur(15px);
       }
       .btn-voltar {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: var(--verde);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: 800;
-        font-size: 0.6rem;
-        text-transform: uppercase;
+        position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+        background: var(--verde); color: white; padding: 6px 12px;
+        border-radius: 6px; text-decoration: none; font-weight: 800;
+        font-size: 0.6rem; text-transform: uppercase;
       }
       .logo-texto {
-        font-family: "Syne";
-        font-size: 1.5rem;
-        font-weight: 800;
-        background: linear-gradient(
-          to right,
-          var(--verde),
-          var(--amarelo),
-          var(--vermelho)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-transform: uppercase;
+        font-family: "Syne"; font-size: 1.5rem; font-weight: 800;
+        background: linear-gradient(to right, var(--verde), var(--amarelo), var(--vermelho));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase;
       }
 
-      .main-content {
-        max-width: 700px;
-        margin: 0 auto;
-        padding: 1rem;
-      }
-      .titulo-secao {
-        font-family: "Syne";
-        text-align: left;
-        margin: 1rem 0;
-        color: #fff;
-        font-size: 1.1rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
+      .main-content { max-width: 700px; margin: 0 auto; padding: 1rem; }
+      .titulo-secao { font-family: "Syne"; text-align: left; margin: 1rem 0; color: #fff; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
 
       /* BUSCA RÁPIDA */
       .search-box {
-        background: var(--glass);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 12px;
-        width: 100%;
-        color: white;
-        margin-bottom: 20px;
-        outline: none;
+        background: var(--glass); border: 1px solid var(--border); border-radius: 12px;
+        padding: 12px; width: 100%; color: white; margin-bottom: 20px; outline: none;
       }
-      .search-box:focus {
-        border-color: var(--amarelo);
-      }
+      .search-box:focus { border-color: var(--amarelo); }
 
       /* GRID CATEGORIAS */
-      .grid-categorias {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
+      .grid-categorias { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
       .cat-card {
-        position: relative;
-        height: 120px;
-        border-radius: 18px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 15px;
-        text-decoration: none;
-        overflow: hidden;
-        transition: 0.3s;
-        border: 1px solid var(--border);
+        position: relative; height: 120px; border-radius: 18px;
+        display: flex; flex-direction: column; justify-content: flex-end;
+        padding: 15px; text-decoration: none; overflow: hidden;
+        transition: 0.3s; border: 1px solid var(--border); cursor: pointer;
       }
-      .cat-card:active {
-        transform: scale(0.96);
-      }
-      .cat-card strong {
-        font-family: "Syne";
-        font-size: 1rem;
-        text-transform: uppercase;
-        z-index: 2;
-      }
-      .cat-card span {
-        font-size: 0.65rem;
-        opacity: 0.8;
-        z-index: 2;
-        text-transform: uppercase;
-        font-weight: 600;
-      }
-
+      .cat-card:active { transform: scale(0.96); }
+      .cat-card strong { font-family: "Syne"; font-size: 1rem; text-transform: uppercase; z-index: 2; }
+      .cat-card span { font-size: 0.65rem; opacity: 0.8; z-index: 2; text-transform: uppercase; font-weight: 600; }
       .cat-card::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-        z-index: 1;
+        content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent); z-index: 1;
       }
 
-      /* CORES ESPECÍFICAS CORRIGIDAS */
-      .kizomba {
-        background: var(--grad-inter);
-      }
-      .brazil {
-        background: var(--grad-puxita);
-      }
-      .angola {
-        background: var(--grad-angola);
-      }
-      .rap {
-        background: var(--grad-angola);
-      }
-      .internacional {
-        background: var(--grad-inter);
-      }
-      .mixs::after {
-        background: var(--grad-brazil);
-        color: black;
-      }
-      .semba::after {
-        background: var(--grad-angola);
-      }
-      .BEATS::after {
-        background: var(--grad-puxita);
-      }
+      /* CORES ESPECÍFICAS */
+      .novidades { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+      .populares { background: linear-gradient(135deg, #f09819, #edde5d); }
+      .kizomba { background: var(--grad-inter); }
+      .brazil { background: var(--grad-puxita); }
+      .angola { background: var(--grad-angola); }
+      .rap { background: var(--grad-rap); }
+      .internacional { background: var(--grad-inter); }
+      .mixs { background: var(--grad-brazil); }
+      .semba { background: var(--grad-angola); }
+      .BEATS { background: var(--grad-puxita); }
+      .puxita { background: var(--grad-brazil); }
 
-      .puxita::after {
-        background: var(--grad-brazil);
-      }
-      /* LISTA DE MÚSICAS FILTRADAS */
+      /* LISTA DE MÚSICAS */
       .music-item {
-        display: flex;
-        align-items: center;
-        background: var(--glass);
-        padding: 12px;
-        border-radius: 15px;
-        margin-bottom: 10px;
-        border: 1px solid var(--border);
-        animation: slideUp 0.4s ease forwards;
+        display: flex; align-items: center; background: var(--glass);
+        padding: 12px; border-radius: 15px; margin-bottom: 10px;
+        border: 1px solid var(--border); animation: slideUp 0.4s ease forwards;
       }
-      @keyframes slideUp {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-      .m-capa {
-        width: 55px;
-        height: 55px;
-        border-radius: 10px;
-        object-fit: cover;
-        margin-right: 15px;
-      }
-      .m-info {
-        flex: 1;
-      }
-      .m-info h4 {
-        font-size: 0.9rem;
-        margin-bottom: 2px;
-        color: #fff;
-      }
-      .m-info p {
-        font-size: 0.75rem;
-        color: var(--amarelo);
-      }
+      .m-capa { width: 55px; height: 55px; border-radius: 10px; object-fit: cover; margin-right: 15px; }
+      .m-info { flex: 1; }
+      .m-info h4 { font-size: 0.9rem; margin-bottom: 2px; color: #fff; }
+      .m-info p { font-size: 0.75rem; color: var(--amarelo); }
       .btn-download-icon {
-        background: var(--verde);
-        color: white;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        font-size: 0.8rem;
+        background: var(--verde); color: white; width: 35px; height: 35px;
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        text-decoration: none; font-size: 0.8rem;
       }
 
       /* MODAL */
       #downloadModal {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        backdrop-filter: blur(10px);
+        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.9); z-index: 1000;
+        display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px);
       }
       .modal-card {
-        background: #111;
-        border: 1px solid var(--border);
-        padding: 25px;
-        border-radius: 25px;
-        width: 100%;
-        max-width: 350px;
-        text-align: center;
+        background: #111; border: 1px solid var(--border); padding: 25px;
+        border-radius: 25px; width: 100%; max-width: 350px; text-align: center;
         border-bottom: 4px solid var(--amarelo);
       }
 
-      footer {
-        padding: 3rem 1rem;
-        text-align: center;
-        opacity: 0.6;
-        font-size: 0.7rem;
-      }
+      footer { padding: 3rem 1rem; text-align: center; opacity: 0.6; font-size: 0.7rem; }
     </style>
   </head>
   <body>
@@ -285,38 +125,14 @@
     <main class="main-content">
       <div id="menu-view">
         <h2 class="titulo-secao">Explorar Estilos 📂</h2>
-        <input
-          type="text"
-          class="search-box"
-          placeholder="Procurar artista ou música..."
-          id="mainSearch"
-          oninput="buscaGeral()"
-        />
+        <input type="text" class="search-box" placeholder="Procurar artista ou música..." id="mainSearch" oninput="buscaGeral()" />
         <div class="grid-categorias" id="grid-home"></div>
       </div>
 
       <div id="result-view" style="display: none">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-          "
-        >
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <h2 id="cat-titulo" class="titulo-secao" style="margin: 0"></h2>
-          <button
-            onclick="voltarMenu()"
-            style="
-              background: none;
-              border: none;
-              color: var(--amarelo);
-              font-weight: 800;
-              font-size: 0.7rem;
-            "
-          >
-            FECHAR ✕
-          </button>
+          <button onclick="voltarMenu()" style="background: none; border: none; color: var(--amarelo); font-weight: 800; font-size: 0.7rem; cursor:pointer;">FECHAR ✕</button>
         </div>
         <div id="lista-musicas"></div>
       </div>
@@ -324,60 +140,33 @@
 
     <div id="downloadModal" onclick="fecharModal(event)">
       <div class="modal-card" onclick="event.stopPropagation()">
-        <img
-          id="mCapa"
-          src=""
-          style="
-            width: 100px;
-            height: 100px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            border: 2px solid var(--amarelo);
-          "
-        />
+        <img id="mCapa" src="" style="width: 100px; height: 100px; border-radius: 15px; margin-bottom: 15px; border: 2px solid var(--amarelo);" />
         <h3 id="mArtista" style="margin-bottom: 5px"></h3>
-        <p
-          id="mTitulo"
-          style="color: var(--amarelo); margin-bottom: 20px; font-size: 0.9rem"
-        ></p>
-        <a
-          id="mLink"
-          href="#"
-          class="btn-download-icon"
-          style="
-            width: 100%;
-            border-radius: 12px;
-            height: 50px;
-            font-weight: 800;
-            text-transform: uppercase;
-          "
-          >Baixar MP3</a
-        >
-        <p style="margin-top: 15px; font-size: 0.6rem; opacity: 0.5">
-          SANTOLA MUSIC - O BLOG DAS ILHAS
-        </p>
+        <p id="mTitulo" style="color: var(--amarelo); margin-bottom: 20px; font-size: 0.9rem"></p>
+        <a id="mLink" href="#" class="btn-download-icon" style="width: 100%; border-radius: 12px; height: 50px; font-weight: 800; text-transform: uppercase;">Baixar MP3</a>
+        <p style="margin-top: 15px; font-size: 0.6rem; opacity: 0.5">SANTOLA MUSIC - O BLOG DAS ILHAS</p>
       </div>
     </div>
 
     <footer>
       <p>© 2026 DESENVOLVIDO POR</p>
-      <strong style="color: var(--amarelo); font-size: 1rem"
-        >PACHECO GONÇALVES</strong
-      >
+      <strong style="color: var(--amarelo); font-size: 1rem">PACHECO GONÇALVES</strong>
     </footer>
 
     <script>
       let musicasGerais = [];
       const ESTILOS = [
-        { nome: "Kizomba & Zouk", classe: "kizomba" },
-        { nome: "Top Brazil", classe: "brazil" },
-        { nome: "Top STP", classe: "puxita" },
-        { nome: "Top Angola", classe: "angola" },
-        { nome: "RAP", classe: "rap" },
-        { nome: "BEATS", classe: "BEATS" },
-        { nome: "Melhores MIXS", classe: "mixs" },
-        { nome: "SEMBA", classe: "semba" },
-        { nome: "Internacional", classe: "internacional" },
+        { nome: "Novidades", filtro: "NOVIDADE", classe: "novidades" },
+        { nome: "Mais Baixadas", filtro: "POPULAR", classe: "populares" },
+        { nome: "Kizomba & Zouk", filtro: "Kizomba", classe: "kizomba" },
+        { nome: "Top Brazil", filtro: "Brazil", classe: "brazil" },
+        { nome: "Top STP", filtro: "STP", classe: "puxita" },
+        { nome: "Top Angola", filtro: "Angola", classe: "angola" },
+        { nome: "RAP", filtro: "RAP", classe: "rap" },
+        { nome: "BEATS", filtro: "BEATS", classe: "BEATS" },
+        { nome: "Melhores MIXS", filtro: "MIXS", classe: "mixs" },
+        { nome: "SEMBA", filtro: "SEMBA", classe: "semba" },
+        { nome: "Internacional", filtro: "Internacional", classe: "internacional" }
       ];
 
       async function iniciar() {
@@ -385,48 +174,52 @@
           const r = await fetch("musicas.json");
           musicasGerais = await r.json();
           renderizarGrid();
-        } catch (e) {
-          console.error("Erro ao carregar músicas");
-        }
+        } catch (e) { console.error("Erro ao carregar músicas"); }
       }
 
       function renderizarGrid() {
         const grid = document.getElementById("grid-home");
         grid.innerHTML = ESTILOS.map((estilo) => {
-          const total = musicasGerais.filter((m) =>
-            (m.categoria || m.gênero || "")
-              .toLowerCase()
-              .includes(estilo.nome.toLowerCase()),
-          ).length;
+          let total = 0;
+          if (estilo.filtro === "NOVIDADE") {
+            total = musicasGerais.length > 15 ? 15 : musicasGerais.length;
+          } else if (estilo.filtro === "POPULAR") {
+            total = musicasGerais.filter(m => m.popular === true).length;
+          } else {
+            total = musicasGerais.filter((m) =>
+              (m.categoria || m.gênero || "").toLowerCase().includes(estilo.filtro.toLowerCase())
+            ).length;
+          }
 
           return `
-            <div class="cat-card ${estilo.classe}" onclick="filtrar('${estilo.nome}')">
+            <div class="cat-card ${estilo.classe}" onclick="filtrar('${estilo.filtro}', '${estilo.nome}')">
               <span>${total} Músicas</span>
               <strong>${estilo.nome}</strong>
-            </div>
-          `;
+            </div>`;
         }).join("");
       }
 
-      function filtrar(estilo) {
-        const filtradas = musicasGerais.filter((m) =>
-          (m.categoria || m.gênero || "")
-            .toLowerCase()
-            .includes(estilo.toLowerCase()),
-        );
+      function filtrar(filtro, nomeExibicao) {
+        let filtradas = [];
+        if (filtro === "NOVIDADE") {
+          filtradas = [...musicasGerais].reverse().slice(0, 15);
+        } else if (filtro === "POPULAR") {
+          filtradas = musicasGerais.filter(m => m.popular === true);
+        } else {
+          filtradas = musicasGerais.filter((m) =>
+            (m.categoria || m.gênero || "").toLowerCase().includes(filtro.toLowerCase())
+          );
+        }
 
-        document.getElementById("cat-titulo").innerText = estilo;
+        document.getElementById("cat-titulo").innerText = nomeExibicao;
         document.getElementById("menu-view").style.display = "none";
         document.getElementById("result-view").style.display = "block";
 
         const lista = document.getElementById("lista-musicas");
         if (filtradas.length === 0) {
-          lista.innerHTML =
-            '<p style="text-align:center; opacity:0.5; padding:40px;">Nenhuma música encontrada.</p>';
+          lista.innerHTML = '<p style="text-align:center; opacity:0.5; padding:40px;">Nenhuma música encontrada.</p>';
         } else {
-          lista.innerHTML = filtradas
-            .map(
-              (m) => `
+          lista.innerHTML = filtradas.map((m) => `
             <div class="music-item">
               <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
               <div class="m-info">
@@ -434,62 +227,42 @@
                 <p>${m.titulo}</p>
               </div>
               <a href="javascript:void(0)" onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')" class="btn-download-icon">↓</a>
-            </div>
-          `,
-            )
-            .join("");
+            </div>`).join("");
         }
         window.scrollTo(0, 0);
       }
 
       function buscaGeral() {
         const termo = document.getElementById("mainSearch").value.toLowerCase();
-        if (termo.length < 2) {
-          document.getElementById("result-view").style.display = "none";
-          document.getElementById("menu-view").style.display = "block";
-          return;
-        }
-
-        const filtradas = musicasGerais.filter(
-          (m) =>
-            m.artista.toLowerCase().includes(termo) ||
-            m.titulo.toLowerCase().includes(termo),
+        if (termo.length < 2) { voltarMenu(); return; }
+        const filtradas = musicasGerais.filter(m => 
+          m.artista.toLowerCase().includes(termo) || m.titulo.toLowerCase().includes(termo)
         );
-
         document.getElementById("cat-titulo").innerText = "Resultados";
         document.getElementById("menu-view").style.display = "none";
         document.getElementById("result-view").style.display = "block";
-
         const lista = document.getElementById("lista-musicas");
-        lista.innerHTML = filtradas
-          .map(
-            (m) => `
-            <div class="music-item">
-              <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
-              <div class="m-info">
-                <h4>${m.artista}</h4>
-                <p>${m.titulo}</p>
-              </div>
-              <a href="javascript:void(0)" onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')" class="btn-download-icon">↓</a>
+        lista.innerHTML = filtradas.map(m => `
+          <div class="music-item">
+            <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
+            <div class="m-info">
+              <h4>${m.artista}</h4>
+              <p>${m.titulo}</p>
             </div>
-          `,
-          )
-          .join("");
+            <a href="javascript:void(0)" onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')" class="btn-download-icon">↓</a>
+          </div>`).join("");
       }
 
       function abrirModal(data) {
         const m = JSON.parse(decodeURIComponent(data));
-        document.getElementById("mCapa").src =
-          m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
+        document.getElementById("mCapa").src = m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
         document.getElementById("mArtista").innerText = m.artista;
         document.getElementById("mTitulo").innerText = m.titulo;
         document.getElementById("mLink").href = m.link;
         document.getElementById("downloadModal").style.display = "flex";
       }
 
-      function fecharModal(e) {
-        document.getElementById("downloadModal").style.display = "none";
-      }
+      function fecharModal() { document.getElementById("downloadModal").style.display = "none"; }
 
       function voltarMenu() {
         document.getElementById("menu-view").style.display = "block";
