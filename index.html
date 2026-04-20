@@ -213,14 +213,29 @@
         margin: 0 auto;
         padding: 1rem;
       }
-      .card-glass { 
-            background: linear-gradient(270deg, #050505, #111, #1a1a1a);
-            border-radius: 24px; padding: 1.2rem; border: 1px solid var(--border); margin-bottom: 2rem; position: relative; overflow: hidden;
-        }
+      .card-glass {
+        background: linear-gradient(270deg, #050505, #111, #1a1a1a);
+        border-radius: 24px;
+        padding: 1.2rem;
+        border: 1px solid var(--border);
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
       .card-glass::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; 
-            background: linear-gradient(to right, var(--verde), var(--amarelo), var(--vermelho));
-        }
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+      }
 
       .titulo-secao {
         font-family: "Syne";
@@ -435,9 +450,15 @@
       }
 
       @keyframes gradienteSTP {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       /* BOTÕES COM VIDA */
@@ -470,36 +491,77 @@
       <div class="logo-texto" onclick="window.location.href = 'index.html'">
         Santola Music
       </div>
-      <p style="color: var(--amarelo); font-weight: 600; font-size: 0.65rem; letter-spacing: 3px; margin-top: 5px;">
+      <p
+        style="
+          color: var(--amarelo);
+          font-weight: 600;
+          font-size: 0.65rem;
+          letter-spacing: 3px;
+          margin-top: 5px;
+        "
+      >
         O BLOG DAS ILHAS
       </p>
 
-      <a href="https://wa.me/2399944660?text=Quero+anunciar" class="btn-publicitar-top">Publicitar Aqui</a>
+      <a
+        href="https://wa.me/2399944660?text=Quero+anunciar"
+        class="btn-publicitar-top"
+        >Publicitar Aqui</a
+      >
 
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Procurar artista ou música..." oninput="realizarPesquisa()" />
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Procurar artista ou música..."
+          oninput="realizarPesquisa()"
+        />
       </div>
       <div class="container-logo-dir">
-        <img src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" class="logo-img-dir" />
+        <img
+          src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+          class="logo-img-dir"
+        />
       </div>
     </header>
 
     <main class="main-content">
       <div id="home-content" class="page-section">
-        <div class="ads-container" onclick="window.location.href = 'eventos.html'">
+        <div
+          class="ads-container"
+          onclick="window.location.href = 'eventos.html'"
+        >
           <div class="ads-slide active">
-            <span style="color: var(--vermelho); font-weight: 800; font-size: 0.6rem;">PUBLICIDADE</span>
-            <h3 style="font-family: 'Syne'; color: var(--amarelo)">EVENTOS DAS ILHAS</h3>
-            <p style="font-size: 0.7rem; opacity: 0.8">Clique para ver a agenda completa</p>
+            <span
+              style="
+                color: var(--vermelho);
+                font-weight: 800;
+                font-size: 0.6rem;
+              "
+              >PUBLICIDADE</span
+            >
+            <h3 style="font-family: &quot;Syne&quot;; color: var(--amarelo)">
+              EVENTOS DAS ILHAS
+            </h3>
+            <p style="font-size: 0.7rem; opacity: 0.8">
+              Clique para ver a agenda completa
+            </p>
           </div>
           <div class="ads-slide" style="background: #0d2b14">
-            <span style="color: var(--amarelo); font-weight: 800; font-size: 0.6rem">PROMOÇÃO</span>
-            <h3 style="font-family: 'Syne'; color: white">ANUNCIE CONNOSCO</h3>
+            <span
+              style="color: var(--amarelo); font-weight: 800; font-size: 0.6rem"
+              >PROMOÇÃO</span
+            >
+            <h3 style="font-family: &quot;Syne&quot;; color: white">
+              ANUNCIE CONNOSCO
+            </h3>
             <p style="font-size: 0.7rem">Dê visibilidade ao seu negócio</p>
           </div>
         </div>
 
-        <a href="categorias.html" class="cat-full-btn">📂 EXPLORAR POR CATEGORIAS</a>
+        <a href="categorias.html" class="cat-full-btn"
+          >📂 EXPLORAR POR CATEGORIAS</a
+        >
 
         <section class="card-glass">
           <h2 class="titulo-secao"><span>🔥</span> Novidades</h2>
@@ -511,8 +573,15 @@
           <div id="list-top20"></div>
 
           <div class="row-botoes-footer">
-            <a href="https://youtube.com/@SantolaMusic" target="_blank" class="btn-footer-action btn-letras">VER LETRAS</a>
-            <a href="playlists.html" class="btn-footer-action btn-playlist">ALBUMS & PLAYLISTS</a>
+            <a
+              href="https://youtube.com/@SantolaMusic"
+              target="_blank"
+              class="btn-footer-action btn-letras"
+              >VER LETRAS</a
+            >
+            <a href="playlists.html" class="btn-footer-action btn-playlist"
+              >ALBUMS & PLAYLISTS</a
+            >
           </div>
         </section>
       </div>
@@ -520,7 +589,15 @@
       <div id="search-results-view" class="page-section" style="display: none">
         <h2 class="titulo-secao"><span>🔍</span> Resultados</h2>
         <div id="list-search"></div>
-        <button class="cat-full-btn" style="background: #222; margin-top: 20px; border-bottom: 4px solid #000;" onclick="cancelarPesquisa()">
+        <button
+          class="cat-full-btn"
+          style="
+            background: #222;
+            margin-top: 20px;
+            border-bottom: 4px solid #000;
+          "
+          onclick="cancelarPesquisa()"
+        >
           VOLTAR AO INÍCIO
         </button>
       </div>
@@ -528,33 +605,105 @@
 
     <div id="downloadModal">
       <div class="modal-card">
-        <button onclick="fecharModal()" style="position: absolute; right: 20px; top: 15px; background: none; border: none; color: white; font-size: 1.8rem;">&times;</button>
-        <img id="modalCapa" src="" class="artist-thumb" style="width: 100px; height: 100px; margin: 0 auto 15px; display: block; border-radius: 15px; border: 2px solid var(--amarelo);" />
-        <h2 id="modalArtista" style="font-family: 'Syne'; font-size: 1.3rem"></h2>
-        <p id="modalTitulo" style="color: var(--amarelo); font-size: 1rem; margin-bottom: 20px"></p>
+        <button
+          onclick="fecharModal()"
+          style="
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+          "
+        >
+          &times;
+        </button>
+        <img
+          id="modalCapa"
+          src=""
+          class="artist-thumb"
+          style="
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            display: block;
+            border-radius: 15px;
+            border: 2px solid var(--amarelo);
+          "
+        />
+        <h2
+          id="modalArtista"
+          style="font-family: &quot;Syne&quot;; font-size: 1.3rem"
+        ></h2>
+        <p
+          id="modalTitulo"
+          style="color: var(--amarelo); font-size: 1rem; margin-bottom: 20px"
+        ></p>
 
-        <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.85rem; text-align: left;">
-          <p style="margin-bottom: 5px"><strong>Gênero:</strong> <span id="modalGenero" style="color: var(--verde)"></span></p>
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            text-align: left;
+          "
+        >
+          <p style="margin-bottom: 5px">
+            <strong>Gênero:</strong>
+            <span id="modalGenero" style="color: var(--verde)"></span>
+          </p>
           <p><strong>Tamanho:</strong> <span id="modalPeso"></span></p>
         </div>
 
-        <a id="modalLinkDownload" href="" class="cat-full-btn" style="margin-bottom: 10px">FAZER DOWNLOAD</a>
-        <a id="modalShareWA" href="" target="_blank" class="social-mini s-wa" style="display: block; text-align: center">PARTILHAR NO WHATSAPP</a>
+        <a
+          id="modalLinkDownload"
+          href=""
+          class="cat-full-btn"
+          style="margin-bottom: 10px"
+          >FAZER DOWNLOAD</a
+        >
+        <a
+          id="modalShareWA"
+          href=""
+          target="_blank"
+          class="social-mini s-wa"
+          style="display: block; text-align: center"
+          >PARTILHAR NO WHATSAPP</a
+        >
       </div>
     </div>
 
     <footer>
       <div class="social-row">
         <a href="https://wa.me/2399944660" class="social-mini s-wa">WhatsApp</a>
-        <a href="https://tiktok.com/@santolamusic" class="social-mini s-tk" target="_blank">TikTok</a>
-        <a href="https://youtube.com/@SantolaMusi" class="social-mini s-yt" target="_blank">YouTube</a>
+        <a
+          href="https://tiktok.com/@santolamusic"
+          class="social-mini s-tk"
+          target="_blank"
+          >TikTok</a
+        >
+        <a
+          href="https://youtube.com/@SantolaMusi"
+          class="social-mini s-yt"
+          target="_blank"
+          >YouTube</a
+        >
       </div>
       <div class="footer-info">
-        <a href="politica.html" style="color: var(--amarelo); font-size: 0.7rem; font-weight: 700">TERMOS DE USO & COPYRIGHT</a>
+        <a
+          href="politica.html"
+          style="color: var(--amarelo); font-size: 0.7rem; font-weight: 700"
+          >TERMOS DE USO & COPYRIGHT</a
+        >
       </div>
       <span class="credits-prefix">Site desenhado por</span>
       <span class="dev-name-highlight">Pacheco Gonçalves</span>
-      <p style="opacity: 0.3; font-size: 0.6rem; margin-top: 25px">© 2026 SANTOLA MUSIC - SÃO TOMÉ E PRÍNCIPE</p>
+      <p style="opacity: 0.3; font-size: 0.6rem; margin-top: 25px">
+        © 2026 SANTOLA MUSIC - SÃO TOMÉ E PRÍNCIPE
+      </p>
     </footer>
 
     <script>
@@ -562,10 +711,23 @@
       const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
 
       // Nomes das novas categorias aprovadas
-      const CATEGORIAS_VALIDAS = ["Top Angola", "Top STP", "Top Brazil", "Mix", "Internacionais"];
+      const CATEGORIAS_VALIDAS = [
+        "Top Angola",
+        "Top STP",
+        "Top Brazil",
+        "Mix",
+        "Internacionais",
+      ];
 
       function normalizar(texto) {
-        return texto ? texto.toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
+        return texto
+          ? texto
+              .toString()
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .trim()
+          : "";
       }
 
       function irParaPagina(idPagina) {
@@ -624,8 +786,11 @@
 
       function renderizarHome() {
         const novidades = [...musicasGerais].reverse().slice(0, 10);
-        const top20 = [...musicasGerais].sort((a, b) => b.downloads - a.downloads).slice(0, 20);
-        document.getElementById("list-novidades").innerHTML = gerarHtml(novidades);
+        const top20 = [...musicasGerais]
+          .sort((a, b) => b.downloads - a.downloads)
+          .slice(0, 20);
+        document.getElementById("list-novidades").innerHTML =
+          gerarHtml(novidades);
         document.getElementById("list-top20").innerHTML = gerarHtml(top20);
       }
 
@@ -638,7 +803,7 @@
               normalizar(m.artista).includes(termo) ||
               normalizar(m.titulo).includes(termo) ||
               normalizar(m.categoria).includes(termo) ||
-              normalizar(m.local).includes(termo)
+              normalizar(m.local).includes(termo),
           );
 
           document.getElementById("list-search").innerHTML = filtradas.length
@@ -655,7 +820,9 @@
       }
 
       function gerarHtml(lista) {
-        return lista.map((m) => `
+        return lista
+          .map(
+            (m) => `
             <div class="music-row">
                 <img src="${m.capa}" class="artist-thumb" onerror="this.src='${LOGO_PADRAO}'">
                 <div class="info-musica">
@@ -666,7 +833,9 @@
                 </div>
                 <button onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')" class="btn-download">BAIXAR</button>
             </div>
-        `).join("");
+        `,
+          )
+          .join("");
       }
 
       function abrirModal(dados) {
@@ -677,7 +846,8 @@
         document.getElementById("modalGenero").innerText = m.categoria;
         document.getElementById("modalPeso").innerText = m.tamanho;
         document.getElementById("modalLinkDownload").href = m.link;
-        document.getElementById("modalShareWA").href = `https://wa.me/?text=Ouve isto no Santola: ${m.artista} - ${m.titulo}`;
+        document.getElementById("modalShareWA").href =
+          `https://wa.me/?text=Ouve isto no Santola: ${m.artista} - ${m.titulo}`;
         document.getElementById("downloadModal").style.display = "flex";
       }
 
