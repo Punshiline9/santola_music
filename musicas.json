@@ -3,105 +3,70 @@
     "id": 1,
     "artista": "Puto Português",
     "titulo": "Fala Só",
-    "categoria": "TOP ANGOLA",
+    "categoria": "Top Angola",
+    "popular": true,
     "link": "https://download1655.mediafire.com/4liie9gwvldgffTDq_MuvntRv-EUbpfU7gBegzMTmZwG9oaSI5mak7Unx6rEWs9vELoXY0gydDXQrqAkRXkxvSilf3RlgU6MJNWi4Xhay3tiLvs3aim9y832XA6Ozp5S6TS5KWs3hm7NCp54d20HvjDjvu2XexBxzZKAgKHV1cvGMas/87z1fgqh77v9mk3/Puto+Portugues+Ft.+Lil+Saint+-+Fala+So+%28Kizomba%29%E2%80%8F.mp3",
     "capa": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png",
     "tamanho": "5.4 MB"
   },
   {
+    "id": 2,
     "artista": "Tshunami x Levy x Maninho Pibom & Dj Kalisboy",
     "titulo": "Não Deixei Assim",
-    "capa": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png",
+    "categoria": "Top Angola",
+    "popular": false,
     "link": "https://www.mediafire.com/file/zr5b9fde8atk7bx/Tshunami+x+Levy+x+Maninho+Pibom+&+Dj+Kalisboy+-+Não+Deixei+Assim.mp3/file",
-    "categoria": "TOP ANGOLA",
+    "capa": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png",
     "tamanho": "4.2 MB"
   },
   {
-    "artista": "12 FUROS - DORAMA(feat. Cleyton David",
-    "titulo": "Fala Só",
-    "categoria": "TOP ANGOLA",
+    "id": 3,
+    "artista": "12 FUROS - DORAMA(feat. Cleyton David)",
+    "titulo": "Dorama",
+    "categoria": "Kizomba",
+    "popular": true,
     "link": "https://allfiles.allmine.top/T5nCr",
     "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/12FUROS-300x300.jpg.webp",
     "tamanho": "5.99 MB"
   },
   {
-    "artista": "12 FUROS - DORAMA(feat. Cleyton David",
-    "titulo": "Fala Só",
-    "categoria": "kizomba",
-    "link": "https://allfiles.allmine.top/T5nCr",
-    "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/12FUROS-300x300.jpg.webp",
-    "tamanho": "5.99 MB"
-  },
-  {
+    "id": 4,
     "artista": "Ceff",
     "titulo": "Gosto de Gostar",
-    "categoria": "TOP ANGOLA",
-    "link": "https://allfiles.allmine.top/GkQ7y",
-    "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/658898934_947857337991942_3873082034129634262_n-300x300.jpg.webp",
-    "tamanho": "2.28 MB"
-  },
-   {
-    "artista": "Ceff",
-    "titulo": "Gosto de Gostar",
-    "categoria": "kizomba",
+    "categoria": "Top Angola",
+    "popular": true,
     "link": "https://allfiles.allmine.top/GkQ7y",
     "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/658898934_947857337991942_3873082034129634262_n-300x300.jpg.webp",
     "tamanho": "2.28 MB"
   },
   {
-    "artista": "Ceff",
-    "titulo": "Gosto de Gostar",
-    "categoria": "kizomba",
-    "link": "https://allfiles.allmine.top/GkQ7y",
-    "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/658898934_947857337991942_3873082034129634262_n-300x300.jpg.webp",
-    "tamanho": "2.28 MB"
-  },
-  {
+    "id": 5,
     "artista": "3-FINER",
-    "titulo": "BRINCADEIRA DE PAI E MÃE",
-    "categoria": "kizomba",
+    "titulo": "Brincadeira de Pai e Mãe",
+    "categoria": "Kizomba",
+    "popular": false,
     "link": "https://allfiles.allmine.top/nQMSZ",
     "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/3-Finer-300x300.jpg.webp",
     "tamanho": "7.97 MB"
   },
   {
-    "artista": "3-FINER",
-    "titulo": "BRINCADEIRA DE PAI E MÃE",
-    "categoria": "kizomba",
-    "link": "https://allfiles.allmine.top/nQMSZ",
-    "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/3-Finer-300x300.jpg.webp",
-    "tamanho": "7.97 MB"
-  },
-  {
+    "id": 6,
     "artista": "Dupla Gelado De Múcua (Feat. Preto Show & Dj Lutonda)",
-    "titulo": "– Drip Na Goiaba ",
-    "categoria": "angola",
+    "titulo": "Drip Na Goiaba",
+    "categoria": "Top Angola",
+    "popular": true,
     "link": "https://allfiles.allmine.top/eLL7q",
     "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/DRIP-NA-GOIABA-22-300x300.png.webp",
     "tamanho": "4.22 MB"
   },
   {
-    "artista": "DJ Mario Pro(feat. Yambi DJ Mano K)",
-    "titulo": " – Tambor De Angola ",
-    "categoria": "angola",
-    "link": "https://allfiles.allmine.top/PsEer",
-    "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/b0fcd07b-f15d-4b78-8dd7-64fe3ce35ba1-284x300.jpg.webp",
-    "tamanho": "7.32 MB"
-  },
-  {
-    "artista": "Delcio Huambo(feat. Fábio Hustle)",
-    "titulo": " – Boda ",
-    "categoria": "inter",
-    "link": "https://allfiles.allmine.top/C5F3r",
-    "capa": "https://buedemusica.com/wp-content/uploads/2026/04/ac2tg-m4EFA1NW72lb72q0-300x293.avif",
-    "tamanho": "8.92 MB"
-  },
-  {
-    "artista": "Nenny ",
-    "titulo": "Eu Quero Um Preto",
-    "capa": "https://buedemusica.com/wp-content/uploads/2026/04/Nenny-1-300x300.webp",
-    "link": "https://allfiles.allmine.top/VgUit",
-    "categoria": "inter",
+    "id": 7,
+    "artista": "DJ Mario Pro (feat. Yambi DJ Mano K)",
+    "titulo": "Tambor De Angola",
+    "categoria": "Top Angola",
+    "popular": false,
+    "link": "https://allfiles.allmine.top/eLL7q",
+    "capa": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png",
     "tamanho": "3.8 MB"
   }
 ]
