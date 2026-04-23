@@ -1,5 +1,13 @@
 {
-  "NOVIDADES": [],
+  "NOVIDADES": [
+    {
+      "id": 17,
+      "artista": "Naka Tribal",
+      "titulo": "Pão Fora da Padaria",
+      "url": "https://drive.google.com/file/d/1yAUk-BualGpCRCnUjcR9mLxqDwUschqi/view?usp=drive_link",
+      "capa": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    }
+  ],
   "MAIS_BAIXADAS": [],
   "KIZOMBA_ZOUK": [
     {
@@ -22,13 +30,6 @@
       "titulo": "Brincadeira de Pai e Mãe",
       "url": "https://allfiles.allmine.top/nQMSZ",
       "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/3-Finer-300x300.jpg.webp"
-    },
-    {
-      "id": 16,
-      "artista": "Naka Tribal",
-      "titulo": "Pão Fora da Padaria",
-      "url": "https://drive.google.com/file/d/1yAUk-BualGpCRCnUjcR9mLxqDwUschqi/view?usp=drive_link",
-      "capa": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
     }
   ],
   "TOP_BRAZIL": [],
@@ -104,6 +105,13 @@
       "titulo": "Drip Na Goiaba",
       "url": "https://allfiles.allmine.top/eLL7q",
       "capa": "https://buedemusica.com/wp-content/webp-express/webp-images/uploads/2026/04/DRIP-NA-GOIABA-22-300x300.png.webp"
+    },
+    {
+      "id": 16,
+      "artista": "Naka Tribal",
+      "titulo": "Pão Fora da Padaria",
+      "url": "https://drive.google.com/file/d/1yAUk-BualGpCRCnUjcR9mLxqDwUschqi/view?usp=drive_link",
+      "capa": "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
     },
     {
       "id": 7,
