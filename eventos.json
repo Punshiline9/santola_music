@@ -1,59 +1,275 @@
-[
-  {
-    "titulo": "Pool Party",
-    "dataExpira": "2026-08-23",
-    "imagem": "https://kezir.st/public/uploads/events/img_69b7ee66d0b545.51230502.png",
-    "link": "https://kezir.st/events/688715617150173184",
-    "localizacao": "A Definir, São Tomé",
-    "maps": "A Definir, São Tomé"
-  },
-  {
-    "titulo": "Festa no Mato 2026",
-    "dataExpira": "2026-06-09",
-    "imagem": "https://kezir.st/public/uploads/events/img_695d4c3778a033.00220560.jpg",
-    "link": "https://kezir.st/events/663802460699099136",
-    "localizacao": "Praia de Lagarto, São Tomé",
-    "maps": "Cidade Trindade, São tomé"
-  },
-  {
-    "titulo": "Euphoria - Las Kozitas Buenas",
-    "dataExpira": "2026-08-21",
-    "imagem": "https://kezir.st/public/uploads/events/img_698bc29b1266e2.38693681.jpg",
-    "link": "https://kezir.st/events/676573963593187328",
-    "localizacao": "A Definir, São Tomé",
-    "maps": "A Definir, São Tomé"
-  },
-  {
-    "titulo": "Sunset Pool Party - Deejay Ronaldo",
-    "dataExpira": "2026-16-08",
-    "imagem": "https://kezir.st/public/uploads/events/img_69ba9f6d477571.44284474.jpg",
-    "link": "https://kezir.st/events/689455451930099712",
-    "localizacao": "A Definir, São Tomé",
-    "maps": "A Definir, São Tomé"
-  },
-  {
-    "titulo": "Palco Aberto",
-    "dataExpira": "2026-04-24",
-    "imagem": "https://kezir.st/public/uploads/events/img_69c3f4970a15b2.52700267.jpg",
-    "link": "https://kezir.st/events/692020796595372032",
-    "localizacao": "Aliança Francesa, Rua Ex Gago Coutinho, São Tomé",
-    "maps": "Aliança Francesa, Rua Ex Gago Coutinho, São Tomé"
-  },
-  {
-    "titulo": "Mussulo Em Ribeira Afonso",
-    "dataExpira": "2026-04-20",
-    "imagem": "https://kezir.st/public/uploads/events/img_69dfb20709cea6.64894888.jfif",
-    "link": "https://kezir.st/events/699645906571493376",
-    "localizacao": "A frente da Igreja de Ribeira Afonso, São Tomé",
-    "maps": "A frente da Igreja de Ribeira Afonso, São Tomé"
-  },
-  {
-    "titulo": "São Tomé Maratona 2026 - Corra no Centro do Mundo",
-    "dataExpira": "2026-06-28",
-    "imagem": "https://kezir.st/public/uploads/events/img_6942c4ef33a713.14669892.jpg",
-    "link": "https://kezir.st/events/656510376791244800",
-    "localizacao": "info@saotomemaratona.com, São Tomé",
-    "maps": "info@saotomemaratona.com"
-  }
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Eventos | Santola Music</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
 
-]
+    <style>
+      :root {
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --glass: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+      body {
+        background-color: #080808;
+        color: white;
+        min-height: 100vh;
+      }
+
+      /* HEADER */
+      header {
+        padding: 2rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        background: #080808;
+      }
+      .logo-texto {
+        font-family: "Syne";
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+      }
+
+      /* GRELHA DE EVENTOS */
+      .main-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 1.5rem;
+      }
+
+      .event-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      /* Responsividade para Telemóvel */
+      @media (max-width: 768px) {
+        .event-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .event-card {
+        position: relative;
+        height: 250px;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        text-decoration: none;
+        color: white;
+        display: flex;
+        align-items: flex-end;
+        transition: transform 0.3s ease;
+      }
+
+      .event-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--amarelo);
+      }
+
+      .event-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        opacity: 0.5;
+      }
+
+      .event-overlay {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+      }
+
+      .tag-destaque {
+        font-size: 0.6rem;
+        background: var(--vermelho);
+        padding: 2px 8px;
+        border-radius: 5px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .event-overlay h3 {
+        font-family: "Syne";
+        font-size: 1.1rem;
+        margin-top: 8px;
+        color: var(--amarelo);
+      }
+
+      .event-details-box {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .detail-item {
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        opacity: 0.9;
+      }
+
+      .detail-item i {
+        color: var(--verde);
+        width: 12px;
+      }
+
+      .maps-btn {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 0.7rem;
+        color: var(--amarelo);
+        text-decoration: underline;
+        font-weight: 700;
+      }
+
+      .no-events {
+        text-align: center;
+        grid-column: 1 / -1;
+        padding: 50px;
+        opacity: 0.4;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="logo-texto">Santola Music</a>
+      <p style="color: var(--amarelo); font-size: 0.7rem; letter-spacing: 3px">
+        EVENTOS E DESTAQUES
+      </p>
+    </header>
+
+    <main class="main-content">
+      <h2
+        style="
+          font-family: &quot;Syne&quot;;
+          font-size: 1.2rem;
+          margin-bottom: 20px;
+        "
+      >
+        Próximos Eventos 🔥
+      </h2>
+
+      <div class="event-grid" id="eventGrid">
+        <p class="no-events">A carregar eventos disponíveis...</p>
+      </div>
+    </main>
+
+    <script>
+      const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
+
+      async function carregarEventos() {
+        try {
+          const response = await fetch("eventos.json");
+          const todosEventos = await response.json();
+
+          const hoje = new Date();
+          hoje.setHours(0, 0, 0, 0);
+
+          const ativos = todosEventos.filter((ev) => {
+            const expira = new Date(ev.dataExpira);
+            return expira >= hoje;
+          });
+
+          const container = document.getElementById("eventGrid");
+
+          if (ativos.length === 0) {
+            container.innerHTML =
+              '<p class="no-events">Não há eventos ativos de momento.</p>';
+            return;
+          }
+
+          container.innerHTML = ativos
+            .map(
+              (ev) => `
+            <div class="card-container">
+                <a href="${ev.link}" class="event-card">
+                  <img src="${ev.imagem}" class="event-img" onerror="this.src='${LOGO_PADRAO}'">
+                  <div class="event-overlay">
+                    <span class="tag-destaque">Destaque</span>
+                    <h3>${ev.titulo}</h3>
+                    
+                    <div class="event-details-box">
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Até: ${ev.dataExpira}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${ev.localizacao || "Local a definir"}</span>
+                        </div>
+                    </div>
+
+                    ${
+                      ev.maps
+                        ? `
+                        <object>
+                            <a href="${ev.maps}" target="_blank" class="maps-btn">
+                                <i class="fas fa-location-arrow"></i> VER NO MAPA
+                            </a>
+                        </object>
+                    `
+                        : ""
+                    }
+                  </div>
+                </a>
+            </div>
+          `,
+            )
+            .join("");
+        } catch (e) {
+          console.error("Erro ao carregar eventos.json");
+          document.getElementById("eventGrid").innerHTML =
+            '<p class="no-events">Erro ao carregar a agenda.</p>';
+        }
+      }
+
+      window.onload = carregarEventos;
+    </script>
+  </body>
+</html>
