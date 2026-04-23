@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SANTOLA ADMIN | Painel de Moderação</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #0a0a0a;
+        color: white;
+        padding: 40px;
+      }
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+      .card {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid #ffcc00;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .btn-ok {
+        background: #00ff88;
+        color: black;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 5px;
+      }
+      .btn-no {
+        background: #ff4d4d;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+      }
+      #login {
+        position: fixed;
+        inset: 0;
+        background: #0a0a0a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+      input {
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="login">
+      <h1>SANTOLA ADMIN</h1>
+      <input type="password" id="pass" placeholder="Código de Acesso" />
+      <button class="btn-ok" onclick="entrar()">ENTRAR</button>
+    </div>
+
+    <h1>Músicas Pendentes</h1>
+    <div id="lista" class="grid"></div>
+
+    <script>
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbxZ26-7vADjeoigibMc-a1KvR-Tj0iFqJDjjY-rf5TuZ70nofOvBeP4smlrN9c_n6wp/exec";
+      const PASS_CORRETA = ".Pancho11."; // Define o teu código aqui
+
+      function entrar() {
+        if (document.getElementById("pass").value === PASS_CORRETA) {
+          document.getElementById("login").style.display = "none";
+          carregar();
+        } else {
+          alert("Acesso negado");
+        }
+      }
+
+      async function carregar() {
+        const res = await fetch(SCRIPT_URL + "?type=pendentes");
+        const data = await res.json();
+        const div = document.getElementById("lista");
+        div.innerHTML = data.length ? "" : "Nada para aprovar!";
+        data.forEach((m) => {
+          div.innerHTML += `
+                    <div class="card" id="row-${m.row}">
+                        <div>
+                            <b>${m.artista}</b> - ${m.titulo} <br>
+                            <a href="${m.urlMusica}" target="_blank" style="color: #00ff88">Ouvir</a>
+                        </div>
+                        <div>
+                            <button class="btn-ok" onclick="acao(${m.row}, 'approve')">APROVAR</button>
+                            <button class="btn-no" onclick="acao(${m.row}, 'delete')">ELIMINAR</button>
+                        </div>
+                    </div>`;
+        });
+      }
+
+      async function acao(row, act) {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify({ action: act, row: row }),
+        });
+        document.getElementById(`row-${row}`).remove();
+      }
+    </script>
+  </body>
+</html>
