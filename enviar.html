@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enviar Trabalho | Santola Music</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="upload-style.css" />
+    <style>
+      .error-border {
+        border: 2px solid #d21034 !important;
+        box-shadow: 0 0 10px rgba(210, 16, 52, 0.3) !important;
+        background: rgba(210, 16, 52, 0.05) !important;
+      }
+      .checkbox-row {
+        display: flex;
+        gap: 10px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        margin-top: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .checkbox-row label {
+        font-size: 0.75rem !important;
+        color: #aaa;
+        cursor: pointer;
+      }
+      .checkbox-row input {
+        width: 20px;
+        height: 20px;
+        accent-color: #12ad2b;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header-upload">
+      <a href="index.html" class="btn-voltar-home">← VOLTAR</a>
+      <div class="brand-center">
+        <div class="logo-texto-p">Santola Music</div>
+        <p class="sub-ilhas">O BLOG DAS ILHAS</p>
+      </div>
+    </header>
+
+    <main class="main-content-upload">
+      <div class="card-glass-form bento-animado">
+        <h2 class="titulo-secao"><span>📤</span> Enviar o teu trabalho</h2>
+        <form id="uploadForm" novalidate>
+          <div class="input-group">
+            <label>NOME DO ARTISTA (Opcional)</label>
+            <input
+              type="text"
+              id="artista"
+              placeholder="Deixa vazio para 'Santola Music'"
+            />
+          </div>
+          <div class="input-group">
+            <label>TÍTULO DA MÚSICA (Opcional)</label>
+            <input
+              type="text"
+              id="titulo"
+              placeholder="Deixa vazio para 'Blog das Ilhas'"
+            />
+          </div>
+          <div class="input-group">
+            <label>ESTILO (CATEGORIA) *</label>
+            <select id="genero" required>
+              <option value="" disabled selected>Escolha o gênero...</option>
+              <option value="Kizomba & Zouk">Kizomba & Zouk</option>
+              <option value="Top STP">Top STP</option>
+              <option value="Top Angola">Top Angola</option>
+              <option value="Top Brazil">Top Brazil</option>
+              <option value="Rap">Rap</option>
+              <option value="Beats">Beats</option>
+              <option value="Semba">Semba</option>
+              <option value="Melhores Mixs">Melhores Mixs</option>
+              <option value="Internacional">Internacional</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>CAPA DA MÚSICA (Opcional)</label>
+            <input type="file" id="capa" accept="image/*" class="file-input" />
+          </div>
+          <div class="input-group">
+            <label>FICHEIRO ÁUDIO (MP3) *</label>
+            <input
+              type="file"
+              id="musica"
+              accept="audio/*"
+              class="file-input"
+              required
+            />
+          </div>
+          <div class="checkbox-row" id="acordoContainer">
+            <input type="checkbox" id="acordo" />
+            <label for="acordo"
+              >Eu autorizo a <b>Santola Music</b> a publicar este trabalho e
+              confirmo que possuo os direitos autorais da obra.</label
+            >
+          </div>
+          <button type="submit" class="btn-enviar-final">
+            ENVIAR PARA REVISÃO
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbxZ26-7vADjeoigibMc-a1KvR-Tj0iFqJDjjY-rf5TuZ70nofOvBeP4smlrN9c_n6wp/exec";
+
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const btn = document.querySelector(".btn-enviar-final");
+          const musicaFile = document.getElementById("musica");
+          const generoSel = document.getElementById("genero");
+          const acordoCheck = document.getElementById("acordo");
+          const acordoCont = document.getElementById("acordoContainer");
+
+          // Validação visual
+          let erro = false;
+          [musicaFile, generoSel, acordoCont].forEach((el) =>
+            el.classList.remove("error-border"),
+          );
+
+          if (!musicaFile.files.length) {
+            musicaFile.classList.add("error-border");
+            erro = true;
+          }
+          if (!generoSel.value) {
+            generoSel.classList.add("error-border");
+            erro = true;
+          }
+          if (!acordoCheck.checked) {
+            acordoCont.classList.add("error-border");
+            erro = true;
+          }
+
+          if (erro) return alert("Preencha os campos marcados a vermelho!");
+
+          btn.innerText = "A ENVIAR... AGUARDE";
+          btn.disabled = true;
+
+          const ler = (f) =>
+            new Promise((res) => {
+              const r = new FileReader();
+              r.onload = () =>
+                res({ base64: r.result.split(",")[1], mime: f.type });
+              r.readAsDataURL(f);
+            });
+
+          try {
+            const payload = {
+              artista:
+                document.getElementById("artista").value.trim() ||
+                "Santola Music",
+              titulo:
+                document.getElementById("titulo").value.trim() ||
+                "Blog das Ilhas",
+              genero: generoSel.value,
+            };
+
+            const mData = await ler(musicaFile.files[0]);
+            payload.musicaBase64 = mData.base64;
+            payload.musicaMime = mData.mime;
+
+            const capaFile = document.getElementById("capa").files[0];
+            if (capaFile) {
+              const cData = await ler(capaFile);
+              payload.capaBase64 = cData.base64;
+              payload.capaMime = cData.mime;
+            }
+
+            const response = await fetch(SCRIPT_URL, {
+              method: "POST",
+              body: JSON.stringify(payload),
+            });
+            const resText = await response.text();
+
+            if (resText === "Sucesso") {
+              alert("Enviado com sucesso!");
+              this.reset();
+            } else {
+              throw new Error(resText);
+            }
+          } catch (err) {
+            alert("Erro no envio. Tente novamente.");
+            console.error(err);
+          } finally {
+            btn.innerText = "ENVIAR PARA REVISÃO";
+            btn.disabled = false;
+          }
+        });
+    </script>
+  </body>
+</html>
