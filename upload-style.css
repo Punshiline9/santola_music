@@ -1,0 +1,146 @@
+:root {
+  --verde: #12ad2b;
+  --amarelo: #ffdb00;
+  --vermelho: #d21034;
+  --glass: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
+  --bg: #080808;
+  --rosa: #ff00ff;
+}
+
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: white;
+  min-height: 100vh;
+}
+
+/* HEADER ESTILIZADO */
+.header-upload {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8, 8, 8, 0.95);
+}
+
+.btn-voltar-home {
+  background: var(--glass);
+  color: var(--amarelo);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.7rem;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: 1px solid var(--amarelo);
+  transition: 0.3s;
+}
+
+.btn-voltar-home:hover {
+  background: var(--amarelo);
+  color: black;
+}
+
+.logo-texto-p {
+  font-family: "Syne";
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--verde), var(--amarelo), var(--vermelho));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.sub-ilhas {
+  color: var(--amarelo);
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.logo-mini-dir img { width: 35px; opacity: 0.8; }
+
+/* CONTAINER BENTO / GLASS */
+.main-content-upload {
+  padding: 2rem 1rem;
+  display: flex; justify-content: center;
+}
+
+.card-glass-form {
+  background: linear-gradient(270deg, #050505, #0c0c0a, #1a1a1a);
+  background-size: 400% 400%;
+  animation: gradienteSTP 10s ease infinite;
+  border-radius: 28px;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  width: 100%; max-width: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-glass-form::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+  background: linear-gradient(to right, var(--verde), var(--amarelo), var(--vermelho));
+}
+
+/* FORMULÁRIO E INPUTS */
+.input-group { margin-bottom: 20px; }
+.input-group label {
+  display: block; font-size: 0.65rem; font-weight: 800; color: #888;
+  margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
+}
+
+input[type="text"], .select-dark-custom, .file-input {
+  width: 100%; background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  padding: 12px 15px; border-radius: 12px;
+  color: white; font-size: 0.9rem; outline: none;
+}
+
+/* ESTILO DO SELECT (Fundo Escuro e Cores) */
+.select-dark-custom {
+  cursor: pointer;
+  appearance: none; /* Remove seta padrão para estilo limpo */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='yellow' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+.select-dark-custom option {
+  background-color: #080808; /* Força fundo escuro no sistema */
+  color: white;
+  padding: 10px;
+}
+
+/* Cores das opções baseadas nas fotos */
+.opt-verde { color: var(--verde) !important; }
+.opt-amarelo { color: var(--amarelo) !important; }
+.opt-vermelho { color: var(--vermelho) !important; }
+.opt-pink { color: var(--rosa) !important; }
+.opt-branco { color: white !important; }
+
+/* BOTÃO FINAL */
+.btn-enviar-final {
+  width: 100%; padding: 16px; border-radius: 16px; border: none;
+  background: linear-gradient(270deg, var(--verde), var(--amarelo), var(--vermelho));
+  background-size: 400% 400%;
+  animation: gradienteSTP 6s ease infinite;
+  color: black; font-weight: 800; cursor: pointer;
+  text-transform: uppercase; letter-spacing: 1px;
+  border-bottom: 4px solid rgba(0,0,0,0.2);
+}
+
+@keyframes gradienteSTP {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
