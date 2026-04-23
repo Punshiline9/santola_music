@@ -6,25 +6,44 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
+    <meta name="theme-color" content="#080808" />
+    <meta
+      name="description"
+      content="Santola Music - A maior montra da música de São Tomé e Príncipe. Kizomba, Puxita, Bulauê e muito mais."
+    />
+
     <title>Santola Music | O Blog Das Ilhas</title>
+
     <link
       rel="icon"
       type="image/png"
       href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
     />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
     <style>
+      /* ============================================================
+           1. CORE DESIGN SYSTEM (CSS VARIABLES)
+           ============================================================ */
       :root {
         --verde: #12ad2b;
         --amarelo: #ffdb00;
         --vermelho: #d21034;
+        --preto-deep: #080808;
+        --preto-card: #111111;
         --glass: rgba(255, 255, 255, 0.05);
-        --border: rgba(255, 255, 255, 0.1);
-        --glow: 0 0 15px rgba(255, 219, 0, 0.3);
+        --border: rgba(255, 255, 255, 0.12);
+        --glow-amarelo: 0 0 20px rgba(255, 219, 0, 0.25);
+        --glow-verde: 0 0 20px rgba(18, 173, 43, 0.25);
+        --transition-fast: all 0.2s ease;
+        --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
+
+      /* RESET E SCROLLBAR */
       * {
         margin: 0;
         padding: 0;
@@ -32,424 +51,33 @@
         font-family: "Inter", sans-serif;
         -webkit-tap-highlight-color: transparent;
       }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--preto-deep);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--amarelo);
+      }
+
       body {
-        background-color: #080808;
+        background-color: var(--preto-deep);
         color: white;
         min-height: 100vh;
         overflow-x: hidden;
+        line-height: 1.5;
       }
 
-      /* SPLASH SCREEN */
-      #splash {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #080808;
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: opacity 0.5s ease;
-      }
-      #splash img {
-        width: 120px;
-        animation: pulse 1s infinite alternate;
-        filter: drop-shadow(0 0 15px var(--amarelo));
-      }
-      @keyframes pulse {
-        from {
-          transform: scale(1);
-          opacity: 0.8;
-        }
-        to {
-          transform: scale(1.1);
-          opacity: 1;
-        }
-      }
-
-      /* HEADER */
-      header {
-        padding: 2.5rem 1rem 1.5rem;
-        text-align: center;
-        border-bottom: 1px solid var(--border);
-        background: rgba(8, 8, 8, 0.98);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        backdrop-filter: blur(10px);
-      }
-      .logo-texto {
-        font-family: "Syne";
-        font-size: 2.8rem;
-        font-weight: 800;
-        background: linear-gradient(
-          to right,
-          var(--verde),
-          var(--amarelo),
-          var(--vermelho)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
-        line-height: 1.1;
-        cursor: pointer;
-      }
-
-      .btn-publicitar-top {
-        background: var(--amarelo);
-        color: #000;
-        padding: 6px 16px;
-        border-radius: 20px;
-        text-decoration: none;
-        font-weight: 800;
-        font-size: 0.65rem;
-        margin-top: 10px;
-        text-transform: uppercase;
-        border: none;
-        cursor: pointer;
-        display: inline-block;
-        transition: 0.3s;
-        border-bottom: 3px solid #bfa300;
-      }
-      .btn-publicitar-top:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--glow);
-        background: white;
-      }
-
-      .btn-enviar {
-        position: absolute;
-        left: 15px;
-        top: 15px;
-        background: var(--verde);
-        color: white;
-        padding: 7px 12px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: 800;
-        font-size: 0.6rem;
-        z-index: 10;
-        border-bottom: 2px solid #0a6b1a;
-        text-transform: uppercase;
-        transition: 0.2s;
-      }
-      .btn-enviar:active {
-        transform: scale(0.95);
-      }
-
-      .container-logo-dir {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        width: 42px;
-        opacity: 0.9;
-      }
-      .logo-img-dir {
-        width: 100%;
-        object-fit: contain;
-      }
-
-      .search-box {
-        background: var(--glass);
-        border-radius: 14px;
-        margin: 1.2rem auto 0;
-        border: 1.5px solid var(--border);
-        width: 100%;
-        max-width: 500px;
-        display: flex;
-        align-items: center;
-        padding-left: 15px;
-        transition: 0.3s;
-      }
-      .search-box:focus-within {
-        border-color: var(--amarelo);
-        box-shadow: var(--glow);
-      }
-      .search-box input {
-        flex: 1;
-        background: transparent;
-        border: none;
-        outline: none;
-        color: white;
-        font-size: 0.95rem;
-        padding: 0.8rem;
-      }
-
-      /* ANÚNCIOS */
-      .ads-container {
-        width: 100%;
-        height: 120px;
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        margin: 20px 0;
-        overflow: hidden;
-        position: relative;
-        cursor: pointer;
-        background: #111;
-      }
-      .ads-slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-        padding: 15px;
-        transition: opacity 0.5s ease;
-      }
-      .ads-slide.active {
-        display: flex;
-      }
-
-      /* MAIN CONTENT */
-      .main-content {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 1rem;
-      }
-      .card-glass {
-        background: linear-gradient(270deg, #050505, #111, #1a1a1a);
-        border-radius: 24px;
-        padding: 1.2rem;
-        border: 1px solid var(--border);
-        margin-bottom: 2rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .card-glass::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(
-          to right,
-          var(--verde),
-          var(--amarelo),
-          var(--vermelho)
-        );
-      }
-
-      .titulo-secao {
-        font-family: "Syne";
-        color: #fff;
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-      .titulo-secao span {
-        color: var(--amarelo);
-      }
-
-      /* BOTÕES DE NAVEGAÇÃO */
-      .cat-full-btn {
-        display: block;
-        text-align: center;
-        padding: 16px;
-        border-radius: 16px;
-        text-decoration: none;
-        font-weight: 800;
-        margin-bottom: 20px;
-        background: var(--verde);
-        color: white;
-        border-bottom: 4px solid #0a6b1a;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: 0.2s;
-      }
-      .cat-full-btn:active {
-        transform: translateY(2px);
-        border-bottom-width: 1px;
-      }
-
-      .row-botoes-footer {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
-      }
-      .btn-footer-action {
-        flex: 1;
-        height: 45px;
-        text-align: center;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 800;
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: 0.3s;
-      }
-      .btn-letras {
-        background: var(--vermelho);
-        color: white;
-        border-bottom: 3px solid #8b0a22;
-      }
-      .btn-playlist {
-        background: #1a1a1a;
-        color: var(--amarelo);
-        border: 1px solid var(--amarelo);
-        border-bottom: 3px solid #857200;
-      }
-
-      /* LISTAGEM DE MÚSICAS */
-      .music-row {
-        display: flex;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.03);
-        margin-bottom: 12px;
-        padding: 12px;
-        border-radius: 16px;
-        gap: 12px;
-        border: 1px solid var(--border);
-        transition: 0.2s;
-      }
-      .music-row:hover {
-        background: rgba(255, 255, 255, 0.07);
-        border-color: var(--border);
-      }
-      .artist-thumb {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-        object-fit: cover;
-        background: #222;
-        border: 1px solid var(--border);
-      }
-      .info-musica {
-        flex: 1;
-        min-width: 0;
-      }
-      .info-musica strong {
-        font-size: 0.95rem;
-        color: #fff;
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      .info-musica small {
-        color: #aaa;
-        font-size: 0.75rem;
-      }
-      .tag-cat {
-        font-size: 0.55rem;
-        background: var(--verde);
-        color: white;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-weight: 800;
-        display: inline-block;
-        margin-top: 4px;
-      }
-      .btn-download {
-        background: var(--amarelo);
-        color: black;
-        padding: 8px 14px;
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: 800;
-        font-size: 0.65rem;
-        transition: 0.2s;
-      }
-
-      /* MODAL */
-      #downloadModal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        z-index: 10000;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        backdrop-filter: blur(10px);
-      }
-      .modal-card {
-        background: #111;
-        border-radius: 28px;
-        padding: 2rem;
-        border: 1px solid var(--amarelo);
-        width: 100%;
-        max-width: 380px;
-        text-align: center;
-        position: relative;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-      }
-
-      /* FOOTER */
-      footer {
-        background: #050505;
-        padding: 3rem 1rem 2rem;
-        text-align: center;
-        border-top: 1px solid var(--border);
-      }
-      .social-row {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 25px;
-        flex-wrap: wrap;
-      }
-      .social-mini {
-        padding: 10px 15px;
-        border-radius: 10px;
-        text-decoration: none;
-        color: white;
-        font-size: 0.7rem;
-        font-weight: 800;
-        border: 1px solid var(--border);
-        transition: 0.3s;
-      }
-      .s-wa {
-        border-color: #25d366;
-        color: #25d366;
-      }
-      .s-yt {
-        border-color: #ff0000;
-        color: #ff0000;
-      }
-
-      .dev-name-highlight {
-        font-size: 1rem;
-        color: var(--amarelo);
-        text-transform: uppercase;
-        font-weight: 800;
-        display: block;
-        margin-top: 5px;
-        letter-spacing: 1px;
-      }
-      .credits-prefix {
-        font-size: 0.65rem;
-        color: #666;
-        text-transform: uppercase;
-        display: block;
-        margin-top: 25px;
-      }
-
-      /* DEGRADE ANIMADO NOS CARDS */
-      .card-glass {
-        background: linear-gradient(270deg, #050505, #0c0c0a, #d21034, #070707);
-        background-size: 400% 400%;
-        animation: gradienteSTP 10s ease infinite;
-      }
-
-      @keyframes gradienteSTP {
+      /* ============================================================
+           2. ANIMAÇÕES GLOBAIS
+           ============================================================ */
+      @keyframes stpGradient {
         0% {
           background-position: 0% 50%;
         }
@@ -461,398 +89,1056 @@
         }
       }
 
-      /* BOTÕES COM VIDA */
-      .cat-full-btn,
-      .btn-download,
-      .btn-publicitar-top {
+      @keyframes pulseLogo {
+        from {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        to {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ============================================================
+           3. SPLASH SCREEN
+           ============================================================ */
+      #splash {
+        position: fixed;
+        inset: 0;
+        background: var(--preto-deep);
+        z-index: 15000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s;
+      }
+      #splash img {
+        width: 120px;
+        animation: pulseLogo 1.2s infinite alternate;
+        filter: drop-shadow(0 0 15px var(--amarelo));
+      }
+
+      /* ============================================================
+           4. CABEÇALHO DINÂMICO (HEADER)
+           ============================================================ */
+      header {
+        padding: 2.5rem 1rem 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        background: rgba(8, 8, 8, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(15px);
+      }
+
+      /* BOTÃO ENVIAR (LADO ESQUERDO) */
+      .btn-enviar-top {
+        position: absolute;
+        left: 15px;
+        top: 18px;
+        background: var(--verde);
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        border-bottom: 3px solid #0a6b1a;
+        transition: var(--transition-fast);
+      }
+      .btn-enviar-top:hover {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+      }
+
+      /* LOGO TEXTO */
+      .logo-main {
+        font-family: "Syne";
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+        line-height: 1;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+      }
+
+      .slogan-blog {
+        color: var(--amarelo);
+        font-weight: 700;
+        font-size: 0.7rem;
+        letter-spacing: 5px;
+        margin-top: 8px;
+        text-transform: uppercase;
+      }
+
+      /* BOTÃO PUBLICIDADE */
+      .btn-ad-top {
+        background: var(--amarelo);
+        color: #000;
+        padding: 8px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.7rem;
+        margin-top: 15px;
+        text-transform: uppercase;
+        display: inline-block;
+        border-bottom: 3px solid #bfa300;
+        transition: var(--transition-smooth);
+      }
+      .btn-ad-top:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--glow-amarelo);
+        background: #fff;
+      }
+
+      /* LOGO DIREITO */
+      .container-logo-dir {
+        position: absolute;
+        right: 15px;
+        top: 18px;
+        width: 45px;
+      }
+      .logo-stp-img {
+        width: 100%;
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+      }
+
+      /* CAIXA DE PESQUISA INTELIGENTE */
+      .search-box-wrapper {
+        background: var(--glass);
+        border-radius: 16px;
+        margin: 1.5rem auto 0;
+        border: 1.5px solid var(--border);
+        width: 100%;
+        max-width: 550px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        transition: var(--transition-smooth);
+      }
+      .search-box-wrapper:focus-within {
+        border-color: var(--amarelo);
+        box-shadow: var(--glow-amarelo);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .search-box-wrapper input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 1rem;
+        padding: 1rem;
+      }
+
+      /* ============================================================
+           5. BANNER DE ANÚNCIOS (SLIDER)
+           ============================================================ */
+      .ads-slider {
+        width: 100%;
+        height: 140px;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        margin: 25px 0;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        background: #000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .ads-item {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        transition: all 0.6s ease;
+      }
+      .ads-item.active {
+        display: flex;
+        animation: slideInUp 0.6s ease;
+      }
+
+      /* ============================================================
+           6. MAIN CONTENT WRAPPER
+           ============================================================ */
+      .main-container {
+        max-width: 850px;
+        margin: 0 auto;
+        padding: 0 1.2rem 5rem;
+      }
+
+      /* CARDS COM DEGRADÊ BANDEIRA STP */
+      .card-santola {
+        background: linear-gradient(270deg, #050505, #0c0c0a, #d21034, #070707);
+        background-size: 400% 400%;
+        animation: stpGradient 12s ease infinite;
+        border-radius: 28px;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+        margin-bottom: 2.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-santola::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+      }
+
+      .section-title {
+        font-family: "Syne";
+        color: #fff;
+        font-size: 1.3rem;
+        margin-bottom: 22px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .section-title span {
+        color: var(--amarelo);
+        font-size: 1.6rem;
+      }
+
+      /* BOTÃO EXPLORAR CATEGORIAS */
+      .btn-categorias-hero {
+        display: block;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: 800;
+        margin: 10px 0 30px;
         background: linear-gradient(270deg, #12ad2b, #ffdb00, #d21034);
         background-size: 400% 400%;
-        animation: gradienteSTP 6s ease infinite;
+        animation: stpGradient 6s ease infinite;
         color: black;
+        border-bottom: 5px solid #000;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: var(--transition-smooth);
+      }
+      .btn-categorias-hero:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.1);
+        box-shadow: var(--glow-verde);
       }
 
-      .card-glass:hover::before {
-        left: 100%;
+      /* ============================================================
+           7. LISTA DE MÚSICAS (MUSIC ROWS)
+           ============================================================ */
+      .musica-card {
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.45);
+        margin-bottom: 14px;
+        padding: 14px;
+        border-radius: 18px;
+        gap: 15px;
+        border: 1px solid var(--border);
+        transition: var(--transition-smooth);
       }
-
-      .music-row:hover {
+      .musica-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--amarelo);
         transform: scale(1.02);
-        background: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .img-capa {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
+        object-fit: cover;
+        background: #222;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .musica-meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .musica-meta strong {
+        font-size: 1.05rem;
+        color: #fff;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 3px;
+      }
+      .musica-meta small {
+        color: #aaa;
+        font-size: 0.85rem;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .estilo-pill {
+        font-size: 0.6rem;
+        background: var(--verde);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-weight: 800;
+        display: inline-block;
+        text-transform: uppercase;
+      }
+
+      .btn-baixar-list {
+        background: var(--amarelo);
+        color: black;
+        padding: 10px 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.75rem;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        text-transform: uppercase;
+      }
+      .btn-baixar-list:hover {
+        background: white;
+        transform: scale(1.05);
+      }
+
+      /* ============================================================
+           8. MODAL DE DOWNLOAD COM DEEP LINKING
+           ============================================================ */
+      #modalMaster {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.97);
+        z-index: 12000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        backdrop-filter: blur(15px);
+      }
+      .modal-santola-box {
+        background: #111;
+        border-radius: 35px;
+        padding: 2.5rem;
+        border: 2px solid var(--amarelo);
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+        position: relative;
+        animation: modalPopUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      }
+      @keyframes modalPopUp {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .btn-fechar {
+        position: absolute;
+        right: 22px;
+        top: 22px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2.2rem;
+        cursor: pointer;
+        line-height: 1;
+        transition: 0.2s;
+      }
+      .btn-fechar:hover {
+        color: var(--vermelho);
+      }
+
+      .modal-infos {
+        margin-bottom: 25px;
+      }
+      .modal-infos h2 {
+        font-family: "Syne";
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        color: #fff;
+      }
+      .modal-infos p {
+        color: var(--amarelo);
+        font-size: 1.1rem;
+      }
+
+      .btn-final-download {
+        display: block;
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(270deg, #12ad2b, #ffdb00, #d21034);
+        background-size: 400% 400%;
+        animation: stpGradient 6s ease infinite;
+        border-radius: 18px;
+        color: black;
+        text-decoration: none;
+        font-weight: 800;
+        text-transform: uppercase;
+        border-bottom: 5px solid #000;
+        margin-bottom: 15px;
+        transition: 0.2s;
+      }
+      .btn-final-download:active {
+        transform: translateY(2px);
+        border-bottom-width: 1px;
+      }
+
+      /* NOVA OPÇÃO: COPIAR LINK DE REDIRECIONAMENTO */
+      .btn-share-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #444;
+        color: #aaa;
+        padding: 14px;
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        transition: var(--transition-smooth);
+      }
+      .btn-share-link:hover {
+        border-color: var(--amarelo);
+        color: var(--amarelo);
+        background: rgba(255, 219, 0, 0.05);
+      }
+      .btn-share-link.copiado {
+        border-color: var(--verde);
+        color: var(--verde);
+        background: rgba(18, 173, 43, 0.05);
+      }
+
+      /* ============================================================
+           9. RODAPÉ (FOOTER) PROFISSIONAL
+           ============================================================ */
+      footer {
+        background: #050505;
+        padding: 4rem 1.5rem 2.5rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+      }
+      .footer-socials {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 35px;
+        flex-wrap: wrap;
+      }
+      .f-social-btn {
+        padding: 14px 22px;
+        border-radius: 14px;
+        text-decoration: none;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 800;
+        border: 1px solid var(--border);
+        transition: var(--transition-smooth);
+        text-transform: uppercase;
+      }
+      .f-social-btn.whatsapp {
+        border-color: #25d366;
+        color: #25d366;
+      }
+      .f-social-btn.youtube {
+        border-color: #ff0000;
+        color: #ff0000;
+      }
+      .f-social-btn:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .creditos-santola {
+        margin-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 30px;
+      }
+      .dev-label {
+        font-size: 0.7rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .dev-nome {
+        color: var(--amarelo);
+        font-weight: 800;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        margin-top: 8px;
+        display: block;
+        letter-spacing: 1px;
+      }
+      .copy-info {
+        opacity: 0.3;
+        font-size: 0.65rem;
+        margin-top: 25px;
+        letter-spacing: 1px;
+      }
+
+      /* RESPONSIVIDADE ADICIONAL */
+      @media (max-width: 600px) {
+        .logo-main {
+          font-size: 2.4rem;
+        }
+        .btn-enviar-top {
+          padding: 6px 10px;
+          font-size: 0.6rem;
+        }
+        .main-container {
+          padding: 0 1rem 3rem;
+        }
+        .modal-santola-box {
+          padding: 1.8rem;
+          border-radius: 25px;
+        }
       }
     </style>
   </head>
   <body>
     <div id="splash">
-      <img src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png" alt="SANTOLA" />
+      <img
+        src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+        alt="SANTOLA MUSIC PLATFORM"
+      />
     </div>
 
-    <header>
-      <a href="https://wa.me/2399944660" class="btn-enviar">ENVIAR MÚSICA</a>
-      <div class="logo-texto" onclick="window.location.href = 'index.html'">
+    <header id="siteHeader">
+      <a href="enviar.html" class="btn-enviar-top">Mandar Música</a>
+
+      <div class="logo-main" onclick="window.location.href = 'index.html'">
         Santola Music
       </div>
-      <p
-        style="
-          color: var(--amarelo);
-          font-weight: 600;
-          font-size: 0.65rem;
-          letter-spacing: 3px;
-          margin-top: 5px;
-        "
-      >
-        O BLOG DAS ILHAS
-      </p>
+      <p class="slogan-blog">O BLOG DAS ILHAS</p>
 
       <a
-        href="https://wa.me/2399944660?text=Quero+anunciar"
-        class="btn-publicitar-top"
-        >Publicitar Aqui</a
+        href="https://wa.me/2399944660?text=Olá+Santola+quero+anunciar"
+        class="btn-ad-top"
       >
+        Anunciar Aqui
+      </a>
 
-      <div class="search-box">
+      <div class="search-box-wrapper">
         <input
           type="text"
-          id="searchInput"
-          placeholder="Procurar artista ou música..."
-          oninput="realizarPesquisa()"
+          id="mainSearch"
+          placeholder="Artista, música ou categoria..."
+          oninput="motorDeBusca()"
         />
       </div>
+
       <div class="container-logo-dir">
         <img
           src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
-          class="logo-img-dir"
+          alt="Emblema Nacional"
+          class="logo-stp-img"
         />
       </div>
     </header>
 
-    <main class="main-content">
-      <div id="home-content" class="page-section">
-        <div
-          class="ads-container"
-          onclick="window.location.href = 'eventos.html'"
-        >
-          <div class="ads-slide active">
-            <span
+    <main class="main-container">
+      <div id="home-view">
+        <div class="ads-slider" onclick="window.location.href = 'eventos.html'">
+          <div
+            class="ads-item active"
+            style="
+              background:
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url(&quot;https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80&quot;);
+              background-size: cover;
+              background-position: center;
+            "
+          >
+            <h3
               style="
-                color: var(--vermelho);
-                font-weight: 800;
-                font-size: 0.6rem;
+                color: var(--amarelo);
+                font-family: &quot;Syne&quot;;
+                font-size: 1.5rem;
               "
-              >PUBLICIDADE</span
             >
-            <h3 style="font-family: &quot;Syne&quot;; color: var(--amarelo)">
-              EVENTOS DAS ILHAS
+              AGENDA CULTURAL
             </h3>
-            <p style="font-size: 0.7rem; opacity: 0.8">
-              Clique para ver a agenda completa
+            <p style="font-size: 0.9rem">
+              Vê os próximos shows em São Tomé e Príncipe
             </p>
           </div>
-          <div class="ads-slide" style="background: #0d2b14">
-            <span
-              style="color: var(--amarelo); font-weight: 800; font-size: 0.6rem"
-              >PROMOÇÃO</span
+          <div class="ads-item" style="background: #0d2b14">
+            <h3
+              style="
+                color: white;
+                font-family: &quot;Syne&quot;;
+                font-size: 1.5rem;
+              "
             >
-            <h3 style="font-family: &quot;Syne&quot;; color: white">
-              ANUNCIE CONNOSCO
+              DIVULGA A TUA ARTE
             </h3>
-            <p style="font-size: 0.7rem">Dê visibilidade ao seu negócio</p>
+            <p style="font-size: 0.9rem">
+              Contacta-nos para parcerias e promoções
+            </p>
           </div>
         </div>
 
-        <a href="categorias.html" class="cat-full-btn"
-          >📂 EXPLORAR POR CATEGORIAS</a
+        <a href="categorias.html" class="btn-categorias-hero"
+          >📂 EXPLORAR POR ESTILOS</a
         >
 
-        <section class="card-glass">
-          <h2 class="titulo-secao"><span>🔥</span> Novidades</h2>
-          <div id="list-novidades"></div>
+        <section class="card-santola">
+          <h2 class="section-title"><span>🔥</span> NOVIDADES DO DRIVE</h2>
+          <div id="lista-novidades">
+            <p style="text-align: center; padding: 30px; opacity: 0.4">
+              A carregar músicas aprovadas...
+            </p>
+          </div>
         </section>
 
-        <section class="card-glass">
-          <h2 class="titulo-secao"><span>🏆</span> Top 20 Semanal</h2>
-          <div id="list-top20"></div>
+        <section class="card-santola">
+          <h2 class="section-title"><span>🏆</span> MAIS BAIXADAS (TOP)</h2>
+          <div id="lista-top-hits"></div>
 
-          <div class="row-botoes-footer">
+          <div style="display: flex; gap: 12px; margin-top: 25px">
             <a
               href="https://youtube.com/@SantolaMusic"
               target="_blank"
-              class="btn-footer-action btn-letras"
-              >VER LETRAS</a
+              style="
+                flex: 1;
+                background: var(--vermelho);
+                color: white;
+                text-decoration: none;
+                padding: 15px;
+                border-radius: 15px;
+                font-weight: 800;
+                font-size: 0.75rem;
+                text-align: center;
+                border-bottom: 3px solid #8b0a22;
+              "
             >
-            <a href="playlists.html" class="btn-footer-action btn-playlist"
-              >ALBUMS & PLAYLISTS</a
+              VER CLIPS NO YT
+            </a>
+            <a
+              href="playlists.html"
+              style="
+                flex: 1;
+                background: #1a1a1a;
+                color: var(--amarelo);
+                border: 1px solid var(--amarelo);
+                text-decoration: none;
+                padding: 15px;
+                border-radius: 15px;
+                font-weight: 800;
+                font-size: 0.75rem;
+                text-align: center;
+                border-bottom: 3px solid #665a00;
+              "
             >
+              ÁLBUMS & MIXES
+            </a>
           </div>
         </section>
       </div>
 
-      <div id="search-results-view" class="page-section" style="display: none">
-        <h2 class="titulo-secao"><span>🔍</span> Resultados</h2>
-        <div id="list-search"></div>
+      <div id="search-view" style="display: none">
+        <h2 class="section-title"><span>🔍</span> RESULTADOS ENCONTRADOS</h2>
+        <div id="search-results-list"></div>
         <button
-          class="cat-full-btn"
-          style="
-            background: #222;
-            margin-top: 20px;
-            border-bottom: 4px solid #000;
-          "
-          onclick="cancelarPesquisa()"
+          class="btn-categorias-hero"
+          style="background: #222; margin-top: 40px"
+          onclick="cancelarBusca()"
         >
-          VOLTAR AO INÍCIO
+          VOLTAR PARA O INÍCIO
         </button>
       </div>
     </main>
 
-    <div id="downloadModal">
-      <div class="modal-card">
-        <button
-          onclick="fecharModal()"
-          style="
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-          "
-        >
-          &times;
-        </button>
+    <div id="modalMaster">
+      <div class="modal-santola-box">
+        <button class="btn-fechar" onclick="fecharModal()">&times;</button>
         <img
-          id="modalCapa"
+          id="modalImg"
           src=""
-          class="artist-thumb"
+          alt="Capa"
+          class="img-capa"
           style="
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 15px;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
             display: block;
-            border-radius: 15px;
-            border: 2px solid var(--amarelo);
+            border: 3px solid var(--amarelo);
+            border-radius: 20px;
+            object-fit: cover;
           "
         />
-        <h2
-          id="modalArtista"
-          style="font-family: &quot;Syne&quot;; font-size: 1.3rem"
-        ></h2>
-        <p
-          id="modalTitulo"
-          style="color: var(--amarelo); font-size: 1rem; margin-bottom: 20px"
-        ></p>
 
-        <div
-          style="
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            font-size: 0.85rem;
-            text-align: left;
-          "
-        >
-          <p style="margin-bottom: 5px">
-            <strong>Gênero:</strong>
-            <span id="modalGenero" style="color: var(--verde)"></span>
-          </p>
-          <p><strong>Tamanho:</strong> <span id="modalPeso"></span></p>
+        <div class="modal-infos">
+          <h2 id="modalArt"></h2>
+          <p id="modalTit"></p>
+          <div style="margin-top: 15px">
+            <span id="modalCat" class="estilo-pill"></span>
+          </div>
         </div>
 
-        <a
-          id="modalLinkDownload"
-          href=""
-          class="cat-full-btn"
-          style="margin-bottom: 10px"
-          >FAZER DOWNLOAD</a
+        <a id="modalDownLink" href="" class="btn-final-download">
+          BAIXAR AGORA (MP3)
+        </a>
+
+        <button
+          id="btnCopyShare"
+          class="btn-share-link"
+          onclick="copiarLinkDeep()"
         >
-        <a
-          id="modalShareWA"
-          href=""
-          target="_blank"
-          class="social-mini s-wa"
-          style="display: block; text-align: center"
-          >PARTILHAR NO WHATSAPP</a
-        >
+          🔗 COPIAR LINK DESTE POST
+        </button>
+
+        <p style="margin-top: 15px; font-size: 0.6rem; opacity: 0.4">
+          Ao copiar o link, podes partilhar no WhatsApp para os teus amigos
+          virem baixar aqui.
+        </p>
       </div>
     </div>
 
     <footer>
-      <div class="social-row">
-        <a href="https://wa.me/2399944660" class="social-mini s-wa">WhatsApp</a>
+      <div class="footer-socials">
+        <a href="https://wa.me/2399944660" class="f-social-btn whatsapp"
+          >WhatsApp</a
+        >
         <a
           href="https://tiktok.com/@santolamusic"
-          class="social-mini s-tk"
           target="_blank"
+          class="f-social-btn"
           >TikTok</a
         >
         <a
-          href="https://youtube.com/@SantolaMusi"
-          class="social-mini s-yt"
+          href="https://youtube.com/@SantolaMusic"
           target="_blank"
+          class="f-social-btn youtube"
           >YouTube</a
         >
-      </div>
-      <div class="footer-info">
         <a
-          href="politica.html"
-          style="color: var(--amarelo); font-size: 0.7rem; font-weight: 700"
-          >TERMOS DE USO & COPYRIGHT</a
+          href="https://instagram.com/santolamusic"
+          target="_blank"
+          class="f-social-btn"
+          >Instagram</a
         >
       </div>
-      <span class="credits-prefix">Site desenhado por</span>
-      <span class="dev-name-highlight">Pacheco Gonçalves</span>
-      <p style="opacity: 0.3; font-size: 0.6rem; margin-top: 25px">
-        © 2026 SANTOLA MUSIC - SÃO TOMÉ E PRÍNCIPE
-      </p>
+
+      <div style="margin-bottom: 30px">
+        <a
+          href="politica.html"
+          style="
+            color: #666;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin: 0 15px;
+            font-weight: 600;
+          "
+          >TERMOS DE USO</a
+        >
+        <a
+          href="contato.html"
+          style="
+            color: #666;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin: 0 15px;
+            font-weight: 600;
+          "
+          >CONTACTO</a
+        >
+      </div>
+
+      <div class="creditos-santola">
+        <span class="dev-label">Desenvolvimento e Tecnologia por</span>
+        <span class="dev-nome">Pacheco Gonçalves</span>
+        <p class="copy-info">
+          © 2026 SANTOLA MUSIC - SÃO TOMÉ E PRÍNCIPE <br />
+          TODOS OS DIREITOS RESERVADOS
+        </p>
+      </div>
     </footer>
 
     <script>
-      let musicasGerais = [];
+      // --- 1. CONFIGURAÇÕES DO MOTOR ---
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbyvtkJfAINnNcJQoZAERjykSdaLuIK1IrdbbnooFmf-hJ7ACWxfihwRYGoTmMJ2cGpx/exec";
       const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
 
-      // Nomes das novas categorias aprovadas
-      const CATEGORIAS_VALIDAS = [
-        "Top Angola",
-        "Top STP",
-        "Top Brazil",
-        "Mix",
-        "Internacionais",
-      ];
+      let dbMusicas = [];
+      let urlAtualMusica = "";
 
-      function normalizar(texto) {
-        return texto
-          ? texto
-              .toString()
-              .toLowerCase()
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "")
-              .trim()
-          : "";
-      }
-
-      function irParaPagina(idPagina) {
-        const home = document.getElementById("home-content");
-        const busca = document.getElementById("search-results-view");
-        if (idPagina === "search-results") {
-          home.style.display = "none";
-          busca.style.display = "block";
-        } else {
-          home.style.display = "block";
-          busca.style.display = "none";
-          window.scrollTo(0, 0);
-        }
-      }
-
+      // --- 2. SINCRONIZAÇÃO HÍBRIDA ---
       window.addEventListener("load", async () => {
-        try {
-          const r = await fetch("musicas.json");
-          const dadosRaw = await r.json();
+        console.log("Sincronizando Base de Dados Santola...");
 
-          musicasGerais = dadosRaw.map((m) => ({
-            id: m.id || Math.random(),
-            artista: m.artista || "Santola Music",
-            titulo: m.titulo || "Música STP",
-            categoria: m.categoria || "Mix", // Categoria padrão caso não encontre
-            link: m.link || "#",
-            capa: m.capa || LOGO_PADRAO,
-            tamanho: m.tamanho || "4.5 MB",
-            downloads: m.downloads || Math.floor(Math.random() * 50) + 100,
-            local: m.local || "São Tomé",
-          }));
-          renderizarHome();
-        } catch (e) {
-          console.error("Erro ao carregar músicas:", e);
+        try {
+          // A. Carregar do musicas.json (Estrutura Manual Categorizada)
+          const resJ = await fetch("musicas.json");
+          const jsonRaw = await resJ.json();
+
+          let listJson = [];
+          Object.keys(jsonRaw).forEach((chaveCat) => {
+            if (Array.isArray(jsonRaw[chaveCat])) {
+              jsonRaw[chaveCat].forEach((mus) => {
+                listJson.push({
+                  artista: mus.artista || "Santola Music",
+                  titulo: mus.titulo || "Lançamento",
+                  capa: mus.capa || LOGO_PADRAO,
+                  link: mus.url || "#", // Padrão JSON
+                  estilo: chaveCat.replace("_", " "),
+                  relevancia: mus.id ? mus.id * 10 : 50,
+                });
+              });
+            }
+          });
+
+          // B. Carregar do Google Drive (Automação Aprovada)
+          let listGoogle = [];
+          try {
+            const resG = await fetch(SCRIPT_URL + "?type=aprovados");
+            const driveAprovados = await resG.json();
+
+            listGoogle = driveAprovados.map((m) => ({
+              artista: m.artista,
+              titulo: m.titulo,
+              capa: m.urlCapa || LOGO_PADRAO,
+              link: m.urlMusica || "#", // Padrão Google
+              estilo: m.genero || "Geral",
+              relevancia: 500, // Novidades do Drive têm prioridade
+            }));
+          } catch (gErr) {
+            console.warn("Servidor Google offline, carregando apenas JSON.");
+          }
+
+          // C. Fusão Total e Ordenação
+          dbMusicas = [...listGoogle, ...listJson];
+
+          atualizarInterface();
+
+          // --- DEEP LINKING CHECK ---
+          // Verifica se o utilizador veio através de um link de partilha
+          const urlParams = new URLSearchParams(window.location.search);
+          const shareArt = urlParams.get("artista");
+          const shareTit = urlParams.get("titulo");
+
+          if (shareArt && shareTit) {
+            const musAlvo = dbMusicas.find(
+              (m) =>
+                norm(m.artista) === norm(shareArt) &&
+                norm(m.titulo) === norm(shareTit),
+            );
+            if (musAlvo)
+              abrirModal(encodeURIComponent(JSON.stringify(musAlvo)));
+          }
+        } catch (error) {
+          console.error("Falha ao sincronizar músicas:", error);
+          document.getElementById("lista-novidades").innerHTML =
+            "<p style='color:var(--vermelho); text-align:center;'>Erro de rede. Tenta atualizar a página.</p>";
         }
 
-        iniciarAnuncios();
-
-        setTimeout(() => {
-          const splash = document.getElementById("splash");
-          splash.style.opacity = "0";
-          setTimeout(() => (splash.style.display = "none"), 500);
-        }, 1000);
+        // Iniciar componentes
+        iniciarSliders();
+        removerSplash();
       });
 
-      function iniciarAnuncios() {
-        const slides = document.querySelectorAll(".ads-slide");
-        let index = 0;
-        if (slides.length < 2) return;
-        setInterval(() => {
-          slides[index].classList.remove("active");
-          index = (index + 1) % slides.length;
-          slides[index].classList.add("active");
-        }, 5000);
+      // --- 3. GESTÃO DA INTERFACE ---
+      function atualizarInterface() {
+        const gridNovidades = document.getElementById("lista-novidades");
+        const novidades = [...dbMusicas].slice(0, 18);
+        gridNovidades.innerHTML = montarListaHTML(novidades);
+
+        const gridTop = document.getElementById("lista-top-hits");
+        const topHits = [...dbMusicas]
+          .sort((a, b) => b.relevancia - a.relevancia)
+          .slice(0, 10);
+        gridTop.innerHTML = montarListaHTML(topHits);
       }
 
-      function renderizarHome() {
-        const novidades = [...musicasGerais].reverse().slice(0, 10);
-        const top20 = [...musicasGerais]
-          .sort((a, b) => b.downloads - a.downloads)
-          .slice(0, 20);
-        document.getElementById("list-novidades").innerHTML =
-          gerarHtml(novidades);
-        document.getElementById("list-top20").innerHTML = gerarHtml(top20);
-      }
+      function montarListaHTML(lista) {
+        if (lista.length === 0)
+          return "<p style='text-align:center; opacity:0.3;'>Nenhuma música encontrada.</p>";
 
-      function realizarPesquisa() {
-        const termo = normalizar(document.getElementById("searchInput").value);
-        if (termo.length > 0) {
-          irParaPagina("search-results");
-          const filtradas = musicasGerais.filter(
-            (m) =>
-              normalizar(m.artista).includes(termo) ||
-              normalizar(m.titulo).includes(termo) ||
-              normalizar(m.categoria).includes(termo) ||
-              normalizar(m.local).includes(termo),
-          );
-
-          document.getElementById("list-search").innerHTML = filtradas.length
-            ? gerarHtml(filtradas)
-            : `<div style='text-align:center; padding:40px; opacity:0.5;'><p>🔍 Não encontramos "${termo}"</p></div>`;
-        } else {
-          cancelarPesquisa();
-        }
-      }
-
-      function cancelarPesquisa() {
-        document.getElementById("searchInput").value = "";
-        irParaPagina("home");
-      }
-
-      function gerarHtml(lista) {
         return lista
           .map(
-            (m) => `
-            <div class="music-row">
-                <img src="${m.capa}" class="artist-thumb" onerror="this.src='${LOGO_PADRAO}'">
-                <div class="info-musica">
-                    <strong>${m.artista}</strong>
-                    <small>${m.titulo} • <span style="color:var(--amarelo)">${m.local}</span></small><br>
-                    <span class="tag-cat">${m.categoria}</span>
-                    <span style="font-size:0.6rem; opacity:0.5; margin-left:5px;">🔥 ${m.downloads} hits</span>
+            (m, i) => `
+                <div class="musica-card" style="animation: slideInUp 0.4s ease forwards; animation-delay: ${i * 0.05}s">
+                    <img src="${m.capa}" class="img-capa" alt="${m.artista}" onerror="this.src='${LOGO_PADRAO}'">
+                    <div class="musica-meta">
+                        <strong>${m.artista}</strong>
+                        <small>${m.titulo}</small>
+                        <span class="estilo-pill">${m.estilo}</span>
+                    </div>
+                    <button class="btn-baixar-list" onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')">
+                        BAIXAR
+                    </button>
                 </div>
-                <button onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')" class="btn-download">BAIXAR</button>
-            </div>
-        `,
+            `,
           )
           .join("");
       }
 
-      function abrirModal(dados) {
-        const m = JSON.parse(decodeURIComponent(dados));
-        document.getElementById("modalCapa").src = m.capa;
-        document.getElementById("modalArtista").innerText = m.artista;
-        document.getElementById("modalTitulo").innerText = m.titulo;
-        document.getElementById("modalGenero").innerText = m.categoria;
-        document.getElementById("modalPeso").innerText = m.tamanho;
-        document.getElementById("modalLinkDownload").href = m.link;
-        document.getElementById("modalShareWA").href =
-          `https://wa.me/?text=Ouve isto no Santola: ${m.artista} - ${m.titulo}`;
-        document.getElementById("downloadModal").style.display = "flex";
+      // --- 4. MOTOR DE BUSCA (IGNORA ACENTOS) ---
+      function motorDeBusca() {
+        const input = document.getElementById("mainSearch");
+        const termoOriginal = input.value;
+        const termoLimpo = norm(termoOriginal);
+
+        const home = document.getElementById("home-view");
+        const searchView = document.getElementById("search-view");
+        const resultsBox = document.getElementById("search-results-list");
+
+        if (termoLimpo.length > 0) {
+          home.style.display = "none";
+          searchView.style.display = "block";
+
+          const resultados = dbMusicas.filter((m) => {
+            const stringBusca = norm(m.artista + m.titulo + m.estilo);
+            return stringBusca.includes(termoLimpo);
+          });
+
+          resultsBox.innerHTML =
+            resultados.length > 0
+              ? montarListaHTML(resultados)
+              : `<div style="text-align:center; padding:60px; opacity:0.3;">
+                        <p style="font-size:3rem; margin-bottom:10px;">🔍</p>
+                        <p>Não encontramos nada para "<b>${termoOriginal}</b>"</p>
+                       </div>`;
+        } else {
+          cancelarBusca();
+        }
+      }
+
+      function norm(texto) {
+        return texto
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .trim();
+      }
+
+      function cancelarBusca() {
+        document.getElementById("mainSearch").value = "";
+        document.getElementById("home-view").style.display = "block";
+        document.getElementById("search-view").style.display = "none";
+        window.scrollTo(0, 0);
+      }
+
+      // --- 5. GESTÃO DO MODAL E REDIRECIONAMENTO ---
+      function abrirModal(dadosCodificados) {
+        const m = JSON.parse(decodeURIComponent(dadosCodificados));
+
+        document.getElementById("modalImg").src = m.capa;
+        document.getElementById("modalArt").innerText = m.artista;
+        document.getElementById("modalTit").innerText = m.titulo;
+        document.getElementById("modalCat").innerText = m.estilo;
+        document.getElementById("modalDownLink").href = m.link;
+
+        // CONSTRUIR O LINK DE REDIRECIONAMENTO PARA O TEU BLOG
+        // Isso gera um link como: santolamusic.com/index.html?artista=Calema&titulo=TeAmo
+        const urlBase = window.location.origin + window.location.pathname;
+        urlAtualMusica = `${urlBase}?artista=${encodeURIComponent(m.artista)}&titulo=${encodeURIComponent(m.titulo)}`;
+
+        document.getElementById("modalMaster").style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      async function copiarLinkDeep() {
+        try {
+          await navigator.clipboard.writeText(urlAtualMusica);
+          const btn = document.getElementById("btnCopyShare");
+          const originalText = btn.innerHTML;
+
+          btn.innerHTML = "✅ LINK COPIADO!";
+          btn.classList.add("copiado");
+
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove("copiado");
+          }, 2500);
+        } catch (err) {
+          alert(
+            "O teu navegador não permite copiar automaticamente. Copia o link da barra de endereços.",
+          );
+        }
       }
 
       function fecharModal() {
-        document.getElementById("downloadModal").style.display = "none";
+        document.getElementById("modalMaster").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      // Fecha modal ao clicar fora
+      window.onclick = function (e) {
+        if (e.target == document.getElementById("modalMaster")) fecharModal();
+      };
+
+      // --- 6. UTILITÁRIOS VISUAIS ---
+      function iniciarSliders() {
+        const itens = document.querySelectorAll(".ads-item");
+        let ativ = 0;
+        if (itens.length < 2) return;
+        setInterval(() => {
+          itens[ativ].classList.remove("active");
+          ativ = (ativ + 1) % itens.length;
+          itens[ativ].classList.add("active");
+        }, 6000);
+      }
+
+      function removerSplash() {
+        const splash = document.getElementById("splash");
+        setTimeout(() => {
+          splash.style.opacity = "0";
+          setTimeout(() => (splash.style.display = "none"), 800);
+        }, 1000);
       }
     </script>
   </body>
