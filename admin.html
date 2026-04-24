@@ -2,13 +2,22 @@
 <html lang="pt-pt">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SANTOLA ADMIN | Painel de Moderação</title>
     <style>
       body {
         font-family: sans-serif;
-        background: #0a0a0a;
+        /* Fundo escuro Santola (#080808) com filtro sobre a bandeira */
+        background:
+          linear-gradient(rgba(8, 8, 8, 0.9), rgba(8, 8, 8, 0.9)),
+          url("LINK_DA_SUA_BANDEIRA_AQUI.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
         color: white;
-        padding: 40px;
+        padding: 20px;
+        margin: 0;
+        min-height: 100vh;
       }
       .grid {
         display: grid;
@@ -18,40 +27,62 @@
         background: #1a1a1a;
         padding: 20px;
         border-radius: 10px;
-        border-left: 5px solid #ffcc00;
+        border-left: 5px solid #ffdb00; /* Amarelo Santola */
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .info-musica {
+        word-break: break-word;
+      }
+      .botoes-acao {
+        display: flex;
+        gap: 10px;
       }
       .btn-ok {
-        background: #00ff88;
-        color: black;
-        padding: 10px;
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-        margin-right: 5px;
-      }
-      .btn-no {
-        background: #ff4d4d;
+        background: #12ad2b; /* Verde Santola */
         color: white;
         padding: 10px;
         border: none;
         cursor: pointer;
+        font-weight: bold;
+        border-radius: 4px;
+      }
+      .btn-no {
+        background: #d21034; /* Vermelho Santola */
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 4px;
       }
       #login {
         position: fixed;
         inset: 0;
-        background: #0a0a0a;
+        background: #080808; /* Fundo Escuro Santola */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         z-index: 10;
+        padding: 20px;
+        text-align: center;
       }
       input {
-        padding: 10px;
-        margin-bottom: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        width: 100%;
+        max-width: 300px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: none;
+      }
+      #login button {
+        width: 100%;
+        max-width: 300px;
       }
     </style>
   </head>
@@ -68,10 +99,18 @@
     <script>
       const SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycbxZ26-7vADjeoigibMc-a1KvR-Tj0iFqJDjjY-rf5TuZ70nofOvBeP4smlrN9c_n6wp/exec";
-      const PASS_CORRETA = ".Pancho11."; // Define o teu código aqui
+      const PASS_CORRETA = ".Pancho11.";
+
+      window.onload = () => {
+        if (sessionStorage.getItem("adminLogado") === "true") {
+          document.getElementById("login").style.display = "none";
+          carregar();
+        }
+      };
 
       function entrar() {
         if (document.getElementById("pass").value === PASS_CORRETA) {
+          sessionStorage.setItem("adminLogado", "true");
           document.getElementById("login").style.display = "none";
           carregar();
         } else {
@@ -87,11 +126,11 @@
         data.forEach((m) => {
           div.innerHTML += `
                     <div class="card" id="row-${m.row}">
-                        <div>
+                        <div class="info-musica">
                             <b>${m.artista}</b> - ${m.titulo} <br>
-                            <a href="${m.urlMusica}" target="_blank" style="color: #00ff88">Ouvir</a>
+                            <a href="${m.urlMusica}" target="_blank" style="color: #12ad2b; text-decoration: none; font-weight: bold; margin-top: 5px; display: inline-block;">Ouvir</a>
                         </div>
-                        <div>
+                        <div class="botoes-acao">
                             <button class="btn-ok" onclick="acao(${m.row}, 'approve')">APROVAR</button>
                             <button class="btn-no" onclick="acao(${m.row}, 'delete')">ELIMINAR</button>
                         </div>
