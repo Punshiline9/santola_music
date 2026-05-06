@@ -17,6 +17,9 @@
       rel="stylesheet"
     />
     <style>
+      /* ============================================
+         CSS MANTIDO EXATAMENTE COMO ENVIASTE
+         ============================================ */
       :root {
         --verde: #12ad2b;
         --amarelo: #ffdb00;
@@ -859,8 +862,11 @@
 
     <div id="toast" class="toast"></div>
 
+    <!-- ======================== SCRIPT ATUALIZADO ======================== -->
     <script>
-      const API_BASE = "http://127.0.0.1:5001";
+      // ⚡ NOVO API BASE (Google Apps Script – ID atualizado)
+      const API_BASE = "https://script.google.com/macros/s/AKfycbz-JdXtBOVudKEKDYUHzN--zwW3iQz4BHtZsNrmBSLFXOWQOS2KCnl8whv_TJ90wv6O/exec";
+
       let aprovadas = [],
         pendentes = [],
         itemEmRevisao = null;
@@ -948,7 +954,7 @@
         if (tipo === "config") carregarConfig();
       }
 
-      // ========== APROVADOS ==========
+      // ========== APROVADOS (leitura local do musicas.json) ==========
       async function carregarAprovados() {
         try {
           const res = await fetch("../musicas.json", { cache: "no-cache" });
@@ -982,14 +988,16 @@
         if (!podeExecutar()) return;
         if (!confirm("Aprovar todas as músicas pendentes?")) return;
         for (const p of pendentes) {
-          await fetch(`${API_BASE}/aprovar_musica`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              ...p,
-              id_pendente: p.id,
-              categoria: p.categoria || "INTERNACIONAL",
-              link: p.url_externa || p.link,
+              action: "aprovar_musica",
+              id_pendente: p.id || p.ID,
+              artista: p.artista || p.Artista,
+              titulo: p.titulo || p.Título,
+              categoria: p.categoria || p.Categoria || "INTERNACIONAL",
+              link: p.url_externa || p.link || p.Link,
             }),
           });
         }
@@ -1001,7 +1009,7 @@
       // ========== PENDENTES ==========
       async function carregarPendentes() {
         try {
-          const res = await fetch(`${API_BASE}/listar_pendentes`);
+          const res = await fetch(`${API_BASE}?action=listar_pendentes`);
           const json = await res.json();
           pendentes = json.status === "sucesso" ? json.pendentes : [];
           document.getElementById("count-pendentes").innerText =
@@ -1022,8 +1030,8 @@
           .map(
             (m, i) => `
                 <div class="music-item" draggable="true" data-index="${i}">
-                    <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
-                    <div class="m-info"><h4>${m.artista}</h4><p>${m.titulo} • ${m.categoria}</p></div>
+                    <img src="${m.capa || m.Capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
+                    <div class="m-info"><h4>${m.artista || m.Artista}</h4><p>${m.titulo || m.Título} • ${m.categoria || m.Categoria || ""}</p></div>
                     <button onclick="abrirEdicao(${i}, ${isPendente})" class="btn-acao btn-edit">✏️</button>
                     ${isPendente ? `<button onclick="acaoServidor('aprovar', ${i})" class="btn-acao btn-play">✅</button>` : ""}
                 </div>
@@ -1075,20 +1083,24 @@
       function abrirEdicao(index, isPendente) {
         itemEmRevisao = isPendente ? pendentes[index] : aprovadas[index];
         document.getElementById("edit-artista").value =
-          itemEmRevisao.artista || "";
+          itemEmRevisao.artista || itemEmRevisao.Artista || "";
         document.getElementById("edit-titulo").value =
-          itemEmRevisao.titulo || "";
+          itemEmRevisao.titulo || itemEmRevisao.Título || "";
         document.getElementById("edit-categoria").value =
-          itemEmRevisao.categoria || "";
+          itemEmRevisao.categoria || itemEmRevisao.Categoria || "";
         document.getElementById("edit-descricao").value =
-          itemEmRevisao.descricao || "";
-        document.getElementById("edit-video").value = itemEmRevisao.video || "";
-        document.getElementById("edit-capa").value = itemEmRevisao.capa || "";
+          itemEmRevisao.descricao || itemEmRevisao.Descrição || "";
+        document.getElementById("edit-video").value =
+          itemEmRevisao.video || itemEmRevisao.Vídeo || "";
+        document.getElementById("edit-capa").value =
+          itemEmRevisao.capa || itemEmRevisao.Capa || "";
         document.getElementById("edit-link").value =
-          itemEmRevisao.url || itemEmRevisao.link || "";
-        document.getElementById("edit-tags").value = (
-          itemEmRevisao.tags || []
-        ).join(", ");
+          itemEmRevisao.url || itemEmRevisao.link || itemEmRevisao.Link || "";
+        document.getElementById("edit-tags").value = Array.isArray(
+          itemEmRevisao.tags,
+        )
+          ? itemEmRevisao.tags.join(", ")
+          : itemEmRevisao.tags || "";
         document.getElementById("edit-direitos").value =
           itemEmRevisao.direitos_confirmados !== false ? "true" : "false";
         previewImagem("edit-capa", "preview-capa");
@@ -1101,8 +1113,10 @@
       async function salvarConteudo() {
         if (!podeExecutar()) return;
         if (!itemEmRevisao) return;
-        itemEmRevisao.artista = document.getElementById("edit-artista").value;
-        itemEmRevisao.titulo = document.getElementById("edit-titulo").value;
+        itemEmRevisao.artista =
+          document.getElementById("edit-artista").value;
+        itemEmRevisao.titulo =
+          document.getElementById("edit-titulo").value;
         itemEmRevisao.categoria =
           document.getElementById("edit-categoria").value;
         itemEmRevisao.descricao =
@@ -1118,10 +1132,21 @@
         itemEmRevisao.direitos_confirmados =
           document.getElementById("edit-direitos").value === "true";
         try {
-          await fetch(`${API_BASE}/salvar_conteudo`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(itemEmRevisao),
+            body: JSON.stringify({
+              action: "salvar_conteudo",
+              artista: itemEmRevisao.artista,
+              titulo: itemEmRevisao.titulo,
+              categoria: itemEmRevisao.categoria,
+              descricao: itemEmRevisao.descricao,
+              video: itemEmRevisao.video,
+              capa: itemEmRevisao.capa,
+              url: itemEmRevisao.url,
+              tags: itemEmRevisao.tags,
+              direitos_confirmados: itemEmRevisao.direitos_confirmados,
+            }),
           });
           mostrarToast("Conteúdo actualizado!");
           fecharModal();
@@ -1134,10 +1159,15 @@
         if (!podeExecutar()) return;
         if (!confirm("Eliminar esta música permanentemente?")) return;
         try {
-          await fetch(`${API_BASE}/eliminar_musica`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(itemEmRevisao),
+            body: JSON.stringify({
+              action: "eliminar_musica",
+              artista: itemEmRevisao.artista || itemEmRevisao.Artista,
+              titulo: itemEmRevisao.titulo || itemEmRevisao.Título,
+              categoria: itemEmRevisao.categoria || itemEmRevisao.Categoria,
+            }),
           });
           mostrarToast("Música eliminada!");
           fecharModal();
@@ -1152,16 +1182,18 @@
         if (!podeExecutar()) return;
         const p = pendentes[index];
         if (tipo === "aprovar") {
-          if (!confirm(`Aprovar "${p.titulo}"?`)) return;
+          if (!confirm(`Aprovar "${p.titulo || p.Título}"?`)) return;
           try {
-            await fetch(`${API_BASE}/aprovar_musica`, {
+            await fetch(API_BASE, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                ...p,
-                id_pendente: p.id,
-                categoria: p.categoria || "INTERNACIONAL",
-                link: p.url_externa || p.link,
+                action: "aprovar_musica",
+                id_pendente: p.id || p.ID,
+                artista: p.artista || p.Artista,
+                titulo: p.titulo || p.Título,
+                categoria: p.categoria || p.Categoria || "INTERNACIONAL",
+                link: p.url_externa || p.link || p.Link,
               }),
             });
             mostrarToast("Música aprovada!");
@@ -1180,8 +1212,8 @@
           .map(
             (m, i) => `
                 <div class="music-item">
-                    <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
-                    <div class="m-info"><h4>${m.artista}</h4><p>${m.titulo} • ${m.descricao ? "📝" : ""} ${m.video ? "🎬" : ""}</p></div>
+                    <img src="${m.capa || m.Capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
+                    <div class="m-info"><h4>${m.artista || m.Artista}</h4><p>${m.titulo || m.Título} • ${m.descricao || m.Descrição ? "📝" : ""} ${m.video || m.Vídeo ? "🎬" : ""}</p></div>
                     <button onclick="abrirEdicao(${i}, false)" class="btn-acao btn-edit">✏️</button>
                 </div>
             `,
@@ -1195,15 +1227,17 @@
         const container = document.getElementById("lista-conteudo");
         const lista = termo
           ? aprovadas.filter((m) =>
-              (m.artista + " " + m.titulo).toLowerCase().includes(termo),
+              ((m.artista || m.Artista) + " " + (m.titulo || m.Título))
+                .toLowerCase()
+                .includes(termo),
             )
           : aprovadas;
         container.innerHTML = lista
           .map(
             (m, i) => `
                 <div class="music-item">
-                    <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
-                    <div class="m-info"><h4>${m.artista}</h4><p>${m.titulo} • ${m.descricao ? "📝" : ""} ${m.video ? "🎬" : ""}</p></div>
+                    <img src="${m.capa || m.Capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
+                    <div class="m-info"><h4>${m.artista || m.Artista}</h4><p>${m.titulo || m.Título} • ${m.descricao || m.Descrição ? "📝" : ""} ${m.video || m.Vídeo ? "🎬" : ""}</p></div>
                     <button onclick="abrirEdicao(${i}, false)" class="btn-acao btn-edit">✏️</button>
                 </div>
             `,
@@ -1214,9 +1248,11 @@
       // ========== ANÚNCIOS ==========
       async function carregarAnuncios() {
         try {
-          const res = await fetch(`${API_BASE}/listar_anuncios`);
+          const res = await fetch(`${API_BASE}?action=listar_anuncios`);
           const data = await res.json();
-          document.getElementById("lista-anuncios").innerHTML = data.anuncios
+          document.getElementById("lista-anuncios").innerHTML = (
+            data.anuncios || []
+          )
             .map(
               (a, i) => `
                     <div class="item-row"><span><img src="${a.img}" style="height:40px; border-radius:8px; margin-right:10px;"> ${a.link}</span><button onclick="removerAnuncio(${i})">🗑️</button></div>
@@ -1236,10 +1272,14 @@
           return;
         }
         try {
-          await fetch(`${API_BASE}/adicionar_anuncio`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ img, link }),
+            body: JSON.stringify({
+              action: "adicionar_anuncio",
+              img,
+              link,
+            }),
           });
           carregarAnuncios();
           mostrarToast("Anúncio adicionado!");
@@ -1253,10 +1293,13 @@
         if (!podeExecutar()) return;
         if (!confirm("Remover este anúncio?")) return;
         try {
-          await fetch(`${API_BASE}/remover_anuncio`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ index }),
+            body: JSON.stringify({
+              action: "remover_anuncio",
+              index,
+            }),
           });
           carregarAnuncios();
         } catch (e) {
@@ -1267,9 +1310,11 @@
       // ========== EVENTOS ==========
       async function carregarEventos() {
         try {
-          const res = await fetch(`${API_BASE}/listar_eventos`);
+          const res = await fetch(`${API_BASE}?action=listar_eventos`);
           const data = await res.json();
-          document.getElementById("lista-eventos").innerHTML = data.eventos
+          document.getElementById("lista-eventos").innerHTML = (
+            data.eventos || []
+          )
             .map(
               (ev, i) => `
                     <div class="item-row"><div style="display:flex; align-items:center; gap:12px; flex:1;">${ev.banner_imagem ? `<img src="${ev.banner_imagem}" style="height:40px; border-radius:8px;">` : ""}<span><strong>${ev.nome}</strong> - ${ev.data} @ ${ev.local}</span></div><button onclick="removerEvento(${i})">🗑️</button></div>
@@ -1283,6 +1328,7 @@
       async function salvarEvento() {
         if (!podeExecutar()) return;
         const dados = {
+          action: "adicionar_evento",
           nome: document.getElementById("evento-nome").value,
           data: document.getElementById("evento-data").value,
           local: document.getElementById("evento-local").value,
@@ -1295,7 +1341,7 @@
           return;
         }
         try {
-          await fetch(`${API_BASE}/adicionar_evento`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados),
@@ -1310,10 +1356,13 @@
         if (!podeExecutar()) return;
         if (!confirm("Remover este evento?")) return;
         try {
-          await fetch(`${API_BASE}/remover_evento`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ index }),
+            body: JSON.stringify({
+              action: "remover_evento",
+              index,
+            }),
           });
           carregarEventos();
         } catch (e) {
@@ -1324,9 +1373,11 @@
       // ========== PLAYLISTS ==========
       async function carregarPlaylists() {
         try {
-          const res = await fetch(`${API_BASE}/listar_playlists`);
+          const res = await fetch(`${API_BASE}?action=listar_playlists`);
           const data = await res.json();
-          document.getElementById("lista-playlists").innerHTML = data.playlists
+          document.getElementById("lista-playlists").innerHTML = (
+            data.playlists || []
+          )
             .map(
               (p, i) => `
                     <div class="item-row"><span><strong>${p.nome}</strong> - ${p.musicas.length} músicas</span><button onclick="removerPlaylist(${i})">🗑️</button></div>
@@ -1350,10 +1401,14 @@
           return;
         }
         try {
-          await fetch(`${API_BASE}/adicionar_playlist`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nome, musicas }),
+            body: JSON.stringify({
+              action: "adicionar_playlist",
+              nome,
+              musicas,
+            }),
           });
           carregarPlaylists();
           mostrarToast("Playlist salva!");
@@ -1365,10 +1420,13 @@
         if (!podeExecutar()) return;
         if (!confirm("Remover esta playlist?")) return;
         try {
-          await fetch(`${API_BASE}/remover_playlist`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ index }),
+            body: JSON.stringify({
+              action: "remover_playlist",
+              index,
+            }),
           });
           carregarPlaylists();
         } catch (e) {
@@ -1378,22 +1436,27 @@
 
       // ========== ESTATÍSTICAS ==========
       async function carregarEstatisticas() {
-        document.getElementById("stat-total").innerText = aprovadas.length;
-        document.getElementById("stat-downloads").innerText = aprovadas.reduce(
-          (s, m) => s + (m.downloads || 0),
-          0,
-        );
-        document.getElementById("stat-categorias").innerText = new Set(
-          aprovadas.map((m) => m.categoria),
-        ).size;
         try {
-          const res = await fetch(`${API_BASE}/obter_visitantes`);
+          const res = await fetch(`${API_BASE}?action=estatisticas`);
           const d = await res.json();
-          document.getElementById("stat-visitas").innerText = d.total || 0;
+          document.getElementById("stat-total").innerText =
+            d.total_musicas || aprovadas.length;
+          document.getElementById("stat-downloads").innerText =
+            d.total_downloads ||
+            aprovadas.reduce((s, m) => s + (m.downloads || 0), 0);
+          document.getElementById("stat-categorias").innerText =
+            d.categorias || new Set(aprovadas.map((m) => m.categoria)).size;
+        } catch (e) {}
+
+        try {
+          const res = await fetch(`${API_BASE}?action=obter_visitantes`);
+          const visitas = await res.json();
+          document.getElementById("stat-visitas").innerText =
+            visitas.total || 0;
           const hoje = new Date().toISOString().split("T")[0];
           document.getElementById("stat-hoje").innerText =
-            d.por_dia?.[hoje]?.visitas || 0;
-          const historico = Object.entries(d.por_dia || {})
+            visitas.por_dia?.[hoje]?.visitas || 0;
+          const historico = Object.entries(visitas.por_dia || {})
             .sort((a, b) => b[0].localeCompare(a[0]))
             .slice(0, 7);
           document.getElementById("tabela-historico").innerHTML = `
@@ -1427,10 +1490,13 @@
           if (!file) return;
           try {
             const dados = JSON.parse(await file.text());
-            await fetch(`${API_BASE}/restaurar_backup`, {
+            await fetch(API_BASE, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(dados),
+              body: JSON.stringify({
+                action: "restaurar_backup",
+                ...dados,
+              }),
             });
             carregarAprovados();
             mostrarToast("Backup restaurado!");
@@ -1443,7 +1509,7 @@
 
       // ========== CONFIG ==========
       function carregarConfig() {
-        fetch(`${API_BASE}/obter_config`)
+        fetch(`${API_BASE}?action=obter_config`)
           .then((r) => r.json())
           .then((cfg) => {
             document.getElementById("config-nome").value =
@@ -1457,6 +1523,7 @@
       async function salvarConfig() {
         if (!podeExecutar()) return;
         const cfg = {
+          action: "salvar_config",
           nome: document.getElementById("config-nome").value,
           slogan: document.getElementById("config-slogan").value,
           logo: document.getElementById("config-logo").value,
@@ -1464,7 +1531,7 @@
           cor: document.getElementById("config-cor").value,
         };
         try {
-          await fetch(`${API_BASE}/salvar_config`, {
+          await fetch(API_BASE, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(cfg),
