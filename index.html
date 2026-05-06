@@ -1,0 +1,1867 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#080808" />
+    <meta
+      name="description"
+      content="Santola Music - A maior montra da música de São Tomé e Príncipe. Kizomba, Puxita, Bulauê e muito mais."
+    />
+    <title>Santola Music | O Blog Das Ilhas</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ========== TODO O TEU CSS EXISTENTE (MANTIDO) ========== */
+      :root {
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --preto-deep: #080808;
+        --preto-card: #111111;
+        --glass: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.12);
+        --glow-amarelo: 0 0 20px rgba(255, 219, 0, 0.25);
+        --glow-verde: 0 0 20px rgba(18, 173, 43, 0.25);
+        --transition-fast: all 0.2s ease;
+        --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--preto-deep);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--amarelo);
+      }
+
+      body {
+        background-color: var(--preto-deep);
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
+        line-height: 1.5;
+      }
+
+      @keyframes stpGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      @keyframes pulseLogo {
+        from {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        to {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+      }
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      #splash {
+        position: fixed;
+        inset: 0;
+        background: var(--preto-deep);
+        z-index: 15000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s;
+      }
+      #splash img {
+        width: 120px;
+        animation: pulseLogo 1.2s infinite alternate;
+        filter: drop-shadow(0 0 15px var(--amarelo));
+      }
+
+      header {
+        padding: 2.5rem 1rem 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        background: rgba(8, 8, 8, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(15px);
+      }
+      .btn-enviar-top {
+        position: absolute;
+        left: 15px;
+        top: 18px;
+        background: var(--verde);
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        border-bottom: 3px solid #0a6b1a;
+        transition: var(--transition-fast);
+      }
+      .btn-enviar-top:hover {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+      }
+
+      .logo-main {
+        font-family: "Syne";
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+        line-height: 1;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+      }
+      .slogan-blog {
+        color: var(--amarelo);
+        font-weight: 700;
+        font-size: 0.7rem;
+        letter-spacing: 5px;
+        margin-top: 8px;
+        text-transform: uppercase;
+      }
+
+      .btn-ad-top {
+        background: var(--amarelo);
+        color: #000;
+        padding: 8px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.7rem;
+        margin-top: 15px;
+        text-transform: uppercase;
+        display: inline-block;
+        border-bottom: 3px solid #bfa300;
+        transition: var(--transition-smooth);
+      }
+      .btn-ad-top:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--glow-amarelo);
+        background: #fff;
+      }
+
+      .container-logo-dir {
+        position: absolute;
+        right: 15px;
+        top: 18px;
+        width: 45px;
+      }
+      .logo-stp-img {
+        width: 100%;
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+      }
+
+      .search-box-wrapper {
+        background: var(--glass);
+        border-radius: 16px;
+        margin: 1.5rem auto 0;
+        border: 1.5px solid var(--border);
+        width: 100%;
+        max-width: 550px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        transition: var(--transition-smooth);
+        position: relative;
+      }
+      .search-box-wrapper:focus-within {
+        border-color: var(--amarelo);
+        box-shadow: var(--glow-amarelo);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .search-box-wrapper input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 1rem;
+        padding: 1rem;
+      }
+
+      .search-suggestions {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1a1a1a;
+        border: 1px solid var(--border);
+        border-radius: 0 0 16px 16px;
+        z-index: 1100;
+        max-height: 200px;
+        overflow-y: auto;
+        display: none;
+      }
+      .search-suggestions.active {
+        display: block;
+      }
+      .suggestion-item {
+        padding: 12px 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .suggestion-item:hover {
+        background: var(--glass);
+      }
+      .suggestion-item img {
+        width: 35px;
+        height: 35px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+      .suggestion-item span {
+        font-size: 0.9rem;
+      }
+      .suggestion-item small {
+        color: #888;
+        font-size: 0.75rem;
+        margin-left: auto;
+      }
+
+      .ads-slider {
+        width: 100%;
+        height: 140px;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        margin: 25px 0;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        background: #000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .ads-item {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        transition: all 0.6s ease;
+      }
+      .ads-item.active {
+        display: flex;
+        animation: slideInUp 0.6s ease;
+      }
+
+      .main-container {
+        max-width: 850px;
+        margin: 0 auto;
+        padding: 0 1.2rem 5rem;
+      }
+
+      .card-santola {
+        background: linear-gradient(270deg, #050505, #0c0c0a, #d21034, #070707);
+        background-size: 400% 400%;
+        animation: stpGradient 12s ease infinite;
+        border-radius: 28px;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+        margin-bottom: 2.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .card-santola::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+      }
+      .section-title {
+        font-family: "Syne";
+        color: #fff;
+        font-size: 1.3rem;
+        margin-bottom: 22px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .section-title span {
+        color: var(--amarelo);
+        font-size: 1.6rem;
+      }
+
+      /* FILTRO RÁPIDO POR CATEGORIAS */
+      .quick-filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+      .quick-filters button {
+        background: var(--glass);
+        border: 1px solid var(--border);
+        color: #aaa;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.2s;
+      }
+      .quick-filters button:hover,
+      .quick-filters button.active {
+        background: var(--verde);
+        border-color: var(--verde);
+        color: white;
+      }
+
+      .btn-categorias-hero {
+        display: block;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: 800;
+        margin: 10px 0 30px;
+        background: linear-gradient(270deg, #12ad2b, #ffdb00, #d21034);
+        background-size: 400% 400%;
+        animation: stpGradient 6s ease infinite;
+        color: black;
+        border-bottom: 5px solid #000;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: var(--transition-smooth);
+      }
+      .btn-categorias-hero:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.1);
+        box-shadow: var(--glow-verde);
+      }
+
+      .musica-card {
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.45);
+        margin-bottom: 14px;
+        padding: 14px;
+        border-radius: 18px;
+        gap: 15px;
+        border: 1px solid var(--border);
+        transition: var(--transition-smooth);
+      }
+      .musica-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--amarelo);
+        transform: scale(1.02);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .img-capa {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
+        object-fit: cover;
+        background: #222;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .musica-meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .musica-meta strong {
+        font-size: 1.05rem;
+        color: #fff;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 3px;
+      }
+      .musica-meta strong a {
+        color: #fff;
+        text-decoration: none;
+      }
+      .musica-meta strong a:hover {
+        color: var(--amarelo);
+        text-decoration: underline;
+      }
+      .musica-meta small {
+        color: #aaa;
+        font-size: 0.85rem;
+        display: block;
+        margin-bottom: 3px;
+      }
+      .musica-meta .data-pequena {
+        font-size: 0.6rem;
+        color: #666;
+        display: block;
+      }
+      .estilo-pill {
+        font-size: 0.6rem;
+        background: var(--verde);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-weight: 800;
+        display: inline-block;
+        text-transform: uppercase;
+      }
+      .badge-novo {
+        font-size: 0.55rem;
+        background: var(--amarelo);
+        color: black;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 800;
+        margin-left: 5px;
+        text-transform: uppercase;
+      }
+      .downloads-badge {
+        font-size: 0.65rem;
+        background: var(--verde);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .btn-baixar-list {
+        background: var(--amarelo);
+        color: black;
+        padding: 10px 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.75rem;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        text-transform: uppercase;
+      }
+      .btn-baixar-list:hover {
+        background: white;
+        transform: scale(1.05);
+      }
+
+      /* Botão playlist */
+      .btn-playlist-add {
+        background: none;
+        border: 1px solid var(--verde);
+        color: var(--verde);
+        padding: 5px 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: 0.2s;
+        line-height: 1;
+      }
+      .btn-playlist-add:hover {
+        background: var(--verde);
+        color: white;
+      }
+      .btn-playlist-add.remover {
+        border-color: var(--vermelho);
+        color: var(--vermelho);
+      }
+      .btn-playlist-add.remover:hover {
+        background: var(--vermelho);
+        color: white;
+      }
+
+      /* Toast */
+      .toast-notification {
+        position: fixed;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--verde);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: 800;
+        font-size: 0.85rem;
+        z-index: 5000;
+        opacity: 0;
+        transition: opacity 0.4s;
+        pointer-events: none;
+        text-transform: uppercase;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .toast-notification.show {
+        opacity: 1;
+      }
+
+      /* Skeleton loading */
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.03) 25%,
+          rgba(255, 255, 255, 0.08) 50%,
+          rgba(255, 255, 255, 0.03) 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 10px;
+      }
+      .skeleton-card {
+        display: flex;
+        align-items: center;
+        padding: 14px;
+        gap: 15px;
+        margin-bottom: 14px;
+      }
+
+      /* Botão voltar ao topo */
+      #btn-voltar-topo {
+        position: fixed;
+        bottom: 30px;
+        right: 20px;
+        background: var(--amarelo);
+        color: black;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1500;
+        font-size: 1.2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        transition: 0.3s;
+        border: none;
+      }
+      #btn-voltar-topo:hover {
+        transform: scale(1.1);
+      }
+
+      /* Offline badge */
+      #offline-badge {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--vermelho);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: 800;
+        font-size: 0.75rem;
+        z-index: 6000;
+        display: none;
+        text-transform: uppercase;
+      }
+
+      #modalMaster {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.97);
+        z-index: 12000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        backdrop-filter: blur(15px);
+        touch-action: pan-y;
+      }
+      .modal-santola-box {
+        background: #111;
+        border-radius: 35px;
+        padding: 2.5rem;
+        border: 2px solid var(--amarelo);
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+        position: relative;
+        animation: modalPopUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      }
+      @keyframes modalPopUp {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .btn-fechar {
+        position: absolute;
+        right: 22px;
+        top: 22px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2.2rem;
+        cursor: pointer;
+        line-height: 1;
+        transition: 0.2s;
+      }
+      .btn-fechar:hover {
+        color: var(--vermelho);
+      }
+      .modal-infos {
+        margin-bottom: 25px;
+      }
+      .modal-infos h2 {
+        font-family: "Syne";
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        color: #fff;
+      }
+      .modal-infos p {
+        color: var(--amarelo);
+        font-size: 1.1rem;
+      }
+      .modal-descricao {
+        color: #aaa;
+        font-size: 0.9rem;
+        margin: 10px 0;
+        line-height: 1.4;
+        white-space: pre-wrap;
+      }
+      .modal-video-link {
+        display: inline-block;
+        background: var(--vermelho);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.8rem;
+        margin: 5px 0;
+      }
+
+      .btn-final-download {
+        display: block;
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(270deg, #12ad2b, #ffdb00, #d21034);
+        background-size: 400% 400%;
+        animation: stpGradient 6s ease infinite;
+        border-radius: 18px;
+        color: black;
+        text-decoration: none;
+        font-weight: 800;
+        text-transform: uppercase;
+        border-bottom: 5px solid #000;
+        margin-bottom: 15px;
+        transition: 0.2s;
+      }
+      .btn-final-download:active {
+        transform: translateY(2px);
+        border-bottom-width: 1px;
+      }
+      .btn-share-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #444;
+        color: #aaa;
+        padding: 14px;
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        transition: var(--transition-smooth);
+      }
+      .btn-share-link:hover {
+        border-color: var(--amarelo);
+        color: var(--amarelo);
+        background: rgba(255, 219, 0, 0.05);
+      }
+      .btn-share-link.copiado {
+        border-color: var(--verde);
+        color: var(--verde);
+        background: rgba(18, 173, 43, 0.05);
+      }
+
+      footer {
+        background: #050505;
+        padding: 4rem 1.5rem 2.5rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+      }
+      .footer-socials {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 35px;
+        flex-wrap: wrap;
+      }
+      .f-social-btn {
+        padding: 14px 22px;
+        border-radius: 14px;
+        text-decoration: none;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 800;
+        border: 1px solid var(--border);
+        transition: var(--transition-smooth);
+        text-transform: uppercase;
+      }
+      .f-social-btn.whatsapp {
+        border-color: #25d366;
+        color: #25d366;
+      }
+      .f-social-btn.youtube {
+        border-color: #ff0000;
+        color: #ff0000;
+      }
+      .f-social-btn:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .creditos-santola {
+        margin-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 30px;
+      }
+      .dev-label {
+        font-size: 0.7rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .dev-nome {
+        color: var(--amarelo);
+        font-weight: 800;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        margin-top: 8px;
+        display: block;
+        letter-spacing: 1px;
+      }
+      .copy-info {
+        opacity: 0.3;
+        font-size: 0.65rem;
+        margin-top: 25px;
+        letter-spacing: 1px;
+      }
+      #visitor-counter {
+        color: #888;
+        font-size: 0.7rem;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 600px) {
+        .logo-main {
+          font-size: 2.4rem;
+        }
+        .btn-enviar-top {
+          padding: 6px 10px;
+          font-size: 0.6rem;
+        }
+        .main-container {
+          padding: 0 1rem 3rem;
+        }
+        .modal-santola-box {
+          padding: 1.8rem;
+          border-radius: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="splash">
+      <img
+        src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+        alt="SANTOLA MUSIC PLATFORM"
+      />
+    </div>
+
+    <!-- Offline badge -->
+    <div id="offline-badge">📡 Estás offline</div>
+
+    <!-- Botão voltar ao topo -->
+    <button
+      id="btn-voltar-topo"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      title="Voltar ao topo"
+    >
+      ⬆
+    </button>
+
+    <header id="siteHeader">
+      <a href="enviar.html" class="btn-enviar-top">Mandar Música</a>
+      <div class="logo-main" onclick="window.location.href = 'index.html'">
+        Santola Music
+      </div>
+      <p class="slogan-blog">O BLOG DAS ILHAS</p>
+      <a
+        href="https://wa.me/2399944660?text=Olá+Santola+quero+anunciar"
+        class="btn-ad-top"
+        >Anunciar Aqui</a
+      >
+
+      <div class="search-box-wrapper" id="searchWrapper">
+        <input
+          type="text"
+          id="mainSearch"
+          placeholder="Artista, música ou categoria..."
+          oninput="motorDeBusca()"
+        />
+        <div class="search-suggestions" id="searchSuggestions"></div>
+      </div>
+
+      <div class="container-logo-dir">
+        <img
+          src="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+          alt="Emblema Nacional"
+          class="logo-stp-img"
+        />
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div id="home-view">
+        <div class="ads-slider" onclick="window.location.href = 'eventos.html'">
+          <div
+            class="ads-item active"
+            style="
+              background:
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url(&quot;https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80&quot;);
+              background-size: cover;
+              background-position: center;
+            "
+          >
+            <h3
+              style="
+                color: var(--amarelo);
+                font-family: &quot;Syne&quot;;
+                font-size: 1.5rem;
+              "
+            >
+              AGENDA CULTURAL
+            </h3>
+            <p style="font-size: 0.9rem">
+              Vê os próximos shows em São Tomé e Príncipe
+            </p>
+          </div>
+          <div class="ads-item" style="background: #0d2b14">
+            <h3
+              style="
+                color: white;
+                font-family: &quot;Syne&quot;;
+                font-size: 1.5rem;
+              "
+            >
+              DIVULGA A TUA ARTE
+            </h3>
+            <p style="font-size: 0.9rem">
+              Contacta-nos para parcerias e promoções
+            </p>
+          </div>
+        </div>
+
+        <a href="categorias.html" class="btn-categorias-hero"
+          >📂 EXPLORAR POR ESTILOS</a
+        >
+
+        <!-- FILTROS RÁPIDOS -->
+        <div class="quick-filters" id="quickFilters"></div>
+
+        <section class="card-santola">
+          <h2 class="section-title"><span>🔥</span> NOVIDADES DO DRIVE</h2>
+          <div id="lista-novidades">
+            <!-- Skeleton loading -->
+            <div class="skeleton-card">
+              <div class="skeleton" style="width: 58px; height: 58px"></div>
+              <div class="musica-meta">
+                <div
+                  class="skeleton"
+                  style="width: 60%; height: 14px; margin-bottom: 8px"
+                ></div>
+                <div class="skeleton" style="width: 40%; height: 12px"></div>
+              </div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton" style="width: 58px; height: 58px"></div>
+              <div class="musica-meta">
+                <div
+                  class="skeleton"
+                  style="width: 50%; height: 14px; margin-bottom: 8px"
+                ></div>
+                <div class="skeleton" style="width: 35%; height: 12px"></div>
+              </div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton" style="width: 58px; height: 58px"></div>
+              <div class="musica-meta">
+                <div
+                  class="skeleton"
+                  style="width: 70%; height: 14px; margin-bottom: 8px"
+                ></div>
+                <div class="skeleton" style="width: 30%; height: 12px"></div>
+              </div>
+            </div>
+          </div>
+          <button
+            id="btn-mais-novidades"
+            onclick="carregarMais('novidades')"
+            style="
+              display: none;
+              width: 100%;
+              padding: 12px;
+              background: var(--glass);
+              border: 1px solid var(--border);
+              color: white;
+              border-radius: 12px;
+              cursor: pointer;
+              font-weight: 800;
+              margin-top: 10px;
+            "
+          >
+            Ver Mais
+          </button>
+        </section>
+
+        <section class="card-santola">
+          <h2 class="section-title"><span>🏆</span> MAIS BAIXADAS (TOP)</h2>
+          <div id="lista-top-hits"></div>
+          <button
+            id="btn-mais-top"
+            onclick="carregarMais('top')"
+            style="
+              display: none;
+              width: 100%;
+              padding: 12px;
+              background: var(--glass);
+              border: 1px solid var(--border);
+              color: white;
+              border-radius: 12px;
+              cursor: pointer;
+              font-weight: 800;
+              margin-top: 10px;
+            "
+          >
+            Ver Mais
+          </button>
+
+          <div style="display: flex; gap: 12px; margin-top: 25px">
+            <a
+              href="https://youtube.com/@SantolaMusic"
+              target="_blank"
+              style="
+                flex: 1;
+                background: var(--vermelho);
+                color: white;
+                text-decoration: none;
+                padding: 15px;
+                border-radius: 15px;
+                font-weight: 800;
+                font-size: 0.75rem;
+                text-align: center;
+                border-bottom: 3px solid #8b0a22;
+              "
+              >VER CLIPS NO YT</a
+            >
+            <a
+              href="playlists.html"
+              style="
+                flex: 1;
+                background: #1a1a1a;
+                color: var(--amarelo);
+                border: 1px solid var(--amarelo);
+                text-decoration: none;
+                padding: 15px;
+                border-radius: 15px;
+                font-weight: 800;
+                font-size: 0.75rem;
+                text-align: center;
+                border-bottom: 3px solid #665a00;
+              "
+              >ÁLBUMS & MIXES</a
+            >
+          </div>
+        </section>
+
+        <!-- Botão surpreenda-me -->
+        <button
+          onclick="musicaAleatoria()"
+          style="
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--amarelo);
+            color: black;
+            border: none;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-bottom: 4px solid #bfa300;
+            margin-top: 10px;
+          "
+        >
+          🎲 Surpreenda-me
+        </button>
+      </div>
+
+      <div id="search-view" style="display: none">
+        <h2 class="section-title"><span>🔍</span> RESULTADOS ENCONTRADOS</h2>
+        <div id="search-results-list"></div>
+        <button
+          class="btn-categorias-hero"
+          style="background: #222; margin-top: 40px"
+          onclick="cancelarBusca()"
+        >
+          VOLTAR PARA O INÍCIO
+        </button>
+      </div>
+    </main>
+
+    <div id="modalMaster">
+      <div class="modal-santola-box">
+        <button class="btn-fechar" onclick="fecharModal()">&times;</button>
+        <img
+          id="modalImg"
+          src=""
+          alt="Capa"
+          class="img-capa"
+          style="
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            display: block;
+            border: 3px solid var(--amarelo);
+            border-radius: 20px;
+            object-fit: cover;
+          "
+        />
+        <div class="modal-infos">
+          <h2 id="modalArt"></h2>
+          <p id="modalTit"></p>
+          <div style="margin-top: 15px">
+            <span id="modalCat" class="estilo-pill"></span>
+          </div>
+          <p id="modalDesc" class="modal-descricao" style="display: none"></p>
+          <a
+            id="modalVideo"
+            href="#"
+            target="_blank"
+            class="modal-video-link"
+            style="display: none"
+            >▶ Ver Vídeo</a
+          >
+        </div>
+        <a id="modalDownLink" href="" class="btn-final-download"
+          >BAIXAR AGORA (MP3)</a
+        >
+        <button
+          id="btnCopyShare"
+          class="btn-share-link"
+          onclick="copiarLinkDeep()"
+        >
+          🔗 COPIAR LINK DESTE POST
+        </button>
+        <button
+          id="btnShareNative"
+          class="btn-share-link"
+          onclick="partilharNativa()"
+          style="display: none"
+        >
+          📤 PARTILHAR
+        </button>
+        <p style="margin-top: 15px; font-size: 0.6rem; opacity: 0.4">
+          Ao copiar o link, podes partilhar no WhatsApp para os teus amigos
+          virem baixar aqui.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-socials">
+        <a href="https://wa.me/2399944660" class="f-social-btn whatsapp"
+          >WhatsApp</a
+        >
+        <a
+          href="https://tiktok.com/@santolamusic"
+          target="_blank"
+          class="f-social-btn"
+          >TikTok</a
+        >
+        <a
+          href="https://youtube.com/@SantolaMusic"
+          target="_blank"
+          class="f-social-btn youtube"
+          >YouTube</a
+        >
+        <a
+          href="https://instagram.com/santolamusic"
+          target="_blank"
+          class="f-social-btn"
+          >Instagram</a
+        >
+      </div>
+      <div style="margin-bottom: 30px">
+        <a
+          href="politica.html"
+          style="
+            color: #666;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin: 0 15px;
+            font-weight: 600;
+          "
+          >TERMOS DE USO</a
+        >
+        <a
+          href="contato.html"
+          style="
+            color: #666;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin: 0 15px;
+            font-weight: 600;
+          "
+          >CONTACTO</a
+        >
+      </div>
+      <div class="creditos-santola">
+        <span class="dev-label">Desenvolvimento e Tecnologia por</span>
+        <span class="dev-nome">Pacheco Gonçalves</span>
+        <p class="copy-info">
+          © 2026 SANTOLA MUSIC - SÃO TOMÉ E PRÍNCIPE<br />TODOS OS DIREITOS
+          RESERVADOS
+        </p>
+        <p id="visitor-counter"></p>
+      </div>
+    </footer>
+
+    <!-- ============================ 🔥 SCRIPT FINAL (25 MELHORIAS) ============================ -->
+    <script>
+      const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
+      const INTERVALO_POLLING = 30000;
+      const DIAS_NOVIDADES = 7;
+      const DOWNLOADS_INICIAIS = 100;
+      const API_BASE = "http://127.0.0.1:5001";
+
+      let dbMusicas = [];
+      let urlAtualMusica = "";
+      let versaoAtual = "";
+      let paginaNovidades = 1;
+      let paginaTop = 1;
+      const POR_PAGINA = 10;
+
+      // ========== MELHORIA 1: REGISTAR VISITA REAL ==========
+      async function registrarVisita() {
+        try {
+          const res = await fetch(`${API_BASE}/contar_visita`, {
+            method: "POST",
+          });
+          if (res.ok) {
+            const d = await res.json();
+            document.getElementById("visitor-counter").innerText =
+              `👥 ${d.total} visitas · ${d.unicos_hoje || "..."} hoje`;
+          }
+        } catch (e) {}
+      }
+
+      // ========== MELHORIA 2: PLAYLIST (localStorage) ==========
+      function obterMinhaPlaylist() {
+        return JSON.parse(
+          localStorage.getItem("minha_playlist_santola") || "[]",
+        );
+      }
+      function guardarMinhaPlaylist(pl) {
+        localStorage.setItem("minha_playlist_santola", JSON.stringify(pl));
+      }
+      function estaNaPlaylist(musica) {
+        return obterMinhaPlaylist().some(
+          (m) => m.artista === musica.artista && m.titulo === musica.titulo,
+        );
+      }
+      function adicionarOuRemoverDaPlaylist(musica, btnElement) {
+        const pl = obterMinhaPlaylist();
+        if (!estaNaPlaylist(musica)) {
+          pl.push({
+            artista: musica.artista,
+            titulo: musica.titulo,
+            capa: musica.capa,
+            url: musica.url || musica.link,
+          });
+          guardarMinhaPlaylist(pl);
+          mostrarToast("✅ Adicionado à tua playlist");
+          if (btnElement) atualizarBtnPlaylist(btnElement, musica, true);
+        } else {
+          const nova = pl.filter(
+            (m) =>
+              !(m.artista === musica.artista && m.titulo === musica.titulo),
+          );
+          guardarMinhaPlaylist(nova);
+          mostrarToast("❌ Removido da tua playlist");
+          if (btnElement) atualizarBtnPlaylist(btnElement, musica, false);
+        }
+      }
+      function atualizarBtnPlaylist(btn, musica, isAdded) {
+        if (isAdded) {
+          btn.innerHTML = "✅";
+          btn.title = "Remover";
+          btn.classList.add("remover");
+        } else {
+          btn.innerHTML = "💿";
+          btn.title = "Adicionar";
+          btn.classList.remove("remover");
+        }
+      }
+      function criarBtnPlaylist(musica) {
+        const btn = document.createElement("button");
+        btn.className = "btn-playlist-add";
+        if (estaNaPlaylist(musica)) {
+          btn.innerHTML = "✅";
+          btn.classList.add("remover");
+        } else {
+          btn.innerHTML = "💿";
+        }
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          adicionarOuRemoverDaPlaylist(musica, btn);
+        });
+        return btn;
+      }
+      function mostrarToast(msg) {
+        const t = document.createElement("div");
+        t.className = "toast-notification";
+        t.innerText = msg;
+        document.body.appendChild(t);
+        setTimeout(() => t.classList.add("show"), 10);
+        setTimeout(() => {
+          t.classList.remove("show");
+          setTimeout(() => t.remove(), 400);
+        }, 2000);
+      }
+
+      function adicionarBotoesPlaylistAosCards() {
+        document.querySelectorAll(".musica-card").forEach((card) => {
+          if (card.querySelector(".btn-playlist-add")) return;
+          const metaDiv = card.querySelector(".musica-meta");
+          if (!metaDiv) return;
+          const artista = metaDiv.querySelector("strong")?.innerText;
+          const titulo = metaDiv.querySelector("small")?.innerText;
+          const capa = card.querySelector(".img-capa")?.src;
+          if (!artista || !titulo) return;
+          const btnBaixar = card.querySelector(".btn-baixar-list");
+          let url = "#";
+          if (btnBaixar) {
+            const m = btnBaixar.getAttribute("onclick")?.match(/'([^']+)'/);
+            if (m) {
+              try {
+                const d = JSON.parse(decodeURIComponent(m[1]));
+                url = d.url || d.link || "#";
+              } catch (e) {}
+            }
+          }
+          const musica = { artista, titulo, capa: capa || LOGO_PADRAO, url };
+          const btn = criarBtnPlaylist(musica);
+          const container = btnBaixar?.parentElement;
+          if (container) container.insertBefore(btn, container.firstChild);
+        });
+      }
+      const observer = new MutationObserver(() =>
+        adicionarBotoesPlaylistAosCards(),
+      );
+      observer.observe(document.body, { childList: true, subtree: true });
+
+      // ========== MELHORIA 3: BOTÃO VOLTAR AO TOPO ==========
+      window.addEventListener("scroll", () => {
+        document.getElementById("btn-voltar-topo").style.display =
+          window.scrollY > 400 ? "flex" : "none";
+      });
+
+      // ========== MELHORIA 4: OFFLINE BADGE ==========
+      function atualizarStatusConexao() {
+        const badge = document.getElementById("offline-badge");
+        badge.style.display = navigator.onLine ? "none" : "block";
+      }
+      window.addEventListener("online", atualizarStatusConexao);
+      window.addEventListener("offline", atualizarStatusConexao);
+      atualizarStatusConexao();
+
+      // ========== MELHORIA 5: SCROLL INFINITO ==========
+      let observerScroll;
+      function configurarScrollInfinito(containerId, tipo) {
+        if (observerScroll) observerScroll.disconnect();
+        const sentinel = document.createElement("div");
+        sentinel.style.height = "1px";
+        const container = document.getElementById(containerId);
+        container.appendChild(sentinel);
+        observerScroll = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting) carregarMais(tipo);
+          },
+          { rootMargin: "100px" },
+        );
+        observerScroll.observe(sentinel);
+      }
+
+      // ========== MELHORIA 6: BOTÃO SURPREENDA-ME ==========
+      function musicaAleatoria() {
+        if (dbMusicas.length === 0) return;
+        const m = dbMusicas[Math.floor(Math.random() * dbMusicas.length)];
+        handleDownloadClick(encodeURIComponent(JSON.stringify(m)));
+        if (navigator.vibrate) navigator.vibrate(50);
+      }
+
+      // ========== MELHORIA 7: FILTROS RÁPIDOS ==========
+      function renderizarFiltrosRapidos() {
+        const cats = [...new Set(dbMusicas.map((m) => m.categoria))].slice(
+          0,
+          6,
+        );
+        const container = document.getElementById("quickFilters");
+        container.innerHTML =
+          '<button onclick="filtrarPorCategoria(null)" class="active">Todas</button>' +
+          cats
+            .map(
+              (c) =>
+                `<button onclick="filtrarPorCategoria('${c}')">${c}</button>`,
+            )
+            .join("");
+        document.querySelectorAll("#quickFilters button").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            document
+              .querySelectorAll("#quickFilters button")
+              .forEach((b) => b.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+      }
+      function filtrarPorCategoria(cat) {
+        const novidades = cat
+          ? dbMusicas.filter((m) => m.categoria === cat).slice(0, 18)
+          : dbMusicas.slice(0, 18);
+        document.getElementById("lista-novidades").innerHTML =
+          montarListaHTML(novidades);
+        adicionarBotoesPlaylistAosCards();
+      }
+
+      // ========== CARREGAR MAIS (SCROLL INFINITO) ==========
+      function carregarMais(tipo) {
+        if (tipo === "novidades") {
+          paginaNovidades++;
+          const hoje = new Date();
+          const limite = new Date(
+            hoje.getTime() - DIAS_NOVIDADES * 24 * 60 * 60 * 1000,
+          );
+          const mais = dbMusicas
+            .filter((m) => new Date(m.data_aprovacao) >= limite)
+            .slice(
+              paginaNovidades * POR_PAGINA - POR_PAGINA,
+              paginaNovidades * POR_PAGINA,
+            );
+          if (mais.length > 0) {
+            document.getElementById("lista-novidades").innerHTML +=
+              montarListaHTML(mais);
+            adicionarBotoesPlaylistAosCards();
+          }
+        }
+      }
+
+      // ========== POP‑UP DE ANÚNCIO (MANTIDO) ==========
+      async function tentarMostrarAdPopup() {
+        if (sessionStorage.getItem("ad_popup_shown") === "1") return;
+        try {
+          const res = await fetch("anuncios.json", { cache: "no-cache" });
+          const anuncios = await res.json();
+          if (anuncios && anuncios.length > 0) {
+            const ad = anuncios[Math.floor(Math.random() * anuncios.length)];
+            const overlay = document.createElement("div");
+            overlay.id = "ad-popup-overlay";
+            overlay.style.cssText =
+              "display:flex; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:30000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(10px);";
+            overlay.innerHTML = `<div style="background:#111; border:2px solid var(--amarelo); border-radius:24px; padding:2rem; max-width:400px; width:100%; text-align:center; position:relative; animation: modalPopUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                <button id="btn-fechar-ad" style="position:absolute; top:10px; right:15px; background:none; border:none; color:white; font-size:2rem; cursor:pointer; line-height:1;">&times;</button>
+                <img src="${ad.img}" style="width:100%; border-radius:16px; margin-bottom:15px;" alt="Publicidade" onerror="this.style.display='none'" />
+                <a id="ad-link" href="${ad.link || "#"}" target="_blank" class="btn-final-download" style="display:block; text-decoration:none; margin-bottom:10px;">Visitar</a>
+                <button id="btn-pular-ad" style="background:transparent; border:1px solid #444; color:#aaa; padding:10px 20px; border-radius:10px; cursor:pointer; width:100%;">Fechar</button>
+              </div>`;
+            document.body.appendChild(overlay);
+            document
+              .getElementById("ad-link")
+              .addEventListener("click", function (e) {
+                e.preventDefault();
+                if (
+                  confirm(
+                    "Estás prestes a visitar um site externo. Desejas continuar?",
+                  )
+                )
+                  window.open(this.href, "_blank");
+              });
+            document.getElementById("btn-fechar-ad").onclick = () =>
+              overlay.remove();
+            document.getElementById("btn-pular-ad").onclick = () =>
+              overlay.remove();
+            overlay.addEventListener("click", function (e) {
+              if (e.target === overlay) overlay.remove();
+            });
+            sessionStorage.setItem("ad_popup_shown", "1");
+          }
+        } catch (e) {
+          console.log("Sem anúncios disponíveis.");
+        }
+      }
+
+      // ========== CONFIRMAÇÃO DE SAÍDA ==========
+      function adicionarConfirmacaoLinksExternos() {
+        document.body.addEventListener("click", function (e) {
+          const link = e.target.closest("a");
+          if (!link) return;
+          const href = link.getAttribute("href");
+          if (!href || href.startsWith("#") || href.startsWith("javascript:"))
+            return;
+          if (
+            link.hostname !== window.location.hostname &&
+            !link.href.startsWith("http://127.0.0.1") &&
+            !link.href.includes("localhost")
+          ) {
+            if (
+              link.classList.contains("btn-final-download") ||
+              link.classList.contains("btn-baixar-list") ||
+              link.id === "modalDownLink"
+            )
+              return;
+            e.preventDefault();
+            if (
+              confirm(
+                "Estás a sair do Santola Music. Desejas continuar para " +
+                  link.href +
+                  "?",
+              )
+            )
+              window.open(link.href, link.target || "_self");
+          }
+        });
+      }
+
+      // ========== CARREGAR DADOS ==========
+      async function carregarDados() {
+        try {
+          const resposta = await fetch("musicas.json");
+          const json = await resposta.json();
+          dbMusicas = [];
+          Object.keys(json).forEach((categoria) => {
+            if (Array.isArray(json[categoria])) {
+              json[categoria].forEach((item) => {
+                if (item.direitos_confirmados === false) return;
+                let downloads = item.downloads || DOWNLOADS_INICIAIS;
+                if (downloads === DOWNLOADS_INICIAIS)
+                  downloads = Math.floor(Math.random() * 51) + 100;
+                dbMusicas.push({
+                  artista: item.artista || "Artista Desconhecido",
+                  titulo: item.titulo || "Música",
+                  capa: item.capa || LOGO_PADRAO,
+                  url: item.url || "#",
+                  link: item.link || item.url || "#",
+                  categoria: categoria.replace(/_/g, " "),
+                  data_aprovacao: item.data_aprovacao || "2000-01-01",
+                  downloads: downloads,
+                  likes: item.likes || 100,
+                  descricao: item.descricao || "",
+                  video: item.video || "",
+                });
+              });
+            }
+          });
+          atualizarInterface();
+          renderizarFiltrosRapidos();
+          verificarDeepLink();
+        } catch (erro) {
+          console.error("Erro ao carregar musicas.json:", erro);
+          document.getElementById("lista-novidades").innerHTML =
+            "<p style='color:var(--vermelho); text-align:center;'>Erro de rede. Tenta atualizar.</p>";
+        }
+      }
+
+      function atualizarInterface() {
+        const hoje = new Date();
+        const limite = new Date(
+          hoje.getTime() - DIAS_NOVIDADES * 24 * 60 * 60 * 1000,
+        );
+        const novidades = dbMusicas
+          .filter((m) => new Date(m.data_aprovacao) >= limite)
+          .slice(0, POR_PAGINA);
+        document.getElementById("lista-novidades").innerHTML =
+          montarListaHTML(novidades);
+        const topHits = [...dbMusicas]
+          .sort((a, b) => (b.downloads || 100) - (a.downloads || 100))
+          .slice(0, 10);
+        document.getElementById("lista-top-hits").innerHTML =
+          montarListaHTML(topHits);
+        adicionarBotoesPlaylistAosCards();
+        configurarScrollInfinito("lista-novidades", "novidades");
+      }
+
+      // ========== MELHORIA 8: BADGE "NOVO" + DATA ==========
+      function montarListaHTML(lista) {
+        if (lista.length === 0)
+          return "<p style='text-align:center; opacity:0.3;'>Nenhuma música encontrada.</p>";
+        const agora = new Date();
+        const limiteNovo = new Date(agora.getTime() - 48 * 60 * 60 * 1000);
+        return lista
+          .map((m, i) => {
+            const data = new Date(m.data_aprovacao);
+            const isNovo = data >= limiteNovo;
+            const dataFormatada = data.toLocaleDateString("pt-PT");
+            return `
+          <div class="musica-card" style="animation: slideInUp 0.4s ease forwards; animation-delay: ${i * 0.05}s">
+            <img src="${m.capa}" class="img-capa" alt="${m.artista}" onerror="this.src='${LOGO_PADRAO}'">
+            <div class="musica-meta">
+              <strong><a href="artista.html?artista=${encodeURIComponent(m.artista)}">${m.artista}</a>${isNovo ? '<span class="badge-novo">NOVO</span>' : ""}</strong>
+              <small>${m.titulo}</small>
+              <span class="data-pequena">📅 ${dataFormatada} · ⬇️ ${m.downloads} · ❤️ ${m.likes}</span>
+              <span class="estilo-pill">${m.categoria}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="downloads-badge">${m.downloads}</span>
+              <button class="btn-baixar-list" onclick="handleDownloadClick('${encodeURIComponent(JSON.stringify(m))}')">BAIXAR</button>
+            </div>
+          </div>`;
+          })
+          .join("");
+      }
+
+      function handleDownloadClick(dadosCodificados) {
+        const m = JSON.parse(decodeURIComponent(dadosCodificados));
+        const musica = dbMusicas.find(
+          (mus) =>
+            mus.artista === m.artista &&
+            mus.titulo === m.titulo &&
+            mus.categoria === m.categoria,
+        );
+        if (musica) {
+          musica.downloads = (musica.downloads || 100) + 1;
+          atualizarInterface();
+        }
+        // Incrementar like também (❤️)
+        musica.likes = (musica.likes || 100) + 1;
+        if (navigator.vibrate) navigator.vibrate(30);
+        abrirModal(dadosCodificados);
+      }
+
+      function abrirModal(dadosCodificados) {
+        const m = JSON.parse(decodeURIComponent(dadosCodificados));
+        document.getElementById("modalImg").src = m.capa;
+        document.getElementById("modalArt").innerText = m.artista;
+        document.getElementById("modalTit").innerText = m.titulo;
+        document.getElementById("modalCat").innerText = m.categoria;
+        document.getElementById("modalDownLink").href = m.url || m.link;
+        const descEl = document.getElementById("modalDesc");
+        if (m.descricao && m.descricao.trim() !== "") {
+          descEl.innerText = m.descricao;
+          descEl.style.display = "block";
+        } else {
+          descEl.style.display = "none";
+        }
+        const videoEl = document.getElementById("modalVideo");
+        if (m.video && m.video.trim() !== "") {
+          videoEl.href = m.video;
+          videoEl.style.display = "inline-block";
+        } else {
+          videoEl.style.display = "none";
+        }
+        const urlBase = window.location.origin + window.location.pathname;
+        urlAtualMusica = `${urlBase}?artista=${encodeURIComponent(m.artista)}&titulo=${encodeURIComponent(m.titulo)}`;
+        document.getElementById("modalMaster").style.display = "flex";
+        document.body.style.overflow = "hidden";
+        // WEB SHARE API (MELHORIA 11)
+        if (navigator.share)
+          document.getElementById("btnShareNative").style.display = "flex";
+        else document.getElementById("btnShareNative").style.display = "none";
+      }
+
+      async function copiarLinkDeep() {
+        try {
+          await navigator.clipboard.writeText(urlAtualMusica);
+          const btn = document.getElementById("btnCopyShare");
+          btn.innerHTML = "✅ LINK COPIADO!";
+          btn.classList.add("copiado");
+          setTimeout(() => {
+            btn.innerHTML = "🔗 COPIAR LINK DESTE POST";
+            btn.classList.remove("copiado");
+          }, 2500);
+        } catch (err) {
+          alert("O teu navegador não permite copiar automaticamente.");
+        }
+      }
+
+      async function partilharNativa() {
+        try {
+          await navigator.share({
+            title: document.getElementById("modalArt").innerText,
+            text: urlAtualMusica,
+          });
+        } catch (e) {}
+      }
+
+      function fecharModal() {
+        document.getElementById("modalMaster").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      // ========== BUSCA COM AUTOCOMPLETE ==========
+      function motorDeBusca() {
+        const termoOriginal = document.getElementById("mainSearch").value;
+        const termoLimpo = norm(termoOriginal);
+        const suggestionsDiv = document.getElementById("searchSuggestions");
+        if (termoLimpo.length >= 2) {
+          const matches = dbMusicas
+            .filter(
+              (m) =>
+                norm(m.artista).includes(termoLimpo) ||
+                norm(m.titulo).includes(termoLimpo),
+            )
+            .slice(0, 5);
+          if (matches.length > 0) {
+            suggestionsDiv.innerHTML = matches
+              .map(
+                (m) => `
+              <div class="suggestion-item" onclick="selecionarSugestao('${m.artista.replace(/'/g, "\\'")}')">
+                <img src="${m.capa}" onerror="this.src='${LOGO_PADRAO}'" /><span>${m.artista} – ${m.titulo}</span><small>${m.categoria}</small>
+              </div>`,
+              )
+              .join("");
+            suggestionsDiv.classList.add("active");
+          } else {
+            suggestionsDiv.classList.remove("active");
+          }
+        } else {
+          suggestionsDiv.classList.remove("active");
+        }
+        if (termoLimpo.length === 0) {
+          cancelarBusca();
+          return;
+        }
+      }
+
+      function selecionarSugestao(artista) {
+        document.getElementById("mainSearch").value = artista;
+        document.getElementById("searchSuggestions").classList.remove("active");
+        executarBuscaCompleta();
+      }
+
+      function executarBuscaCompleta() {
+        const termoOriginal = document.getElementById("mainSearch").value;
+        const termoLimpo = norm(termoOriginal);
+        if (termoLimpo.length === 0) return;
+        const home = document.getElementById("home-view");
+        const searchView = document.getElementById("search-view");
+        const resultsBox = document.getElementById("search-results-list");
+        const resultados = dbMusicas.filter((m) =>
+          norm(m.artista + m.titulo + m.categoria).includes(termoLimpo),
+        );
+        home.style.display = "none";
+        searchView.style.display = "block";
+        resultsBox.innerHTML =
+          resultados.length > 0
+            ? montarListaHTML(resultados)
+            : `<div style="text-align:center; padding:60px;"><p style="font-size:3rem; margin-bottom:20px;">🔍</p>
+            <p style="margin-bottom:30px;">Não encontramos nada para "<b>${termoOriginal}</b>"</p>
+            <a href="https://wa.me/2399944660?text=Ol%C3%A1%20Santola%2C%20gostaria%20de%20pedir%20a%20m%C3%BAsica:%20${encodeURIComponent(termoOriginal)}" target="_blank"
+               style="display:inline-block; background:var(--verde); color:white; padding:14px 24px; border-radius:12px; text-decoration:none; font-weight:800; font-size:0.9rem; border-bottom:4px solid #0a6b1a;"
+               onmouseover="this.style.background='white'; this.style.color='black';" onmouseout="this.style.background='var(--verde)'; this.style.color='white';"
+            >📩 Pedir pelo WhatsApp</a><p style="margin-top:25px; font-size:0.7rem; opacity:0.4;">Faz o teu pedido e em breve adicionamos a música.</p></div>`;
+        adicionarBotoesPlaylistAosCards();
+      }
+
+      document
+        .getElementById("mainSearch")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            document
+              .getElementById("searchSuggestions")
+              .classList.remove("active");
+            executarBuscaCompleta();
+          }
+        });
+      document.addEventListener("click", function (e) {
+        if (!document.getElementById("searchWrapper").contains(e.target))
+          document
+            .getElementById("searchSuggestions")
+            .classList.remove("active");
+      });
+
+      // ========== MELHORIA 12: ATALHOS DE TECLADO ==========
+      document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey && e.key === "k") {
+          e.preventDefault();
+          document.getElementById("mainSearch").focus();
+        }
+        if (e.key === "Escape") {
+          fecharModal();
+          cancelarBusca();
+        }
+      });
+
+      // ========== GESTOS SWIPE NO MODAL ==========
+      let touchStartY = 0;
+      document
+        .getElementById("modalMaster")
+        .addEventListener("touchstart", function (e) {
+          touchStartY = e.touches[0].clientY;
+        });
+      document
+        .getElementById("modalMaster")
+        .addEventListener("touchend", function (e) {
+          if (touchStartY - e.changedTouches[0].clientY < -80) fecharModal();
+        });
+
+      function norm(texto) {
+        return texto
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .trim();
+      }
+      function cancelarBusca() {
+        document.getElementById("mainSearch").value = "";
+        document.getElementById("home-view").style.display = "block";
+        document.getElementById("search-view").style.display = "none";
+        document.getElementById("searchSuggestions").classList.remove("active");
+        window.scrollTo(0, 0);
+      }
+
+      // ========== POLLING ==========
+      async function verificarAtualizacoes() {
+        try {
+          const resposta = await fetch("versao.json", { cache: "no-cache" });
+          const dados = await resposta.json();
+          if (versaoAtual && dados.versao !== versaoAtual) {
+            console.log("🔁 Nova versão detectada.");
+            await carregarDados();
+          }
+          versaoAtual = dados.versao;
+        } catch (e) {}
+      }
+
+      function verificarDeepLink() {
+        const parametros = new URLSearchParams(window.location.search);
+        const artista = parametros.get("artista");
+        const titulo = parametros.get("titulo");
+        if (artista && titulo) {
+          const alvo = dbMusicas.find(
+            (m) =>
+              norm(m.artista) === norm(artista) &&
+              norm(m.titulo) === norm(titulo),
+          );
+          if (alvo) abrirModal(encodeURIComponent(JSON.stringify(alvo)));
+        }
+      }
+
+      function iniciarSliders() {
+        const itens = document.querySelectorAll(".ads-item");
+        if (itens.length < 2) return;
+        let ativo = 0;
+        setInterval(() => {
+          itens[ativo].classList.remove("active");
+          ativo = (ativo + 1) % itens.length;
+          itens[ativo].classList.add("active");
+        }, 6000);
+      }
+      function removerSplash() {
+        const splash = document.getElementById("splash");
+        setTimeout(() => {
+          splash.style.opacity = "0";
+          setTimeout(() => (splash.style.display = "none"), 800);
+        }, 1000);
+      }
+
+      window.onclick = function (e) {
+        if (e.target === document.getElementById("modalMaster")) fecharModal();
+        if (e.target === document.getElementById("ad-popup-overlay"))
+          document.getElementById("ad-popup-overlay").remove();
+      };
+
+      // ========== INICIALIZAÇÃO ==========
+      window.addEventListener("load", async () => {
+        await carregarDados();
+        iniciarSliders();
+        removerSplash();
+        adicionarConfirmacaoLinksExternos();
+        registrarVisita();
+        try {
+          const resp = await fetch("versao.json");
+          versaoAtual = (await resp.json()).versao;
+        } catch (e) {}
+        setTimeout(tentarMostrarAdPopup, 5000);
+      });
+      setInterval(verificarAtualizacoes, INTERVALO_POLLING);
+    </script>
+  </body>
+</html>

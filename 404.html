@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página Não Encontrada | Santola Music</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --preto-deep: #080808;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+      body {
+        background: var(--preto-deep);
+        color: white;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+      }
+      .logo-texto {
+        font-family: "Syne";
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-family: "Syne";
+        font-size: 4rem;
+        color: var(--amarelo);
+      }
+      p {
+        color: #aaa;
+        margin: 20px 0;
+        font-size: 1.1rem;
+      }
+      .btn-home {
+        background: var(--verde);
+        color: white;
+        padding: 14px 30px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        text-transform: uppercase;
+        border-bottom: 3px solid #0a6b1a;
+        transition: all 0.2s ease;
+        display: inline-block;
+        margin-top: 20px;
+      }
+      .btn-home:hover {
+        background: white;
+        color: black;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo-texto">Santola Music</div>
+    <h1>404</h1>
+    <p>Oops! A página que procuras não existe ou foi movida.</p>
+    <a href="index.html" class="btn-home">Voltar ao Início</a>
+  </body>
+</html>

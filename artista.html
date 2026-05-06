@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#080808" />
+    <meta name="description" content="Músicas do artista no Santola Music" />
+    <title id="pageTitle">Artista | Santola Music</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --preto-deep: #080808;
+        --preto-card: #111111;
+        --glass: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.12);
+        --glow-amarelo: 0 0 20px rgba(255, 219, 0, 0.25);
+        --glow-verde: 0 0 20px rgba(18, 173, 43, 0.25);
+        --transition-fast: all 0.2s ease;
+        --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background-color: var(--preto-deep);
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Cabeçalho */
+      header {
+        padding: 1.5rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        background: rgba(8, 8, 8, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(15px);
+      }
+
+      .btn-voltar {
+        position: absolute;
+        left: 15px;
+        top: 18px;
+        background: transparent;
+        color: var(--amarelo);
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        border: 1px solid var(--amarelo);
+        transition: var(--transition-fast);
+      }
+      .btn-voltar:hover {
+        background: rgba(255, 219, 0, 0.1);
+      }
+
+      .logo-main {
+        font-family: "Syne";
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+        cursor: pointer;
+      }
+
+      /* Conteúdo principal */
+      .main-container {
+        max-width: 850px;
+        margin: 2rem auto 5rem;
+        padding: 0 1.2rem;
+      }
+
+      .artist-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+      .artist-header h1 {
+        font-family: "Syne";
+        font-size: 2rem;
+        text-transform: uppercase;
+        color: var(--amarelo);
+      }
+
+      /* Cards de música (iguais ao index) */
+      .musica-card {
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.45);
+        margin-bottom: 14px;
+        padding: 14px;
+        border-radius: 18px;
+        gap: 15px;
+        border: 1px solid var(--border);
+        transition: var(--transition-smooth);
+      }
+      .musica-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--amarelo);
+        transform: scale(1.02);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .img-capa {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
+        object-fit: cover;
+        background: #222;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .musica-meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .musica-meta strong {
+        font-size: 1.05rem;
+        color: #fff;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 3px;
+      }
+      .musica-meta small {
+        color: #aaa;
+        font-size: 0.85rem;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .estilo-pill {
+        font-size: 0.6rem;
+        background: var(--verde);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-weight: 800;
+        display: inline-block;
+        text-transform: uppercase;
+      }
+
+      .btn-baixar-list {
+        background: var(--amarelo);
+        color: black;
+        padding: 10px 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.75rem;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        text-transform: uppercase;
+      }
+      .btn-baixar-list:hover {
+        background: white;
+        transform: scale(1.05);
+      }
+
+      /* Modal */
+      #modalMaster {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.97);
+        z-index: 12000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        backdrop-filter: blur(15px);
+      }
+      .modal-santola-box {
+        background: #111;
+        border-radius: 35px;
+        padding: 2.5rem;
+        border: 2px solid var(--amarelo);
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+        position: relative;
+        animation: modalPopUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      }
+      @keyframes modalPopUp {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .btn-fechar {
+        position: absolute;
+        right: 22px;
+        top: 22px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2.2rem;
+        cursor: pointer;
+        line-height: 1;
+        transition: 0.2s;
+      }
+      .btn-fechar:hover {
+        color: var(--vermelho);
+      }
+      .modal-infos {
+        margin-bottom: 25px;
+      }
+      .modal-infos h2 {
+        font-family: "Syne";
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        color: #fff;
+      }
+      .modal-infos p {
+        color: var(--amarelo);
+        font-size: 1.1rem;
+      }
+      .btn-final-download {
+        display: block;
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(270deg, #12ad2b, #ffdb00, #d21034);
+        background-size: 400% 400%;
+        animation: stpGradient 6s ease infinite;
+        border-radius: 18px;
+        color: black;
+        text-decoration: none;
+        font-weight: 800;
+        text-transform: uppercase;
+        border-bottom: 5px solid #000;
+        margin-bottom: 15px;
+        transition: 0.2s;
+      }
+      .btn-final-download:active {
+        transform: translateY(2px);
+        border-bottom-width: 1px;
+      }
+      .btn-share-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #444;
+        color: #aaa;
+        padding: 14px;
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        transition: var(--transition-smooth);
+      }
+      .btn-share-link:hover {
+        border-color: var(--amarelo);
+        color: var(--amarelo);
+        background: rgba(255, 219, 0, 0.05);
+      }
+      .btn-share-link.copiado {
+        border-color: var(--verde);
+        color: var(--verde);
+        background: rgba(18, 173, 43, 0.05);
+      }
+
+      @media (max-width: 600px) {
+        .logo-main {
+          font-size: 1.6rem;
+        }
+        .modal-santola-box {
+          padding: 1.8rem;
+          border-radius: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="btn-voltar">← Início</a>
+      <div class="logo-main" onclick="window.location.href = 'index.html'">
+        Santola Music
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div class="artist-header">
+        <h1 id="artistName">Artista</h1>
+      </div>
+      <div id="lista-musicas">
+        <p style="text-align: center; opacity: 0.4; padding: 20px">
+          A carregar músicas...
+        </p>
+      </div>
+    </main>
+
+    <!-- Modal (mesmo do index) -->
+    <div id="modalMaster">
+      <div class="modal-santola-box">
+        <button class="btn-fechar" onclick="fecharModal()">&times;</button>
+        <img
+          id="modalImg"
+          src=""
+          alt="Capa"
+          class="img-capa"
+          style="
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            display: block;
+            border: 3px solid var(--amarelo);
+            border-radius: 20px;
+            object-fit: cover;
+          "
+        />
+        <div class="modal-infos">
+          <h2 id="modalArt"></h2>
+          <p id="modalTit"></p>
+          <div style="margin-top: 15px">
+            <span id="modalCat" class="estilo-pill"></span>
+          </div>
+        </div>
+        <a id="modalDownLink" href="" class="btn-final-download"
+          >BAIXAR AGORA (MP3)</a
+        >
+        <button
+          id="btnCopyShare"
+          class="btn-share-link"
+          onclick="copiarLinkDeep()"
+        >
+          🔗 COPIAR LINK DESTE POST
+        </button>
+        <p style="margin-top: 15px; font-size: 0.6rem; opacity: 0.4">
+          Ao copiar o link, podes partilhar no WhatsApp.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
+      let urlAtualMusica = "";
+
+      // Extrai o nome do artista da URL
+      const params = new URLSearchParams(window.location.search);
+      const artistaParam = params.get("artista");
+
+      if (!artistaParam) {
+        document.getElementById("lista-musicas").innerHTML =
+          "<p style='text-align:center; opacity:0.5;'>Nenhum artista especificado.</p>";
+      } else {
+        document.getElementById("artistName").textContent =
+          decodeURIComponent(artistaParam);
+        document.title = decodeURIComponent(artistaParam) + " | Santola Music";
+        carregarMusicasDoArtista(artistaParam);
+      }
+
+      async function carregarMusicasDoArtista(artista) {
+        try {
+          const res = await fetch("musicas.json");
+          const json = await res.json();
+          const musicas = [];
+
+          Object.keys(json).forEach((categoria) => {
+            if (Array.isArray(json[categoria])) {
+              json[categoria].forEach((m) => {
+                musicas.push({
+                  ...m,
+                  categoria: categoria.replace(/_/g, " "),
+                  downloads: m.downloads || 100,
+                });
+              });
+            }
+          });
+
+          // Filtra pelo artista (case insensitive)
+          const filtradas = musicas.filter(
+            (m) => m.artista.toLowerCase() === artista.toLowerCase(),
+          );
+
+          const container = document.getElementById("lista-musicas");
+          if (filtradas.length === 0) {
+            container.innerHTML =
+              "<p style='text-align:center; opacity:0.5;'>Nenhuma música encontrada para este artista.</p>";
+            return;
+          }
+
+          container.innerHTML = filtradas
+            .map(
+              (m, i) => `
+            <div class="musica-card" style="animation: slideInUp 0.4s ease forwards; animation-delay: ${i * 0.05}s">
+              <img src="${m.capa || LOGO_PADRAO}" class="img-capa" alt="${m.artista}" onerror="this.src='${LOGO_PADRAO}'">
+              <div class="musica-meta">
+                <strong>${m.artista}</strong>
+                <small>${m.titulo}</small>
+                <span class="estilo-pill">${m.categoria}</span>
+              </div>
+              <button class="btn-baixar-list" onclick="abrirModal('${encodeURIComponent(JSON.stringify(m))}')">BAIXAR</button>
+            </div>
+          `,
+            )
+            .join("");
+        } catch (err) {
+          document.getElementById("lista-musicas").innerHTML =
+            "<p style='color:var(--vermelho); text-align:center;'>Erro ao carregar músicas.</p>";
+        }
+      }
+
+      // Modal (igual ao index)
+      function abrirModal(dadosCodificados) {
+        const m = JSON.parse(decodeURIComponent(dadosCodificados));
+        document.getElementById("modalImg").src = m.capa;
+        document.getElementById("modalArt").innerText = m.artista;
+        document.getElementById("modalTit").innerText = m.titulo;
+        document.getElementById("modalCat").innerText = m.categoria;
+        document.getElementById("modalDownLink").href = m.url || m.link || "#";
+
+        const urlBase = window.location.origin + window.location.pathname;
+        urlAtualMusica = `${urlBase}?artista=${encodeURIComponent(m.artista)}&titulo=${encodeURIComponent(m.titulo)}`;
+        document.getElementById("modalMaster").style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      async function copiarLinkDeep() {
+        try {
+          await navigator.clipboard.writeText(urlAtualMusica);
+          const btn = document.getElementById("btnCopyShare");
+          const originalText = btn.innerHTML;
+          btn.innerHTML = "✅ LINK COPIADO!";
+          btn.classList.add("copiado");
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove("copiado");
+          }, 2500);
+        } catch (err) {
+          alert(
+            "O teu navegador não permite copiar automaticamente. Copia o link da barra de endereços.",
+          );
+        }
+      }
+
+      function fecharModal() {
+        document.getElementById("modalMaster").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      window.onclick = function (e) {
+        if (e.target == document.getElementById("modalMaster")) fecharModal();
+      };
+    </script>
+  </body>
+</html>

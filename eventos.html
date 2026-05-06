@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Eventos | Santola Music</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --glass: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+      body {
+        background-color: #080808;
+        color: white;
+        min-height: 100vh;
+      }
+
+      /* HEADER */
+      header {
+        padding: 2rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        background: #080808;
+        position: relative;
+      }
+      .btn-voltar {
+        position: absolute;
+        left: 15px;
+        top: 18px;
+        background: transparent;
+        color: var(--amarelo);
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        border: 1px solid var(--amarelo);
+        transition: all 0.2s ease;
+      }
+      .btn-voltar:hover {
+        background: rgba(255, 219, 0, 0.1);
+      }
+      .logo-texto {
+        font-family: "Syne";
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      /* GRELHA DE EVENTOS */
+      .main-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 1.5rem;
+      }
+
+      .event-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .event-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .event-card {
+        position: relative;
+        height: auto;
+        min-height: 250px;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        text-decoration: none;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        transition: transform 0.3s ease;
+        background: #111;
+      }
+
+      .event-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--amarelo);
+      }
+
+      .event-img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        opacity: 0.5;
+      }
+
+      .event-overlay {
+        padding: 15px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .event-overlay h3 {
+        font-family: "Syne";
+        font-size: 1.1rem;
+        margin-top: 5px;
+        color: var(--amarelo);
+      }
+
+      .event-overlay .event-desc {
+        font-size: 0.75rem;
+        opacity: 0.8;
+        margin: 5px 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .event-details-box {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .detail-item {
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        opacity: 0.9;
+      }
+
+      .detail-item i {
+        color: var(--verde);
+        width: 12px;
+      }
+
+      .maps-btn {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 0.7rem;
+        color: var(--amarelo);
+        text-decoration: underline;
+        font-weight: 700;
+      }
+
+      .no-events {
+        text-align: center;
+        grid-column: 1 / -1;
+        padding: 50px;
+        opacity: 0.4;
+      }
+
+      .event-banner {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .event-banner:hover {
+        opacity: 0.85;
+      }
+      .event-banner img {
+        width: 100%;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="btn-voltar">← Início</a>
+      <a href="index.html" class="logo-texto">Santola Music</a>
+      <p
+        style="
+          color: var(--amarelo);
+          font-size: 0.7rem;
+          letter-spacing: 3px;
+          margin-top: 5px;
+        "
+      >
+        EVENTOS E DESTAQUES
+      </p>
+    </header>
+
+    <main class="main-content">
+      <h2
+        style="
+          font-family: &quot;Syne&quot;;
+          font-size: 1.2rem;
+          margin-bottom: 20px;
+        "
+      >
+        Próximos Eventos 🔥
+      </h2>
+
+      <div class="event-grid" id="eventGrid">
+        <p class="no-events">A carregar eventos disponíveis...</p>
+      </div>
+    </main>
+
+    <script>
+      const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
+
+      // Confirmação de saída para links externos
+      function adicionarConfirmacaoSaida() {
+        document.body.addEventListener("click", function (e) {
+          const link = e.target.closest("a");
+          if (!link) return;
+          const href = link.getAttribute("href");
+          if (!href || href.startsWith("#") || href.startsWith("javascript:"))
+            return;
+          if (
+            link.hostname !== window.location.hostname &&
+            !link.href.startsWith("http://127.0.0.1") &&
+            !link.href.includes("localhost")
+          ) {
+            e.preventDefault();
+            if (
+              confirm(
+                "Estás a sair do Santola Music. Desejas continuar para " +
+                  link.href +
+                  "?",
+              )
+            ) {
+              window.open(link.href, link.target || "_self");
+            }
+          }
+        });
+      }
+
+      // Função para interpretar datas no formato ISO, corrigindo mês > 12
+      function parseData(dataStr) {
+        if (!dataStr) return null;
+        const partes = dataStr.split("-");
+        if (partes.length !== 3) return null;
+        let ano = parseInt(partes[0]);
+        let mes = parseInt(partes[1]);
+        let dia = parseInt(partes[2]);
+        if (mes > 12) {
+          // Troca dia e mês se mês > 12
+          [dia, mes] = [mes, dia];
+        }
+        const data = new Date(ano, mes - 1, dia);
+        return isNaN(data.getTime()) ? null : data;
+      }
+
+      function formatarData(dataISO) {
+        if (!dataISO) return "Data a definir";
+        const data = parseData(dataISO);
+        if (!data) return dataISO;
+        const dia = String(data.getDate()).padStart(2, "0");
+        const mes = String(data.getMonth() + 1).padStart(2, "0");
+        const ano = data.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+      }
+
+      async function carregarEventos() {
+        try {
+          const response = await fetch("eventos.json");
+          const todosEventos = await response.json();
+
+          const hoje = new Date();
+          hoje.setHours(0, 0, 0, 0);
+
+          // Filtra eventos cuja dataExpira seja >= hoje
+          const ativos = todosEventos.filter((ev) => {
+            const dataExpira = parseData(ev.dataExpira);
+            return dataExpira ? dataExpira >= hoje : false;
+          });
+
+          const container = document.getElementById("eventGrid");
+
+          if (ativos.length === 0) {
+            container.innerHTML =
+              '<p class="no-events">Nenhum evento agendado de momento.</p>';
+            return;
+          }
+
+          container.innerHTML = ativos
+            .map((ev) => {
+              // Mapeia os campos do JSON para os esperados na renderização
+              const nome = ev.titulo || ev.nome || "Evento";
+              const local = ev.localizacao || ev.local || "";
+              const imagem = ev.imagem || LOGO_PADRAO;
+              const link = ev.link || "";
+              const maps = ev.maps || "";
+              const descricao = ev.descricao || "";
+              const bannerImg = ev.banner_imagem || "";
+              const bannerLink = ev.banner_link || "";
+
+              return `
+              <div class="event-card">
+                <img src="${imagem}" class="event-img" onerror="this.src='${LOGO_PADRAO}'">
+                <div class="event-overlay">
+                  <h3>${nome}</h3>
+                  ${descricao ? `<p class="event-desc">${descricao}</p>` : ""}
+                  
+                  <div class="event-details-box">
+                    <div class="detail-item">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span>Até: ${formatarData(ev.dataExpira)}</span>
+                    </div>
+                    ${
+                      local
+                        ? `
+                    <div class="detail-item">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span>${local}</span>
+                    </div>`
+                        : ""
+                    }
+                  </div>
+
+                  ${
+                    maps
+                      ? `
+                  <a href="${maps}" target="_blank" class="maps-btn">
+                    <i class="fas fa-location-arrow"></i> VER NO MAPA
+                  </a>`
+                      : ""
+                  }
+                  
+                  ${
+                    link && !maps
+                      ? `
+                  <a href="${link}" target="_blank" class="maps-btn" style="color: var(--amarelo);">
+                    <i class="fas fa-external-link-alt"></i> SAIBA MAIS
+                  </a>`
+                      : ""
+                  }
+
+                  ${
+                    bannerImg
+                      ? `
+                  <a href="${bannerLink || "#"}" target="_blank" class="event-banner" title="Publicidade">
+                    <img src="${bannerImg}" alt="Anúncio" onerror="this.style.display='none'" />
+                  </a>`
+                      : ""
+                  }
+                </div>
+              </div>
+            `;
+            })
+            .join("");
+        } catch (e) {
+          console.error("Erro ao carregar eventos.json", e);
+          document.getElementById("eventGrid").innerHTML =
+            '<p class="no-events">Erro ao carregar a agenda.</p>';
+        }
+      }
+
+      adicionarConfirmacaoSaida();
+      window.onload = carregarEventos;
+    </script>
+  </body>
+</html>

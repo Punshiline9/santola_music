@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Anunciar | Santola Music</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --glass: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.12);
+        --preto-deep: #080808;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+      body {
+        background-color: var(--preto-deep);
+        color: white;
+        min-height: 100vh;
+      }
+      header {
+        padding: 1.5rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        background: rgba(8, 8, 8, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(15px);
+      }
+      .btn-voltar {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--verde);
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        border-bottom: 3px solid #0a6b1a;
+        transition: all 0.2s ease;
+      }
+      .btn-voltar:hover {
+        background: white;
+        color: black;
+        transform: translateY(-50%) scale(1.05);
+      }
+      .logo-texto {
+        font-family: "Syne";
+        font-size: 1.6rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .main-content {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+      }
+      .hero-card {
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .hero-card h1 {
+        font-family: "Syne";
+        font-size: 2rem;
+        color: var(--amarelo);
+        margin-bottom: 1rem;
+      }
+      .hero-card p {
+        color: #aaa;
+        font-size: 1rem;
+        max-width: 500px;
+        margin: 0 auto 2rem;
+      }
+      .btn-contact {
+        background: var(--amarelo);
+        color: black;
+        padding: 16px 32px;
+        border-radius: 16px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1rem;
+        text-transform: uppercase;
+        border-bottom: 4px solid #bfa300;
+        transition: all 0.3s ease;
+        display: inline-block;
+      }
+      .btn-contact:hover {
+        transform: translateY(-2px);
+        background: white;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin: 2rem 0;
+      }
+      @media (max-width: 600px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .stat-item {
+        background: #111;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+      .stat-item strong {
+        font-family: "Syne";
+        font-size: 2rem;
+        color: var(--verde);
+        display: block;
+      }
+      .stat-item span {
+        color: #888;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .footer-note {
+        text-align: center;
+        padding: 3rem;
+        border-top: 1px solid var(--border);
+        margin-top: 2rem;
+        font-size: 0.75rem;
+        opacity: 0.5;
+      }
+      .footer-note strong {
+        color: var(--amarelo);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="btn-voltar">← Voltar</a>
+      <div class="logo-texto">Santola Music</div>
+    </header>
+
+    <main class="main-content">
+      <div class="hero-card">
+        <h1>Anuncie no Santola Music</h1>
+        <p>
+          O blog de música n.º 1 de São Tomé e Príncipe. Alcance um público
+          engajado e amante da cultura musical.
+        </p>
+        <a
+          href="https://wa.me/2399944660?text=Ol%C3%A1%2C%20quero%20anunciar%20no%20Santola%20Music!"
+          target="_blank"
+          class="btn-contact"
+          >Falar no WhatsApp</a
+        >
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <strong>+100</strong>
+          <span>Músicas no acervo</span>
+        </div>
+        <div class="stat-item">
+          <strong>+100</strong>
+          <span>Downloads por dia</span>
+        </div>
+        <div class="stat-item">
+          <strong>STP</strong>
+          <span>Foco nas ilhas</span>
+        </div>
+      </div>
+
+      <div class="hero-card" style="background: #111; text-align: left">
+        <h2
+          style="
+            font-family: &quot;Syne&quot;;
+            color: var(--verde);
+            margin-bottom: 20px;
+          "
+        >
+          Porquê anunciar aqui?
+        </h2>
+        <ul
+          style="
+            color: #ccc;
+            line-height: 2;
+            list-style-type: none;
+            padding-left: 0;
+          "
+        >
+          <li>✅ Tráfego 100% orgânico de São Tomé e Príncipe e diáspora</li>
+          <li>✅ Espaços de banner no topo e rodapé do blog</li>
+          <li>✅ Divulgação nas redes sociais (YouTube, TikTok, Instagram)</li>
+          <li>✅ Relatórios mensais de visualizações</li>
+          <li>✅ Preços acessíveis para artistas e negócios locais</li>
+        </ul>
+      </div>
+    </main>
+
+    <div class="footer-note">
+      <p>
+        Desenvolvido por <strong>Pacheco Gonçalves</strong><br />Santola Music -
+        São Tomé e Príncipe © 2026
+      </p>
+    </div>
+  </body>
+</html>
