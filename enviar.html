@@ -146,8 +146,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Link da música (MP3) *</label>
-                <input type="url" id="audio_link" required placeholder="https://drive.google.com/... ou https://mediafire.com/...">
+                <label>🔗 Link da música (MP3)</label>
+                <input type="url" id="audio_link" placeholder="https://drive.google.com/... ou https://mediafire.com/...">
+            </div>
+            <div class="form-group">
+                <label>📁 OU Enviar ficheiro MP3</label>
+                <input type="file" id="audio_file" accept="audio/mp3, audio/mpeg">
             </div>
             <div class="form-group">
                 <label>Descrição (opcional)</label>
@@ -166,8 +170,8 @@
 </main>
 
 <script>
-    // ⚡ NOVO API BASE (Google Apps Script – ID de implementação atualizado)
-    const API_BASE = "https://script.google.com/macros/s/AKfycbyOkQL52WHoz_9zhfqSSvF2nU3KLjoKjyPIhRwZn_qd-zLl9a-q_7_R4tOeAAQl30Qs/exec";
+    // ⚡ API BASE ATUALIZADA
+    const API_BASE = "https://script.google.com/macros/s/AKfycbz-JdXtBOVudKEKDYUHzN--zwW3iQz4BHtZsNrmBSLFXOWQOS2KCnl8whv_TJ90wv6O/exec";
 
     const selectCategoria = document.getElementById("categoria");
     selectCategoria.addEventListener("change", function () {
@@ -187,9 +191,16 @@
         const audio_link = document.getElementById("audio_link").value.trim();
         const descricao = document.getElementById("descricao").value.trim();
         const direitosConfirmados = document.getElementById("confirma-direitos").checked;
+        const fileInput = document.getElementById("audio_file");
+        const file = fileInput.files[0];
 
         if (!categoria) {
             alert("Por favor, escolhe um estilo.");
+            return;
+        }
+
+        if (!audio_link && !file) {
+            alert("Fornece um link da música ou seleciona um ficheiro MP3.");
             return;
         }
 
@@ -198,10 +209,24 @@
             artista,
             titulo,
             categoria,
-            audio_link,
             descricao,
             direitos_confirmados: direitosConfirmados
         };
+
+        // Se houver ficheiro, converte para base64 e adiciona ao payload
+        if (file) {
+            try {
+                const base64 = await fileToBase64(file);
+                payload.musicaBase64 = base64.split(",")[1];      // remove o prefixo data:...
+                payload.musicaMime = file.type;
+                payload.audio_link = "";                           // o backend dará prioridade ao ficheiro
+            } catch (err) {
+                alert("Erro ao ler o ficheiro.");
+                return;
+            }
+        } else {
+            payload.audio_link = audio_link;
+        }
 
         try {
             const resposta = await fetch(API_BASE, {
@@ -222,6 +247,16 @@
             console.error(err);
         }
     });
+
+    // Função auxiliar para converter ficheiro em base64
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
 </script>
 </body>
 </html>
