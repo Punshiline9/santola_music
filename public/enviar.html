@@ -85,15 +85,37 @@
             border-color: var(--amarelo); box-shadow: var(--glow-amarelo); background: rgba(255,255,255,0.08);
         }
         .form-group textarea { resize: vertical; min-height: 80px; }
-        select.cat-kizomba { background-color: var(--cat-kizomba); }
-        select.cat-stp { background-color: var(--cat-stp); }
-        select.cat-angola { background-color: var(--cat-angola); }
-        select.cat-brazil { background-color: var(--cat-brazil); }
-        select.cat-rap { background-color: var(--cat-rap); }
-        select.cat-beats { background-color: var(--cat-beats); }
-        select.cat-semba { background-color: var(--cat-semba); }
-        select.cat-mixes { background-color: var(--cat-mixes); }
-        select.cat-internacional { background-color: var(--cat-internacional); }
+
+        /* Categorias como botões */
+        .cat-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .cat-pill {
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition-fast);
+            color: white;
+            background: #222;
+        }
+        .cat-pill:hover { filter: brightness(1.2); }
+        .cat-pill.selected { border-color: var(--amarelo); box-shadow: var(--glow-amarelo); }
+        .cat-pill[data-cat="cat-kizomba"] { background-color: var(--cat-kizomba); }
+        .cat-pill[data-cat="cat-stp"] { background-color: var(--cat-stp); }
+        .cat-pill[data-cat="cat-angola"] { background-color: var(--cat-angola); }
+        .cat-pill[data-cat="cat-brazil"] { background-color: var(--cat-brazil); }
+        .cat-pill[data-cat="cat-rap"] { background-color: var(--cat-rap); }
+        .cat-pill[data-cat="cat-beats"] { background-color: var(--cat-beats); }
+        .cat-pill[data-cat="cat-semba"] { background-color: var(--cat-semba); }
+        .cat-pill[data-cat="cat-mixes"] { background-color: var(--cat-mixes); }
+        .cat-pill[data-cat="cat-internacional"] { background-color: var(--cat-internacional); }
+
         .checkbox-label {
             display: flex; align-items: flex-start; gap: 10px; color: #aaa; font-size: 0.8rem; line-height: 1.4;
         }
@@ -132,22 +154,37 @@
             </div>
             <div class="form-group">
                 <label>Estilo (categoria) *</label>
-                <select id="categoria" required>
-                    <option value="">Escolhe o gênero…</option>
-                    <option value="KIZOMBA_ZOUK" data-cat="cat-kizomba">Kizomba & Zouk</option>
-                    <option value="TOP_STP" data-cat="cat-stp">Top STP</option>
-                    <option value="TOP_ANGOLA" data-cat="cat-angola">Top Angola</option>
-                    <option value="TOP_BRAZIL" data-cat="cat-brazil">Top Brazil</option>
-                    <option value="RAP_HIPHOP" data-cat="cat-rap">Rap / Hip-Hop</option>
-                    <option value="BEATS_INSTRUMENTAIS" data-cat="cat-beats">Beats & Instrumentais</option>
-                    <option value="SEMBA" data-cat="cat-semba">Semba</option>
-                    <option value="MELHORES_MIXS" data-cat="cat-mixes">Melhores Mixs</option>
-                    <option value="INTERNACIONAL" data-cat="cat-internacional">Internacional</option>
+                <div class="cat-pills" id="catPills">
+                    <div class="cat-pill" data-cat="cat-kizomba" data-value="KIZOMBA_ZOUK">Kizomba & Zouk</div>
+                    <div class="cat-pill" data-cat="cat-stp" data-value="TOP_STP">Top STP</div>
+                    <div class="cat-pill" data-cat="cat-angola" data-value="TOP_ANGOLA">Top Angola</div>
+                    <div class="cat-pill" data-cat="cat-brazil" data-value="TOP_BRAZIL">Top Brazil</div>
+                    <div class="cat-pill" data-cat="cat-rap" data-value="RAP_HIPHOP">Rap / Hip-Hop</div>
+                    <div class="cat-pill" data-cat="cat-beats" data-value="BEATS_INSTRUMENTAIS">Beats & Instrumentais</div>
+                    <div class="cat-pill" data-cat="cat-semba" data-value="SEMBA">Semba</div>
+                    <div class="cat-pill" data-cat="cat-mixes" data-value="MELHORES_MIXS">Melhores Mixs</div>
+                    <div class="cat-pill" data-cat="cat-internacional" data-value="INTERNACIONAL">Internacional</div>
+                </div>
+                <select id="categoria" required style="display:none;">
+                    <option value="">Escolhe…</option>
+                    <option value="KIZOMBA_ZOUK">Kizomba & Zouk</option>
+                    <option value="TOP_STP">Top STP</option>
+                    <option value="TOP_ANGOLA">Top Angola</option>
+                    <option value="TOP_BRAZIL">Top Brazil</option>
+                    <option value="RAP_HIPHOP">Rap / Hip-Hop</option>
+                    <option value="BEATS_INSTRUMENTAIS">Beats & Instrumentais</option>
+                    <option value="SEMBA">Semba</option>
+                    <option value="MELHORES_MIXS">Melhores Mixs</option>
+                    <option value="INTERNACIONAL">Internacional</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Link da música (MP3) *</label>
-                <input type="url" id="audio_link" required placeholder="https://drive.google.com/... ou https://mediafire.com/...">
+                <label>🔗 Link da música (MP3)</label>
+                <input type="url" id="audio_link" placeholder="https://drive.google.com/... ou https://mediafire.com/...">
+            </div>
+            <div class="form-group">
+                <label>📁 OU Enviar ficheiro MP3</label>
+                <input type="file" id="audio_file" accept="audio/mp3, audio/mpeg">
             </div>
             <div class="form-group">
                 <label>Descrição (opcional)</label>
@@ -166,16 +203,19 @@
 </main>
 
 <script>
-    // ⚡ NOVO API BASE (Google Apps Script – ID de implementação atualizado)
-    const API_BASE = "https://script.google.com/macros/s/AKfycbyOkQL52WHoz_9zhfqSSvF2nU3KLjoKjyPIhRwZn_qd-zLl9a-q_7_R4tOeAAQl30Qs/exec";
+    // ⚡ API BASE
+    const API_BASE = "https://script.google.com/macros/s/AKfycbzkBjnZOH-EX1DNHWM8smzE0wxl1liv6dY5fazOY-MTJO49I4BTNIAZnc-tvIw5F61W/exec";
 
-    const selectCategoria = document.getElementById("categoria");
-    selectCategoria.addEventListener("change", function () {
-        const classes = ["cat-kizomba", "cat-stp", "cat-angola", "cat-brazil", "cat-rap", "cat-beats", "cat-semba", "cat-mixes", "cat-internacional"];
-        selectCategoria.classList.remove(...classes);
-        const selectedOption = this.options[this.selectedIndex];
-        const catClass = selectedOption.getAttribute("data-cat");
-        if (catClass) selectCategoria.classList.add(catClass);
+    // Gerir seleção das categorias pelos botões
+    const pills = document.querySelectorAll('.cat-pill');
+    const selectCategoria = document.getElementById('categoria');
+
+    pills.forEach(pill => {
+        pill.addEventListener('click', function () {
+            pills.forEach(p => p.classList.remove('selected'));
+            this.classList.add('selected');
+            selectCategoria.value = this.getAttribute('data-value');
+        });
     });
 
     document.getElementById("form-envio").addEventListener("submit", async (e) => {
@@ -187,9 +227,16 @@
         const audio_link = document.getElementById("audio_link").value.trim();
         const descricao = document.getElementById("descricao").value.trim();
         const direitosConfirmados = document.getElementById("confirma-direitos").checked;
+        const fileInput = document.getElementById("audio_file");
+        const file = fileInput.files[0];
 
         if (!categoria) {
             alert("Por favor, escolhe um estilo.");
+            return;
+        }
+
+        if (!audio_link && !file) {
+            alert("Fornece um link da música ou seleciona um ficheiro MP3.");
             return;
         }
 
@@ -198,10 +245,24 @@
             artista,
             titulo,
             categoria,
-            audio_link,
             descricao,
             direitos_confirmados: direitosConfirmados
         };
+
+        // Se houver ficheiro, converte para base64
+        if (file) {
+            try {
+                const base64 = await fileToBase64(file);
+                payload.musicaBase64 = base64.split(",")[1];      // remove o prefixo data:...
+                payload.musicaMime = file.type;
+                payload.audio_link = "";                           // o backend dará prioridade ao ficheiro
+            } catch (err) {
+                alert("Erro ao ler o ficheiro.");
+                return;
+            }
+        } else {
+            payload.audio_link = audio_link;
+        }
 
         try {
             const resposta = await fetch(API_BASE, {
@@ -213,7 +274,9 @@
             if (resultado.status === "sucesso") {
                 alert("Música enviada com sucesso! Aguarda a aprovação.");
                 document.getElementById("form-envio").reset();
-                selectCategoria.classList.remove(...selectCategoria.classList);
+                // Limpar seleção dos botões
+                pills.forEach(p => p.classList.remove('selected'));
+                selectCategoria.value = "";
             } else {
                 alert("Erro: " + resultado.mensagem);
             }
@@ -222,6 +285,16 @@
             console.error(err);
         }
     });
+
+    // Função auxiliar para converter ficheiro em base64
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
 </script>
 </body>
 </html>
