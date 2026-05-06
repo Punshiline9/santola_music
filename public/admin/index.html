@@ -1,0 +1,1501 @@
+<!doctype html>
+<html lang="pt-pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Painel Admin | Santola Music</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --verde: #12ad2b;
+        --amarelo: #ffdb00;
+        --vermelho: #d21034;
+        --glass: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.12);
+        --preto-deep: #080808;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+      body {
+        background-color: var(--preto-deep);
+        color: white;
+        min-height: 100vh;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 1rem;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: rgba(8, 8, 8, 0.95);
+        z-index: 1000;
+        backdrop-filter: blur(15px);
+      }
+      .btn-voltar {
+        background: transparent;
+        color: var(--amarelo);
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--amarelo);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+      }
+      .logo-texto {
+        font-family: "Syne";
+        font-size: 1.6rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--verde),
+          var(--amarelo),
+          var(--vermelho)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .header-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .tabs-container {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+        background: var(--glass);
+        padding: 5px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        overflow-x: auto;
+        white-space: nowrap;
+        flex-wrap: wrap;
+      }
+      .tab-btn {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        background: transparent;
+        color: #888;
+        font-weight: 800;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: var(--transition);
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        min-width: 90px;
+      }
+      .tab-btn.active {
+        background: var(--verde);
+        color: white;
+      }
+      .badge-pendente {
+        background: var(--vermelho);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-size: 0.6rem;
+        margin-left: 5px;
+      }
+
+      .main-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+      .titulo-secao {
+        font-family: "Syne";
+        text-align: left;
+        margin: 1.5rem 0;
+        color: #fff;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .secao-lista {
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+      .secao-lista.active {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .music-item {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 14px;
+        border-radius: 18px;
+        margin-bottom: 12px;
+        border: 1px solid var(--border);
+        transition: 0.2s;
+        cursor: grab;
+      }
+      .music-item:active {
+        cursor: grabbing;
+      }
+      .music-item.drag-over {
+        border-color: var(--verde);
+        background: rgba(18, 173, 43, 0.15);
+      }
+      .m-capa {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        margin-right: 15px;
+        object-fit: cover;
+      }
+      .m-info {
+        flex: 1;
+      }
+      .m-info h4 {
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+      }
+      .m-info p {
+        font-size: 0.75rem;
+        color: var(--amarelo);
+      }
+
+      .btn-acao {
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        margin-left: 6px;
+      }
+      .btn-edit {
+        background: var(--glass);
+        color: white;
+        border: 1px solid var(--border);
+        transition: 0.2s;
+      }
+      .btn-edit:hover {
+        background: #333;
+        transform: scale(1.1);
+      }
+      .btn-play {
+        background: var(--amarelo);
+        color: black;
+      }
+      .btn-delete {
+        background: transparent;
+        border: 1px solid var(--vermelho);
+        color: var(--vermelho);
+      }
+
+      .form-card {
+        background: var(--glass);
+        border-radius: 18px;
+        padding: 20px;
+        border: 1px solid var(--border);
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.75rem;
+        color: #aaa;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+      }
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border);
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        outline: none;
+        font-size: 0.9rem;
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .btn-salvar {
+        background: var(--verde);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 10px;
+        font-weight: 800;
+        cursor: pointer;
+        border-bottom: 4px solid #0a6b1a;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        margin-top: 10px;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .modal-card {
+        background: #111;
+        border: 2px solid var(--amarelo);
+        padding: 25px;
+        border-radius: 25px;
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .botoes-acao {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .btn-verde {
+        flex: 1;
+        background: var(--verde);
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        border-bottom: 4px solid #0a6b1a;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+      }
+      .btn-vermelho {
+        flex: 1;
+        background: transparent;
+        color: var(--vermelho);
+        padding: 12px;
+        border: 2px solid var(--vermelho);
+        border-radius: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: 0.2s;
+        text-transform: uppercase;
+      }
+      .btn-secundario {
+        flex: 1;
+        background: var(--glass);
+        color: white;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: 0.2s;
+        text-transform: uppercase;
+      }
+
+      .item-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        border: 1px solid var(--border);
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .item-row button {
+        background: var(--vermelho);
+        border: none;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--verde);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: 800;
+        z-index: 5000;
+        opacity: 0;
+        transition: opacity 0.4s;
+        text-transform: uppercase;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+      }
+      .toast.show {
+        opacity: 1;
+      }
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .stat-box {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 20px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        text-align: center;
+        flex: 1;
+        min-width: 120px;
+      }
+      .stat-box strong {
+        display: block;
+        font-size: 2rem;
+        color: var(--amarelo);
+        font-family: "Syne";
+      }
+      .stat-box span {
+        font-size: 0.7rem;
+        color: #888;
+        text-transform: uppercase;
+      }
+
+      .preview-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-top: 8px;
+        border: 1px solid var(--border);
+        display: none;
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 0 12px;
+        margin-bottom: 15px;
+        border: 1px solid var(--border);
+      }
+      .search-bar input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 0.9rem;
+        padding: 10px 0;
+      }
+
+      @media (max-width: 600px) {
+        .header-actions {
+          flex-direction: column;
+          gap: 5px;
+        }
+        .tabs-container {
+          gap: 4px;
+        }
+        .tab-btn {
+          font-size: 0.65rem;
+          padding: 10px 6px;
+          min-width: 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="../index.html" class="btn-voltar">← Sair</a>
+      <div class="logo-texto">Santola Music</div>
+      <div class="header-actions">
+        <button
+          class="btn-secundario"
+          onclick="logout()"
+          title="Terminar sessão"
+        >
+          🚪
+        </button>
+        <span id="status-login" style="font-size: 0.7rem; color: #888"></span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="tabs-container">
+        <button class="tab-btn active" onclick="mudarTab('aprovados')">
+          Aprovados
+        </button>
+        <button class="tab-btn" onclick="mudarTab('pendentes')">
+          Pendentes <span id="count-pendentes" class="badge-pendente">0</span>
+        </button>
+        <button class="tab-btn" onclick="mudarTab('conteudo')">Conteúdo</button>
+        <button class="tab-btn" onclick="mudarTab('anuncios')">Anúncios</button>
+        <button class="tab-btn" onclick="mudarTab('eventos')">Eventos</button>
+        <button class="tab-btn" onclick="mudarTab('playlists')">
+          Playlists
+        </button>
+        <button class="tab-btn" onclick="mudarTab('estatisticas')">📊</button>
+        <button class="tab-btn" onclick="mudarTab('backup')">Backup</button>
+        <button class="tab-btn" onclick="mudarTab('config')">Config</button>
+      </div>
+
+      <!-- ABA APROVADOS -->
+      <div id="tab-aprovados" class="secao-lista active">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--verde); padding-left: 10px"
+        >
+          Músicas no Ar
+        </h2>
+        <div class="search-bar">
+          <input
+            type="text"
+            id="filtro-aprovados"
+            placeholder="Filtrar por artista, título ou categoria..."
+            oninput="filtrarAprovados()"
+          />
+        </div>
+        <div id="lista-aprovados">
+          <p style="text-align: center; opacity: 0.5">A carregar...</p>
+        </div>
+        <button
+          class="btn-salvar"
+          onclick="aprovarTodas()"
+          style="margin-top: 10px"
+        >
+          ✅ Aprovar Todas Pendentes
+        </button>
+      </div>
+
+      <!-- ABA PENDENTES -->
+      <div id="tab-pendentes" class="secao-lista">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--vermelho); padding-left: 10px"
+        >
+          Novos Envios
+        </h2>
+        <div id="lista-pendentes">
+          <p style="text-align: center; opacity: 0.5">A carregar...</p>
+        </div>
+      </div>
+
+      <!-- ABA CONTEÚDO -->
+      <div id="tab-conteudo" class="secao-lista">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--amarelo); padding-left: 10px"
+        >
+          Descrições & Vídeos
+        </h2>
+        <div class="search-bar">
+          <input
+            type="text"
+            id="filtro-conteudo"
+            placeholder="Filtrar..."
+            oninput="filtrarConteudo()"
+          />
+        </div>
+        <div id="lista-conteudo"></div>
+      </div>
+
+      <!-- ABA ANÚNCIOS -->
+      <div id="tab-anuncios" class="secao-lista">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--amarelo); padding-left: 10px"
+        >
+          Gerir Anúncios
+        </h2>
+        <div class="form-card">
+          <div class="form-group">
+            <label>Imagem do banner (URL)</label
+            ><input
+              type="text"
+              id="ad-img"
+              placeholder="https://i.imgur.com/..."
+              oninput="previewImagem('ad-img', 'preview-ad')"
+            /><img id="preview-ad" class="preview-img" />
+          </div>
+          <div class="form-group">
+            <label>Link do anúncio</label
+            ><input
+              type="text"
+              id="ad-link"
+              placeholder="https://exemplo.com"
+            />
+          </div>
+          <button class="btn-salvar" onclick="salvarAnuncio()">
+            Adicionar Banner
+          </button>
+        </div>
+        <div id="lista-anuncios"></div>
+      </div>
+
+      <!-- ABA EVENTOS -->
+      <div id="tab-eventos" class="secao-lista">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--amarelo); padding-left: 10px"
+        >
+          Gerir Eventos
+        </h2>
+        <div class="form-card">
+          <div class="form-group">
+            <label>Nome do evento</label><input type="text" id="evento-nome" />
+          </div>
+          <div class="form-group">
+            <label>Data</label><input type="date" id="evento-data" />
+          </div>
+          <div class="form-group">
+            <label>Local</label><input type="text" id="evento-local" />
+          </div>
+          <div class="form-group">
+            <label>Descrição</label><textarea id="evento-desc"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Banner Publicitário (URL da imagem)</label
+            ><input
+              type="text"
+              id="evento-banner-img"
+              placeholder="https://i.imgur.com/..."
+              oninput="previewImagem('evento-banner-img', 'preview-evento')"
+            /><img id="preview-evento" class="preview-img" />
+          </div>
+          <div class="form-group">
+            <label>Link do banner</label
+            ><input
+              type="text"
+              id="evento-banner-link"
+              placeholder="https://..."
+            />
+          </div>
+          <button class="btn-salvar" onclick="salvarEvento()">
+            Adicionar Evento
+          </button>
+        </div>
+        <div id="lista-eventos"></div>
+      </div>
+
+      <!-- ABA PLAYLISTS -->
+      <div id="tab-playlists" class="secao-lista">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--amarelo); padding-left: 10px"
+        >
+          Playlists Oficiais
+        </h2>
+        <div class="form-card">
+          <div class="form-group">
+            <label>Nome da Playlist</label
+            ><input
+              type="text"
+              id="playlist-nome"
+              placeholder="Ex.: Top Hits"
+            />
+          </div>
+          <div class="form-group">
+            <label>Músicas (IDs ou links separados por vírgula)</label
+            ><textarea
+              id="playlist-musicas"
+              placeholder="id1, id2, id3..."
+            ></textarea>
+          </div>
+          <button class="btn-salvar" onclick="salvarPlaylist()">
+            Salvar Playlist
+          </button>
+        </div>
+        <div id="lista-playlists"></div>
+      </div>
+
+      <!-- ABA ESTATÍSTICAS -->
+      <div id="tab-estatisticas" class="secao-lista">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--amarelo); padding-left: 10px"
+        >
+          Estatísticas
+        </h2>
+        <div
+          id="stats-container"
+          style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px"
+        >
+          <div class="stat-box">
+            <strong id="stat-total">0</strong><span>Total Músicas</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-downloads">0</strong><span>Downloads Totais</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-categorias">0</strong><span>Categorias</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-visitas">0</strong><span>Visitas Totais</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-hoje">0</strong><span>Visitas Hoje</span>
+          </div>
+        </div>
+        <div id="tabela-historico" class="form-card"></div>
+      </div>
+
+      <!-- ABA BACKUP -->
+      <div id="tab-backup" class="secao-lista">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--amarelo); padding-left: 10px"
+        >
+          Backup & Restauro
+        </h2>
+        <button class="btn-salvar" onclick="fazerBackup()">
+          📥 Fazer Backup (JSON)
+        </button>
+        <button
+          class="btn-salvar"
+          style="margin-top: 10px"
+          onclick="restaurarBackup()"
+        >
+          📤 Restaurar Backup
+        </button>
+      </div>
+
+      <!-- ABA CONFIG -->
+      <div id="tab-config" class="secao-lista">
+        <h2
+          class="titulo-secao"
+          style="border-left: 5px solid var(--amarelo); padding-left: 10px"
+        >
+          Configurações Gerais
+        </h2>
+        <div class="form-card">
+          <div class="form-group">
+            <label>Nome do site</label
+            ><input type="text" id="config-nome" value="Santola Music" />
+          </div>
+          <div class="form-group">
+            <label>Slogan</label
+            ><input type="text" id="config-slogan" value="O Blog Das Ilhas" />
+          </div>
+          <div class="form-group">
+            <label>URL do logótipo</label
+            ><input
+              type="text"
+              id="config-logo"
+              value="https://i.postimg.cc/RhnRhFNj/Logo-STP.png"
+            />
+          </div>
+          <div class="form-group">
+            <label>Google Analytics ID</label
+            ><input type="text" id="config-ga" placeholder="G-XXXXXXXX" />
+          </div>
+          <div class="form-group">
+            <label>Cor primária (verde)</label
+            ><input type="color" id="config-cor" value="#12ad2b" />
+          </div>
+          <button class="btn-salvar" onclick="salvarConfig()">
+            Salvar Configurações
+          </button>
+        </div>
+      </div>
+
+      <!-- MODAL LOGIN -->
+      <div id="modalLogin" class="modal-overlay">
+        <div class="modal-card">
+          <h3
+            style="
+              font-family: &quot;Syne&quot;;
+              color: var(--amarelo);
+              margin-bottom: 20px;
+            "
+          >
+            🔐 Autenticação
+          </h3>
+          <div class="form-group">
+            <input
+              type="password"
+              id="senha-input"
+              placeholder="Senha de administrador"
+            />
+          </div>
+          <button class="btn-verde" onclick="verificarSenha()">Entrar</button>
+        </div>
+      </div>
+
+      <!-- MODAL EDIÇÃO -->
+      <div id="modalEdicao" class="modal-overlay">
+        <div class="modal-card">
+          <h2
+            id="modal-titulo"
+            style="color: white; font-family: &quot;Syne&quot;"
+          >
+            Editar
+          </h2>
+          <div class="form-group">
+            <label>Artista</label
+            ><input type="text" id="edit-artista" required />
+          </div>
+          <div class="form-group">
+            <label>Título</label><input type="text" id="edit-titulo" required />
+          </div>
+          <div class="form-group">
+            <label>Estilo</label
+            ><select id="edit-categoria">
+              <option value="KIZOMBA_ZOUK">Kizomba & Zouk</option>
+              <option value="TOP_STP">Top STP</option>
+              <option value="TOP_ANGOLA">Top Angola</option>
+              <option value="TOP_BRAZIL">Top Brazil</option>
+              <option value="RAP_HIPHOP">Rap / Hip-Hop</option>
+              <option value="BEATS_INSTRUMENTAIS">Beats & Instrumentais</option>
+              <option value="SEMBA">Semba</option>
+              <option value="MELHORES_MIXS">Melhores Mixs</option>
+              <option value="INTERNACIONAL">Internacional</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Descrição</label><textarea id="edit-descricao"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Link do Vídeo (YouTube)</label
+            ><input
+              type="text"
+              id="edit-video"
+              placeholder="https://youtube.com/watch?v=..."
+            />
+          </div>
+          <div class="form-group">
+            <label>URL da Capa</label
+            ><input
+              type="text"
+              id="edit-capa"
+              oninput="previewImagem('edit-capa', 'preview-capa')"
+            /><img id="preview-capa" class="preview-img" />
+          </div>
+          <div class="form-group">
+            <label>Link da Música</label><input type="text" id="edit-link" />
+          </div>
+          <div class="form-group">
+            <label>Tags (separadas por vírgula)</label
+            ><input
+              type="text"
+              id="edit-tags"
+              placeholder="kizomba, 2026, remix"
+            />
+          </div>
+          <div class="form-group">
+            <label>Direitos Autorais</label
+            ><select id="edit-direitos">
+              <option value="true">Confirmados</option>
+              <option value="false">Pendentes / Não autorizado</option>
+            </select>
+          </div>
+          <div class="botoes-acao">
+            <button class="btn-verde" onclick="salvarConteudo()">Salvar</button>
+            <button class="btn-vermelho" onclick="eliminarMusica()">
+              Eliminar
+            </button>
+            <button class="btn-secundario" onclick="fecharModal()">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+      const API_BASE = "http://127.0.0.1:5001";
+      let aprovadas = [],
+        pendentes = [],
+        itemEmRevisao = null;
+      let loginTimeout;
+      const TEMPO_INATIVIDADE = 40000;
+
+      // ========== LOGIN ==========
+      function estaLogado() {
+        return sessionStorage.getItem("admin_logado") === "1";
+      }
+      function login() {
+        sessionStorage.setItem("admin_logado", "1");
+        document.getElementById("status-login").innerText = "✅";
+      }
+      function logout() {
+        sessionStorage.removeItem("admin_logado");
+        location.reload();
+      }
+      function solicitarLoginAposInatividade() {
+        if (!estaLogado())
+          document.getElementById("modalLogin").style.display = "flex";
+      }
+      function resetLoginTimeout() {
+        clearTimeout(loginTimeout);
+        loginTimeout = setTimeout(
+          solicitarLoginAposInatividade,
+          TEMPO_INATIVIDADE,
+        );
+      }
+      function verificarSenha() {
+        if (document.getElementById("senha-input").value === "Santola2026") {
+          login();
+          document.getElementById("modalLogin").style.display = "none";
+          mostrarToast("Autenticado!");
+          resetLoginTimeout();
+        } else {
+          mostrarToast("Senha incorreta!", true);
+        }
+      }
+      function podeExecutar() {
+        if (!estaLogado()) {
+          document.getElementById("modalLogin").style.display = "flex";
+          return false;
+        }
+        resetLoginTimeout();
+        return true;
+      }
+
+      // ========== TOAST ==========
+      function mostrarToast(msg, erro = false) {
+        const t = document.getElementById("toast");
+        t.innerText = msg;
+        t.style.background = erro ? "var(--vermelho)" : "var(--verde)";
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 2500);
+      }
+
+      // ========== PREVIEW IMAGEM ==========
+      function previewImagem(inputId, imgId) {
+        const url = document.getElementById(inputId).value;
+        const img = document.getElementById(imgId);
+        if (url) {
+          img.src = url;
+          img.style.display = "block";
+        } else {
+          img.style.display = "none";
+        }
+      }
+
+      // ========== ABAS ==========
+      function mudarTab(tipo) {
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document
+          .querySelectorAll(".secao-lista")
+          .forEach((s) => s.classList.remove("active"));
+        event.target.classList.add("active");
+        document.getElementById(`tab-${tipo}`).classList.add("active");
+        if (tipo === "conteudo") carregarConteudo();
+        if (tipo === "anuncios") carregarAnuncios();
+        if (tipo === "eventos") carregarEventos();
+        if (tipo === "playlists") carregarPlaylists();
+        if (tipo === "estatisticas") carregarEstatisticas();
+        if (tipo === "config") carregarConfig();
+      }
+
+      // ========== APROVADOS ==========
+      async function carregarAprovados() {
+        try {
+          const res = await fetch("../musicas.json", { cache: "no-cache" });
+          const dados = await res.json();
+          aprovadas = [];
+          Object.keys(dados).forEach((cat) => {
+            if (Array.isArray(dados[cat]))
+              dados[cat].forEach((m) =>
+                aprovadas.push({ ...m, categoria: cat }),
+              );
+          });
+          filtrarAprovados();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      function filtrarAprovados() {
+        const termo = (
+          document.getElementById("filtro-aprovados")?.value || ""
+        ).toLowerCase();
+        const lista = termo
+          ? aprovadas.filter((m) =>
+              (m.artista + " " + m.titulo + " " + m.categoria)
+                .toLowerCase()
+                .includes(termo),
+            )
+          : aprovadas;
+        renderizarLista("lista-aprovados", lista, false);
+      }
+      async function aprovarTodas() {
+        if (!podeExecutar()) return;
+        if (!confirm("Aprovar todas as músicas pendentes?")) return;
+        for (const p of pendentes) {
+          await fetch(`${API_BASE}/aprovar_musica`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              ...p,
+              id_pendente: p.id,
+              categoria: p.categoria || "INTERNACIONAL",
+              link: p.url_externa || p.link,
+            }),
+          });
+        }
+        carregarAprovados();
+        carregarPendentes();
+        mostrarToast("Todas aprovadas!");
+      }
+
+      // ========== PENDENTES ==========
+      async function carregarPendentes() {
+        try {
+          const res = await fetch(`${API_BASE}/listar_pendentes`);
+          const json = await res.json();
+          pendentes = json.status === "sucesso" ? json.pendentes : [];
+          document.getElementById("count-pendentes").innerText =
+            pendentes.length;
+          renderizarLista("lista-pendentes", pendentes, true);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      function renderizarLista(id, lista, isPendente) {
+        const container = document.getElementById(id);
+        if (lista.length === 0) {
+          container.innerHTML =
+            '<p style="text-align:center; opacity:0.5;">Vazio.</p>';
+          return;
+        }
+        container.innerHTML = lista
+          .map(
+            (m, i) => `
+                <div class="music-item" draggable="true" data-index="${i}">
+                    <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
+                    <div class="m-info"><h4>${m.artista}</h4><p>${m.titulo} • ${m.categoria}</p></div>
+                    <button onclick="abrirEdicao(${i}, ${isPendente})" class="btn-acao btn-edit">✏️</button>
+                    ${isPendente ? `<button onclick="acaoServidor('aprovar', ${i})" class="btn-acao btn-play">✅</button>` : ""}
+                </div>
+            `,
+          )
+          .join("");
+        ativarDragDrop(id);
+      }
+
+      // ========== DRAG & DROP ==========
+      let draggedIndex = null;
+      function ativarDragDrop(containerId) {
+        document
+          .querySelectorAll(`#${containerId} .music-item`)
+          .forEach((row) => {
+            row.addEventListener("dragstart", function (e) {
+              draggedIndex = parseInt(this.dataset.index);
+              this.style.opacity = "0.4";
+            });
+            row.addEventListener("dragend", function (e) {
+              this.style.opacity = "1";
+              document
+                .querySelectorAll(".music-item")
+                .forEach((r) => r.classList.remove("drag-over"));
+            });
+            row.addEventListener("dragover", function (e) {
+              e.preventDefault();
+              this.classList.add("drag-over");
+            });
+            row.addEventListener("dragleave", function (e) {
+              this.classList.remove("drag-over");
+            });
+            row.addEventListener("drop", function (e) {
+              e.preventDefault();
+              this.classList.remove("drag-over");
+              const targetIndex = parseInt(this.dataset.index);
+              if (draggedIndex !== null && draggedIndex !== targetIndex) {
+                const [moved] = aprovadas.splice(draggedIndex, 1);
+                aprovadas.splice(targetIndex, 0, moved);
+                filtrarAprovados();
+                mostrarToast("Ordem alterada!");
+              }
+              draggedIndex = null;
+            });
+          });
+      }
+
+      // ========== EDIÇÃO ==========
+      function abrirEdicao(index, isPendente) {
+        itemEmRevisao = isPendente ? pendentes[index] : aprovadas[index];
+        document.getElementById("edit-artista").value =
+          itemEmRevisao.artista || "";
+        document.getElementById("edit-titulo").value =
+          itemEmRevisao.titulo || "";
+        document.getElementById("edit-categoria").value =
+          itemEmRevisao.categoria || "";
+        document.getElementById("edit-descricao").value =
+          itemEmRevisao.descricao || "";
+        document.getElementById("edit-video").value = itemEmRevisao.video || "";
+        document.getElementById("edit-capa").value = itemEmRevisao.capa || "";
+        document.getElementById("edit-link").value =
+          itemEmRevisao.url || itemEmRevisao.link || "";
+        document.getElementById("edit-tags").value = (
+          itemEmRevisao.tags || []
+        ).join(", ");
+        document.getElementById("edit-direitos").value =
+          itemEmRevisao.direitos_confirmados !== false ? "true" : "false";
+        previewImagem("edit-capa", "preview-capa");
+        document.getElementById("modalEdicao").style.display = "flex";
+      }
+      function fecharModal() {
+        document.getElementById("modalEdicao").style.display = "none";
+      }
+
+      async function salvarConteudo() {
+        if (!podeExecutar()) return;
+        if (!itemEmRevisao) return;
+        itemEmRevisao.artista = document.getElementById("edit-artista").value;
+        itemEmRevisao.titulo = document.getElementById("edit-titulo").value;
+        itemEmRevisao.categoria =
+          document.getElementById("edit-categoria").value;
+        itemEmRevisao.descricao =
+          document.getElementById("edit-descricao").value;
+        itemEmRevisao.video = document.getElementById("edit-video").value;
+        itemEmRevisao.capa = document.getElementById("edit-capa").value;
+        itemEmRevisao.url = document.getElementById("edit-link").value;
+        itemEmRevisao.tags = document
+          .getElementById("edit-tags")
+          .value.split(",")
+          .map((t) => t.trim())
+          .filter(Boolean);
+        itemEmRevisao.direitos_confirmados =
+          document.getElementById("edit-direitos").value === "true";
+        try {
+          await fetch(`${API_BASE}/salvar_conteudo`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(itemEmRevisao),
+          });
+          mostrarToast("Conteúdo actualizado!");
+          fecharModal();
+          carregarAprovados();
+        } catch (e) {
+          mostrarToast("Erro ao salvar.", true);
+        }
+      }
+      async function eliminarMusica() {
+        if (!podeExecutar()) return;
+        if (!confirm("Eliminar esta música permanentemente?")) return;
+        try {
+          await fetch(`${API_BASE}/eliminar_musica`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(itemEmRevisao),
+          });
+          mostrarToast("Música eliminada!");
+          fecharModal();
+          carregarAprovados();
+        } catch (e) {
+          mostrarToast("Erro ao eliminar.", true);
+        }
+      }
+
+      // ========== AÇÕES ==========
+      async function acaoServidor(tipo, index) {
+        if (!podeExecutar()) return;
+        const p = pendentes[index];
+        if (tipo === "aprovar") {
+          if (!confirm(`Aprovar "${p.titulo}"?`)) return;
+          try {
+            await fetch(`${API_BASE}/aprovar_musica`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                ...p,
+                id_pendente: p.id,
+                categoria: p.categoria || "INTERNACIONAL",
+                link: p.url_externa || p.link,
+              }),
+            });
+            mostrarToast("Música aprovada!");
+            carregarAprovados();
+            carregarPendentes();
+          } catch (e) {
+            mostrarToast("Erro.", true);
+          }
+        }
+      }
+
+      // ========== CONTEÚDO ==========
+      async function carregarConteudo() {
+        const container = document.getElementById("lista-conteudo");
+        container.innerHTML = aprovadas
+          .map(
+            (m, i) => `
+                <div class="music-item">
+                    <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
+                    <div class="m-info"><h4>${m.artista}</h4><p>${m.titulo} • ${m.descricao ? "📝" : ""} ${m.video ? "🎬" : ""}</p></div>
+                    <button onclick="abrirEdicao(${i}, false)" class="btn-acao btn-edit">✏️</button>
+                </div>
+            `,
+          )
+          .join("");
+      }
+      function filtrarConteudo() {
+        const termo = (
+          document.getElementById("filtro-conteudo")?.value || ""
+        ).toLowerCase();
+        const container = document.getElementById("lista-conteudo");
+        const lista = termo
+          ? aprovadas.filter((m) =>
+              (m.artista + " " + m.titulo).toLowerCase().includes(termo),
+            )
+          : aprovadas;
+        container.innerHTML = lista
+          .map(
+            (m, i) => `
+                <div class="music-item">
+                    <img src="${m.capa || "https://i.postimg.cc/RhnRhFNj/Logo-STP.png"}" class="m-capa">
+                    <div class="m-info"><h4>${m.artista}</h4><p>${m.titulo} • ${m.descricao ? "📝" : ""} ${m.video ? "🎬" : ""}</p></div>
+                    <button onclick="abrirEdicao(${i}, false)" class="btn-acao btn-edit">✏️</button>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      // ========== ANÚNCIOS ==========
+      async function carregarAnuncios() {
+        try {
+          const res = await fetch(`${API_BASE}/listar_anuncios`);
+          const data = await res.json();
+          document.getElementById("lista-anuncios").innerHTML = data.anuncios
+            .map(
+              (a, i) => `
+                    <div class="item-row"><span><img src="${a.img}" style="height:40px; border-radius:8px; margin-right:10px;"> ${a.link}</span><button onclick="removerAnuncio(${i})">🗑️</button></div>
+                `,
+            )
+            .join("");
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      async function salvarAnuncio() {
+        if (!podeExecutar()) return;
+        const img = document.getElementById("ad-img").value,
+          link = document.getElementById("ad-link").value;
+        if (!img || !link) {
+          mostrarToast("Preenche todos os campos.", true);
+          return;
+        }
+        try {
+          await fetch(`${API_BASE}/adicionar_anuncio`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ img, link }),
+          });
+          carregarAnuncios();
+          mostrarToast("Anúncio adicionado!");
+          document.getElementById("ad-img").value = "";
+          document.getElementById("ad-link").value = "";
+        } catch (e) {
+          mostrarToast("Erro.", true);
+        }
+      }
+      async function removerAnuncio(index) {
+        if (!podeExecutar()) return;
+        if (!confirm("Remover este anúncio?")) return;
+        try {
+          await fetch(`${API_BASE}/remover_anuncio`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ index }),
+          });
+          carregarAnuncios();
+        } catch (e) {
+          mostrarToast("Erro.", true);
+        }
+      }
+
+      // ========== EVENTOS ==========
+      async function carregarEventos() {
+        try {
+          const res = await fetch(`${API_BASE}/listar_eventos`);
+          const data = await res.json();
+          document.getElementById("lista-eventos").innerHTML = data.eventos
+            .map(
+              (ev, i) => `
+                    <div class="item-row"><div style="display:flex; align-items:center; gap:12px; flex:1;">${ev.banner_imagem ? `<img src="${ev.banner_imagem}" style="height:40px; border-radius:8px;">` : ""}<span><strong>${ev.nome}</strong> - ${ev.data} @ ${ev.local}</span></div><button onclick="removerEvento(${i})">🗑️</button></div>
+                `,
+            )
+            .join("");
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      async function salvarEvento() {
+        if (!podeExecutar()) return;
+        const dados = {
+          nome: document.getElementById("evento-nome").value,
+          data: document.getElementById("evento-data").value,
+          local: document.getElementById("evento-local").value,
+          descricao: document.getElementById("evento-desc").value,
+          banner_imagem: document.getElementById("evento-banner-img").value,
+          banner_link: document.getElementById("evento-banner-link").value,
+        };
+        if (!dados.nome || !dados.data) {
+          mostrarToast("Nome e data são obrigatórios.", true);
+          return;
+        }
+        try {
+          await fetch(`${API_BASE}/adicionar_evento`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dados),
+          });
+          carregarEventos();
+          mostrarToast("Evento adicionado!");
+        } catch (e) {
+          mostrarToast("Erro.", true);
+        }
+      }
+      async function removerEvento(index) {
+        if (!podeExecutar()) return;
+        if (!confirm("Remover este evento?")) return;
+        try {
+          await fetch(`${API_BASE}/remover_evento`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ index }),
+          });
+          carregarEventos();
+        } catch (e) {
+          mostrarToast("Erro.", true);
+        }
+      }
+
+      // ========== PLAYLISTS ==========
+      async function carregarPlaylists() {
+        try {
+          const res = await fetch(`${API_BASE}/listar_playlists`);
+          const data = await res.json();
+          document.getElementById("lista-playlists").innerHTML = data.playlists
+            .map(
+              (p, i) => `
+                    <div class="item-row"><span><strong>${p.nome}</strong> - ${p.musicas.length} músicas</span><button onclick="removerPlaylist(${i})">🗑️</button></div>
+                `,
+            )
+            .join("");
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      async function salvarPlaylist() {
+        if (!podeExecutar()) return;
+        const nome = document.getElementById("playlist-nome").value;
+        const musicas = document
+          .getElementById("playlist-musicas")
+          .value.split(",")
+          .map((m) => m.trim())
+          .filter(Boolean);
+        if (!nome) {
+          mostrarToast("Nome é obrigatório.", true);
+          return;
+        }
+        try {
+          await fetch(`${API_BASE}/adicionar_playlist`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nome, musicas }),
+          });
+          carregarPlaylists();
+          mostrarToast("Playlist salva!");
+        } catch (e) {
+          mostrarToast("Erro.", true);
+        }
+      }
+      async function removerPlaylist(index) {
+        if (!podeExecutar()) return;
+        if (!confirm("Remover esta playlist?")) return;
+        try {
+          await fetch(`${API_BASE}/remover_playlist`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ index }),
+          });
+          carregarPlaylists();
+        } catch (e) {
+          mostrarToast("Erro.", true);
+        }
+      }
+
+      // ========== ESTATÍSTICAS ==========
+      async function carregarEstatisticas() {
+        document.getElementById("stat-total").innerText = aprovadas.length;
+        document.getElementById("stat-downloads").innerText = aprovadas.reduce(
+          (s, m) => s + (m.downloads || 0),
+          0,
+        );
+        document.getElementById("stat-categorias").innerText = new Set(
+          aprovadas.map((m) => m.categoria),
+        ).size;
+        try {
+          const res = await fetch(`${API_BASE}/obter_visitantes`);
+          const d = await res.json();
+          document.getElementById("stat-visitas").innerText = d.total || 0;
+          const hoje = new Date().toISOString().split("T")[0];
+          document.getElementById("stat-hoje").innerText =
+            d.por_dia?.[hoje]?.visitas || 0;
+          const historico = Object.entries(d.por_dia || {})
+            .sort((a, b) => b[0].localeCompare(a[0]))
+            .slice(0, 7);
+          document.getElementById("tabela-historico").innerHTML = `
+                    <table style="width:100%; border-collapse:collapse;">
+                        <tr><th style="text-align:left; padding:8px;">Data</th><th>Visitas</th><th>Únicos</th></tr>
+                        ${historico.map(([dia, info]) => `<tr><td style="padding:8px;">${dia}</td><td>${info.visitas}</td><td>${info.unicos}</td></tr>`).join("")}
+                    </table>`;
+        } catch (e) {}
+      }
+
+      // ========== BACKUP ==========
+      function fazerBackup() {
+        if (!podeExecutar()) return;
+        const blob = new Blob([JSON.stringify(aprovadas, null, 2)], {
+          type: "application/json",
+        });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download =
+          "musicas_backup_" + new Date().toISOString().slice(0, 10) + ".json";
+        a.click();
+        mostrarToast("Backup criado!");
+      }
+      function restaurarBackup() {
+        if (!podeExecutar()) return;
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".json";
+        input.onchange = async function (e) {
+          const file = e.target.files[0];
+          if (!file) return;
+          try {
+            const dados = JSON.parse(await file.text());
+            await fetch(`${API_BASE}/restaurar_backup`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(dados),
+            });
+            carregarAprovados();
+            mostrarToast("Backup restaurado!");
+          } catch (e) {
+            mostrarToast("Ficheiro inválido.", true);
+          }
+        };
+        input.click();
+      }
+
+      // ========== CONFIG ==========
+      function carregarConfig() {
+        fetch(`${API_BASE}/obter_config`)
+          .then((r) => r.json())
+          .then((cfg) => {
+            document.getElementById("config-nome").value =
+              cfg.nome || "Santola Music";
+            document.getElementById("config-slogan").value = cfg.slogan || "";
+            document.getElementById("config-logo").value = cfg.logo || "";
+            document.getElementById("config-ga").value = cfg.ga || "";
+            document.getElementById("config-cor").value = cfg.cor || "#12ad2b";
+          });
+      }
+      async function salvarConfig() {
+        if (!podeExecutar()) return;
+        const cfg = {
+          nome: document.getElementById("config-nome").value,
+          slogan: document.getElementById("config-slogan").value,
+          logo: document.getElementById("config-logo").value,
+          ga: document.getElementById("config-ga").value,
+          cor: document.getElementById("config-cor").value,
+        };
+        try {
+          await fetch(`${API_BASE}/salvar_config`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(cfg),
+          });
+          mostrarToast("Configurações guardadas!");
+        } catch (e) {
+          mostrarToast("Erro.", true);
+        }
+      }
+
+      // ========== ATALHOS DE TECLADO ==========
+      document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey && e.key === "s") {
+          e.preventDefault();
+          if (document.getElementById("modalEdicao").style.display === "flex")
+            salvarConteudo();
+        }
+        if (e.key === "Escape") fecharModal();
+      });
+
+      // ========== INICIALIZAÇÃO ==========
+      window.onload = () => {
+        carregarAprovados();
+        carregarPendentes();
+        if (estaLogado()) {
+          resetLoginTimeout();
+          document.getElementById("status-login").innerText = "✅";
+        } else resetLoginTimeout();
+        document.addEventListener("click", () => resetLoginTimeout());
+        document.addEventListener("keydown", () => resetLoginTimeout());
+      };
+    </script>
+  </body>
+</html>
