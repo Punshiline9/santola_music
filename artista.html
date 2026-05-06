@@ -50,7 +50,6 @@
         overflow-x: hidden;
       }
 
-      /* Cabeçalho */
       header {
         padding: 1.5rem 1rem;
         text-align: center;
@@ -97,7 +96,6 @@
         cursor: pointer;
       }
 
-      /* Conteúdo principal */
       .main-container {
         max-width: 850px;
         margin: 2rem auto 5rem;
@@ -115,7 +113,6 @@
         color: var(--amarelo);
       }
 
-      /* Cards de música (iguais ao index) */
       .musica-card {
         display: flex;
         align-items: center;
@@ -192,7 +189,6 @@
         transform: scale(1.05);
       }
 
-      /* Modal */
       #modalMaster {
         position: fixed;
         inset: 0;
@@ -332,7 +328,6 @@
       </div>
     </main>
 
-    <!-- Modal (mesmo do index) -->
     <div id="modalMaster">
       <div class="modal-santola-box">
         <button class="btn-fechar" onclick="fecharModal()">&times;</button>
@@ -375,10 +370,11 @@
     </div>
 
     <script>
+      // ⚡ API BASE (Google Apps Script)
+      const API_BASE = "https://script.google.com/macros/s/AKfycbz-JdXtBOVudKEKDYUHzN--zwW3iQz4BHtZsNrmBSLFXOWQOS2KCnl8whv_TJ90wv6O/exec";
       const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
       let urlAtualMusica = "";
 
-      // Extrai o nome do artista da URL
       const params = new URLSearchParams(window.location.search);
       const artistaParam = params.get("artista");
 
@@ -394,21 +390,10 @@
 
       async function carregarMusicasDoArtista(artista) {
         try {
-          const res = await fetch("musicas.json");
-          const json = await res.json();
-          const musicas = [];
-
-          Object.keys(json).forEach((categoria) => {
-            if (Array.isArray(json[categoria])) {
-              json[categoria].forEach((m) => {
-                musicas.push({
-                  ...m,
-                  categoria: categoria.replace(/_/g, " "),
-                  downloads: m.downloads || 100,
-                });
-              });
-            }
-          });
+          // 🆕 Agora as músicas vêm da API em vez do ficheiro estático
+          const res = await fetch(`${API_BASE}?action=listar_aprovados`);
+          const dados = await res.json();
+          const musicas = dados.musicas || [];
 
           // Filtra pelo artista (case insensitive)
           const filtradas = musicas.filter(
@@ -443,7 +428,6 @@
         }
       }
 
-      // Modal (igual ao index)
       function abrirModal(dadosCodificados) {
         const m = JSON.parse(decodeURIComponent(dadosCodificados));
         document.getElementById("modalImg").src = m.capa;

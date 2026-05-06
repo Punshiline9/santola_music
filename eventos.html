@@ -232,7 +232,7 @@
     <main class="main-content">
       <h2
         style="
-          font-family: &quot;Syne&quot;;
+          font-family: 'Syne';
           font-size: 1.2rem;
           margin-bottom: 20px;
         "
@@ -246,9 +246,10 @@
     </main>
 
     <script>
+      // ⚡ API BASE (Google Apps Script)
+      const API_BASE = "https://script.google.com/macros/s/AKfycbz-JdXtBOVudKEKDYUHzN--zwW3iQz4BHtZsNrmBSLFXOWQOS2KCnl8whv_TJ90wv6O/exec";
       const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
 
-      // Confirmação de saída para links externos
       function adicionarConfirmacaoSaida() {
         document.body.addEventListener("click", function (e) {
           const link = e.target.closest("a");
@@ -275,7 +276,6 @@
         });
       }
 
-      // Função para interpretar datas no formato ISO, corrigindo mês > 12
       function parseData(dataStr) {
         if (!dataStr) return null;
         const partes = dataStr.split("-");
@@ -283,10 +283,7 @@
         let ano = parseInt(partes[0]);
         let mes = parseInt(partes[1]);
         let dia = parseInt(partes[2]);
-        if (mes > 12) {
-          // Troca dia e mês se mês > 12
-          [dia, mes] = [mes, dia];
-        }
+        if (mes > 12) [dia, mes] = [mes, dia];
         const data = new Date(ano, mes - 1, dia);
         return isNaN(data.getTime()) ? null : data;
       }
@@ -303,16 +300,18 @@
 
       async function carregarEventos() {
         try {
-          const response = await fetch("eventos.json");
-          const todosEventos = await response.json();
+          // 🆕 Agora os eventos vêm da API em vez do ficheiro estático
+          const response = await fetch(`${API_BASE}?action=listar_eventos`);
+          const data = await response.json();
+          const todosEventos = data.eventos || [];
 
           const hoje = new Date();
           hoje.setHours(0, 0, 0, 0);
 
-          // Filtra eventos cuja dataExpira seja >= hoje
+          // Filtra eventos cuja data (ou dataExpira) seja >= hoje
           const ativos = todosEventos.filter((ev) => {
-            const dataExpira = parseData(ev.dataExpira);
-            return dataExpira ? dataExpira >= hoje : false;
+            const dataEvento = parseData(ev.data || ev.dataExpira);
+            return dataEvento ? dataEvento >= hoje : false;
           });
 
           const container = document.getElementById("eventGrid");
@@ -325,15 +324,15 @@
 
           container.innerHTML = ativos
             .map((ev) => {
-              // Mapeia os campos do JSON para os esperados na renderização
               const nome = ev.titulo || ev.nome || "Evento";
               const local = ev.localizacao || ev.local || "";
-              const imagem = ev.imagem || LOGO_PADRAO;
+              const imagem = ev.imagem || ev.banner_imagem || LOGO_PADRAO;
               const link = ev.link || "";
               const maps = ev.maps || "";
               const descricao = ev.descricao || "";
               const bannerImg = ev.banner_imagem || "";
               const bannerLink = ev.banner_link || "";
+              const dataExibicao = ev.data || ev.dataExpira;
 
               return `
               <div class="event-card">
@@ -345,7 +344,7 @@
                   <div class="event-details-box">
                     <div class="detail-item">
                       <i class="fas fa-calendar-alt"></i>
-                      <span>Até: ${formatarData(ev.dataExpira)}</span>
+                      <span>Até: ${formatarData(dataExibicao)}</span>
                     </div>
                     ${
                       local
@@ -390,7 +389,7 @@
             })
             .join("");
         } catch (e) {
-          console.error("Erro ao carregar eventos.json", e);
+          console.error("Erro ao carregar eventos", e);
           document.getElementById("eventGrid").innerHTML =
             '<p class="no-events">Erro ao carregar a agenda.</p>';
         }

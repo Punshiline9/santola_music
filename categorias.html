@@ -158,7 +158,6 @@
       .m-info h4 a:hover { color: var(--amarelo); text-decoration: underline; }
       .m-info p { font-size: 0.8rem; color: var(--amarelo); font-weight: 600; }
 
-      /* Botão de download e playlist */
       .btn-download-trigger {
         background: var(--amarelo); color: black; width: 40px; height: 40px;
         border-radius: 12px; display: flex; align-items: center; justify-content: center;
@@ -277,7 +276,8 @@
     </footer>
 
     <script>
-      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvtkJfAINnNcJQoZAERjykSdaLuIK1IrdbbnooFmf-hJ7ACWxfihwRYGoTmMJ2cGpx/exec";
+      // ⚡ NOVO API BASE (Google Apps Script)
+      const API_BASE = "https://script.google.com/macros/s/AKfycbz-JdXtBOVudKEKDYUHzN--zwW3iQz4BHtZsNrmBSLFXOWQOS2KCnl8whv_TJ90wv6O/exec";
       const LOGO_PADRAO = "https://i.postimg.cc/RhnRhFNj/Logo-STP.png";
       const DIAS_NOVIDADES = 7;
 
@@ -375,40 +375,32 @@
 
       async function iniciar() {
         try {
-          const resJ = await fetch("musicas.json", { cache: "no-cache" });
-          const dadosJson = await resJ.json();
-          let listaCompilada = [];
-          Object.keys(dadosJson).forEach((chave) => {
-            if (Array.isArray(dadosJson[chave])) {
-              dadosJson[chave].forEach((m) => {
-                listaCompilada.push({
-                  artista: m.artista || "Desconhecido",
-                  titulo: m.titulo || "Música",
-                  capa: m.capa || LOGO_PADRAO,
-                  link: m.url || m.link || "#",
-                  categoria: chave,
-                  data_aprovacao: m.data_aprovacao || "2000-01-01",
-                  downloads: m.downloads || 100,
-                  descricao: m.descricao || "",
-                  video: m.video || "",
-                });
-              });
-            }
-          });
-          try {
-            const resG = await fetch(SCRIPT_URL + "?type=aprovados");
-            const dadosGoogle = await resG.json();
-            const listaGoogle = dadosGoogle.map((m) => ({
-              artista: m.artista, titulo: m.titulo, capa: m.urlCapa || LOGO_PADRAO,
-              link: m.urlMusica || "#", categoria: m.genero || "INTERNACIONAL",
-              data_aprovacao: new Date().toISOString().split("T")[0], downloads: 100,
-              descricao: "", video: "",
-            }));
-            musicasGerais = [...listaGoogle, ...listaCompilada];
-          } catch (e) { musicasGerais = listaCompilada; console.warn("Google Drive offline."); }
+          // ⚡ BUSCAR MÚSICAS APROVADAS DIRETO DA API
+          const resposta = await fetch(`${API_BASE}?action=listar_aprovados`);
+          const dados = await resposta.json();
+          const musicas = dados.musicas || [];
+
+          // Mapeia para o formato usado pela página
+          musicasGerais = musicas.map(m => ({
+            artista: m.artista || "Desconhecido",
+            titulo: m.titulo || "Música",
+            capa: m.capa || LOGO_PADRAO,
+            url: m.url || "#",
+            link: m.url || "#",
+            categoria: m.categoria || "INTERNACIONAL",
+            data_aprovacao: m.data_aprovacao || "2000-01-01",
+            downloads: m.downloads || 100,
+            descricao: m.descricao || "",
+            video: m.video || "",
+          }));
+
           renderizarGrid();
           verificarDeepLink();
-        } catch (e) { console.error("Erro ao carregar dados:", e); }
+        } catch (e) {
+          console.error("Erro ao carregar músicas:", e);
+          document.getElementById("grid-home").innerHTML =
+            '<p style="color:var(--vermelho); text-align:center; padding:40px;">Erro ao carregar músicas. Tenta novamente mais tarde.</p>';
+        }
       }
 
       function renderizarGrid() {
